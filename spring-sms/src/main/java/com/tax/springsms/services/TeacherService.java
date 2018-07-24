@@ -24,5 +24,8 @@ public class TeacherService {
 		}
 		return teachers;
 	}
+	public void delete(long id) {
+		tRepo.deleteById(id);
+	}
 
 }

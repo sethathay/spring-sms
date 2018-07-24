@@ -6,9 +6,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<style text/css>
+	.edit{
+		color: #FFC107;
+		background-color:transparent;
+		border:none;
+	}
+	.delete{
+		color: #E34724;
+		background-color:transparent;
+		border:none;
+	}
+</style>
 </head>
 <body>
 
@@ -54,6 +69,8 @@
         <th>Current Address</th>
         <th>Phone No</th>
         <th>Email Address</th>
+        <th>Edit</th>
+        <th>Delete</th>
       </tr>
     </thead>
     <tbody>
@@ -69,6 +86,8 @@
 	        <td>${teacher.caddress}</td>
 	        <td>${teacher.phone}</td>
 	        <td>${teacher.email}</td>
+	       	<td><button class="edit" type="button"><a style="color: #FFC107;" href="teachers"><i class="material-icons">&#xE254;</i></a></button></td>
+	       	<td><button class="delete" type="button"><a style="color: #E34724;" href="delete?id=${teacher.id}"><i class="material-icons">&#xE872;</i></a></button></td>
 	      </tr>
       	</c:forEach>
     </tbody>
