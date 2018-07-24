@@ -33,7 +33,7 @@
 </nav>
 
 <div class="container">
-  <h2>INDEX PAGE</h2>
+  <h2>Dashboard Page</h2>
 </div>
 
 </body>

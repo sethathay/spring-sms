@@ -16,9 +16,20 @@ public class MainController {
 	
 	@GetMapping("/")
 	public String init(HttpServletRequest req) {
-		req.setAttribute("teachers", tService.findAllTeachers());
+		//req.setAttribute("teachers", tService.findAllTeachers());
 		//Render view index.jsp
 		return "index";
+	}
+	
+	@GetMapping("/dashboard")
+	public String dashboard() {
+		return "dashboard";
+	}
+	
+	@GetMapping("/teachers")
+	public String teachers(HttpServletRequest req) {
+		req.setAttribute("teachers", tService.findAllTeachers());
+		return "teachers";
 	}
 
 }

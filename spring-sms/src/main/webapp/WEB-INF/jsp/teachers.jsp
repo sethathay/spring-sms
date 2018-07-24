@@ -33,9 +33,47 @@
 </nav>
 
 <div class="container">
-  <h2>INDEX PAGE</h2>
+  <h2>List Teachers</h2>
+  <p>Function of List Teachers: Create, Update, and Delete</p>   
+  <div class="row">
+  	<div class="col-sm-12">
+  		<button type="button" class="btn btn-success"><i class="fa fa-plus"></i> New</button>
+  		<br/><br/>
+  	</div>
+  </div>         
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Gender</th>
+        <th>Date of Birth</th>
+        <th>Place of Birth</th>
+        <th>Address</th>
+        <th>Family Status</th>
+        <th>Current Address</th>
+        <th>Phone No</th>
+        <th>Email Address</th>
+      </tr>
+    </thead>
+    <tbody>
+    	<c:forEach var="teacher" items="${teachers}">
+	      <tr>
+	        <td>${teacher.id}</td>
+	        <td>${teacher.name}</td>
+	        <td>${teacher.gender? "Male": "Female"}</td>
+	        <td>${teacher.dob}</td>
+	        <td>${teacher.pob}</td>
+	        <td>${teacher.address}</td>
+	        <td>${teacher.fstatus? "Married": "Single"}</td>
+	        <td>${teacher.caddress}</td>
+	        <td>${teacher.phone}</td>
+	        <td>${teacher.email}</td>
+	      </tr>
+      	</c:forEach>
+    </tbody>
+  </table>
 </div>
 
 </body>
 </html>
-  
