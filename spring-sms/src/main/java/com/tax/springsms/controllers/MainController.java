@@ -32,6 +32,15 @@ public class MainController {
 		req.setAttribute("teachers", tService.findAllTeachers());
 		return "teachers";
 	}
+	@GetMapping("/newTeacher")
+	public String addTeacher() {
+		return "newteacher";
+	}
+	@GetMapping("/updateTeacher")
+	public String updateTeacher(@RequestParam long id,HttpServletRequest req) {
+		req.setAttribute("teacher", tService.findOne(id));
+		return "editteacher";
+	}
 	@GetMapping("/delete")
 	public String deleteTeacher(@RequestParam long id,HttpServletRequest req) {
 		tService.delete(id);

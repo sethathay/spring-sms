@@ -25,7 +25,7 @@
         Teachers
       </a>
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="#"><i class="fa fa-plus"></i> New Teacher</a>
+        <a class="dropdown-item" href="/newTeacher"><i class="fa fa-plus"></i> New Teacher</a>
         <a class="dropdown-item" href="/teachers"><i class="fa fa-bars"></i> List Teachers</a>
       </div>
     </li>

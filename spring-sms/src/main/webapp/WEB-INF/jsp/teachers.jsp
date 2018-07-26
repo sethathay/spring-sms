@@ -40,7 +40,7 @@
         Teachers
       </a>
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="#"><i class="fa fa-plus"></i> New Teacher</a>
+        <a class="dropdown-item" href="/newTeacher"><i class="fa fa-plus"></i> New Teacher</a>
         <a class="dropdown-item" href="/teachers"><i class="fa fa-bars"></i> List Teachers</a>
       </div>
     </li>
@@ -86,7 +86,7 @@
 	        <td>${teacher.caddress}</td>
 	        <td>${teacher.phone}</td>
 	        <td>${teacher.email}</td>
-	       	<td><button class="edit" type="button"><a style="color: #FFC107;" href="teachers"><i class="material-icons">&#xE254;</i></a></button></td>
+	       	<td><button class="edit" type="button"><a style="color: #FFC107;" href="updateTeacher?id=${teacher.id}"><i class="material-icons">&#xE254;</i></a></button></td>
 	       	<td><button class="delete" type="button"><a style="color: #E34724;" href="delete?id=${teacher.id}"><i class="material-icons">&#xE872;</i></a></button></td>
 	      </tr>
       	</c:forEach>
