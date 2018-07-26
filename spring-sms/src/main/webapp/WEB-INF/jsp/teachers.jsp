@@ -1,97 +1,132 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
-<style text/css>
-	.edit{
-		color: #FFC107;
-		background-color:transparent;
-		border:none;
-	}
-	.delete{
-		color: #E34724;
-		background-color:transparent;
-		border:none;
-	}
-</style>
+  <%@ include file="header.jsp" %>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-sm bg-success navbar-dark">
-  <ul class="navbar-nav">
-    <li class="nav-item active">
-      <a class="nav-link" href="/">School Mgt SYSTEM</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="/dashboard">Dashboard</a>
-    </li>
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-        Teachers
-      </a>
-      <div class="dropdown-menu">
-        <a class="dropdown-item" href="#"><i class="fa fa-plus"></i> New Teacher</a>
-        <a class="dropdown-item" href="/teachers"><i class="fa fa-bars"></i> List Teachers</a>
-      </div>
-    </li>
-  </ul>
-</nav>
+<%@ include file="navigation.jsp" %>
 
 <div class="container">
-  <h2>List Teachers</h2>
-  <p>Function of List Teachers: Create, Update, and Delete</p>   
-  <div class="row">
-  	<div class="col-sm-12">
-  		<button type="button" class="btn btn-success"><i class="fa fa-plus"></i> New</button>
-  		<br/><br/>
-  	</div>
-  </div>         
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Gender</th>
-        <th>Date of Birth</th>
-        <th>Place of Birth</th>
-        <th>Address</th>
-        <th>Family Status</th>
-        <th>Current Address</th>
-        <th>Phone No</th>
-        <th>Email Address</th>
-        <th>Edit</th>
-        <th>Delete</th>
-      </tr>
-    </thead>
-    <tbody>
-    	<c:forEach var="teacher" items="${teachers}">
-	      <tr>
-	        <td>${teacher.id}</td>
-	        <td>${teacher.name}</td>
-	        <td>${teacher.gender? "Male": "Female"}</td>
-	        <td>${teacher.dob}</td>
-	        <td>${teacher.pob}</td>
-	        <td>${teacher.address}</td>
-	        <td>${teacher.fstatus? "Married": "Single"}</td>
-	        <td>${teacher.caddress}</td>
-	        <td>${teacher.phone}</td>
-	        <td>${teacher.email}</td>
-	       	<td><button class="edit" type="button"><a style="color: #FFC107;" href="teachers"><i class="material-icons">&#xE254;</i></a></button></td>
-	       	<td><button class="delete" type="button"><a style="color: #E34724;" href="delete?id=${teacher.id}"><i class="material-icons">&#xE872;</i></a></button></td>
-	      </tr>
-      	</c:forEach>
-    </tbody>
-  </table>
+<c:choose>
+	<c:when test="${mode == 'VIEW'}">
+		  <h2>បញ្ជីគ្រូបង្រៀន</h2>
+		  <p><i>ក្នុងទំព័រនេះអ្នកអាចធ្វើការបង្កើតថ្មី កែប្រែ និងលុបនូវព៌តមានរបស់គ្រូបង្រៀន</i></p>   
+		  <div class="row">
+		  	<div class="col-sm-12">
+		  		<button type="button" class="btn btn-success"><i class="fa fa-plus"></i> បង្កើតថ្មី</button>
+		  		<br/><br/>
+		  	</div>
+		  </div>         
+		  <table class="table table-striped">
+		    <thead>
+		      <tr>
+		        <th>ល.រ</th>
+		        <th>ឈ្មោះ</th>
+		        <th>ភេទ</th>
+		        <th>ថ្ងៃខែឆ្នាំកំណើត</th>
+		        <th>ទីកន្លែងកំណើត</th>
+		        <th>អាសយដ្ឋានបច្ចុប្បន្ន</th>
+		        <th>ស្ថានភាពគ្រួសារ</th>
+		        <th>អាសយដ្ឋានទំនាក់ទំនងបច្ចុប្បន្ន</th>
+		        <th>លេខទូរសព្ទ</th>
+		        <th>អ៊ីម៉ែល</th>
+		        <th>កែប្រែ</th>
+		        <th>លុប</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		    	<c:forEach var="teacher" items="${teachers}">
+			      <tr>
+			        <td>${teacher.id}</td>
+			        <td>${teacher.name}</td>
+			        <td>${teacher.gender? "ប្រុស": "ស្រី"}</td>
+			        <td>${teacher.dob}</td>
+			        <td>${teacher.pob}</td>
+			        <td>${teacher.address}</td>
+			        <td>${teacher.fstatus? "មានគ្រួសារ": "នៅលីវ"}</td>
+			        <td>${teacher.caddress}</td>
+			        <td>${teacher.phone}</td>
+			        <td>${teacher.email}</td>
+			       	<td><a href="updateTeacher?id=${teacher.id}"><i class="fa fa-pencil" style="color:green"></i></a></td>
+			       	<td><a href="delete?id=${teacher.id}"><i class="fa fa-trash-o" style="color:red"></i></a></td>
+			      </tr>
+		      	</c:forEach>
+		    </tbody>
+		  </table>
+	</c:when>
+	<c:when test="${mode == 'MODIFY'}">
+		<h2>កែប្រែព៌តមានគ្រូបង្រៀន</h2>
+		 <div class="row">
+		  	<div class="col-sm-12">
+		  		<a class="btn btn-success" href="teachers"><i class="fa fa-mail-reply"></i> ត្រលប់ក្រោយ</a>
+		  		<br/><br/>
+		  	</div>
+		  </div>
+			<form method="POST" action="">
+			<input type="hidden" value="${teacher.id}" name="id" id="id">
+			  <div class="form-group row">
+			    <label class="col-form-label col-form-label-sm col-sm-2" for="name">ឈ្មោះ (*)</label>
+			    <div class="col-sm-4">
+			    	<input type="text" required class="form-control form-control-sm" value="${teacher.name}" name="name" id="name">
+			    </div>
+			    <label class="col-form-label col-form-label-sm col-sm-2" for="gender">ភេទ </label>
+			      <div class="col-sm-4">
+			      	<select class="form-control form-control-sm" name="gender" id="gender">
+				        <option value="false" ${teacher.gender? "" : "selected" }>ស្រី</option>
+				        <option value="true" ${teacher.gender? "selected" : "" }>ប្រុស</option>
+				      </select>
+			      </div>
+			  </div>
+			  <div class="form-group row">
+			    <label class="col-form-label col-form-label-sm col-sm-2" for="dob">ថ្ងៃខែឆ្នាំកំណើត</label>
+			    <div class="col-sm-4">
+			    	<input type="date" class="form-control form-control-sm" value="${teacher.dob}" name="dob" id="dob">
+			    </div>
+			    <label class="col-form-label col-form-label-sm col-sm-2" for="pob">ទីកន្លែងកំណើត</label>
+			    <div class="col-sm-4">
+			    	<input type="text" class="form-control form-control-sm" value="${teacher.pob}" name="pob" id="pob">
+			    </div>
+			  </div>
+			  <div class="form-group row">
+				  <label class="col-form-label col-form-label-sm col-sm-2" for="address">អាសយដ្ឋានបច្ចុប្បន្ន</label>
+				  <div class="col-sm-4">
+				  	<textarea class="form-control form-control-sm" rows="3" name="address" id="address">${teacher.address}</textarea>
+				  </div>
+				  <label class="col-form-label col-form-label-sm col-sm-2" for="caddress">អាសយដ្ឋានទំនាក់ទំនងបច្ចុប្បន្ន</label>
+				  <div class="col-sm-4">
+				  	<textarea class="form-control form-control-sm" rows="3" name="caddress" id="caddress">${teacher.caddress}</textarea>
+				  </div>
+				</div>
+				<div class="form-group row">
+			      <label class="col-form-label col-form-label-sm col-sm-2" for="fstatus">ស្ថានភាពគ្រួសារ </label>
+			      <div class="col-sm-4">
+			      	<select class="form-control form-control-sm" name="fstatus" id="fstatus">
+				        <option value="false" ${teacher.fstatus? "" : "selected" }>នៅលីវ</option>
+				        <option value="true" ${teacher.fstatus? "selected" : "" }>មានគ្រួសារ</option>
+				      </select>
+			      </div>
+			      <label class="col-form-label col-form-label-sm col-sm-2" for="phone">លេខទូរសព្ទ</label>
+				    <div class="col-sm-4">
+				    	<input type="text" class="form-control form-control-sm" value="${teacher.phone}" name="phone" id="phone">
+				    </div>
+		      </div>
+			  <div class="form-group row">
+			    <label class="col-form-label col-form-label-sm col-sm-2" for="email">អ៊ីម៉ែល</label>
+			    <div class="col-sm-4">
+			    	<input type="email" class="form-control form-control-sm" value="${teacher.email}" name="email" id="email">
+			    </div>
+			  </div>
+			  <div class="form-group row">        
+	      		<div class="offset-sm-2 col-sm-10">
+	      			<button type="submit" class="btn btn-primary">រក្សាទុក</button>
+	      		</div>
+	    	</div>
+			</form>
+	</c:when>
+</c:choose>
+  
 </div>
 
 </body>

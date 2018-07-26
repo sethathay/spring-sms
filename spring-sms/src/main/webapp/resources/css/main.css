@@ -1,0 +1,20 @@
+.center-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  min-height: 500px;
+}
+
+.edit{
+	color: #FFC107;
+	background-color:transparent;
+	border:none;
+}
+
+.delete{
+	color: #E34724;
+	background-color:transparent;
+	border:none;
+}

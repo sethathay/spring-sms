@@ -7,6 +7,5 @@ import com.tax.springsms.models.Teacher;
 
 @Repository
 public interface TeacherRepository extends CrudRepository<Teacher, Long> {
-
 	
 }

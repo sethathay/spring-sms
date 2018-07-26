@@ -3,6 +3,7 @@ package com.tax.springsms.services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,13 +18,23 @@ public class TeacherService {
 	private TeacherRepository tRepo;
 	
 	
-	public Collection<Teacher> findAllTeachers(){
+	public Collection<Teacher> findAll(){
 		List<Teacher> teachers = new ArrayList<Teacher>();
 		for(Teacher t: tRepo.findAll()) {
 			teachers.add(t);
 		}
 		return teachers;
 	}
+	//Optional for Java 8
+	public Teacher findById(long id) {
+		Optional<Teacher> tempT = tRepo.findById(id);
+		return tempT.isPresent() ? tempT.get(): null;
+	}
+	
+	public long count() {
+		return tRepo.count();
+	}
+	
 	public void delete(long id) {
 		tRepo.deleteById(id);
 	}

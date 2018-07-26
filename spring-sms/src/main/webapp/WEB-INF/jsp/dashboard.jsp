@@ -1,39 +1,63 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+
+<%@ include file="header.jsp" %>
+  
 </head>
 <body>
 
-<nav class="navbar navbar-expand-sm bg-success navbar-dark">
-  <ul class="navbar-nav">
-    <li class="nav-item active">
-      <a class="nav-link" href="/">School Mgt SYSTEM</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="/dashboard">Dashboard</a>
-    </li>
-    <li class="nav-item dropdown">
-      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-        Teachers
-      </a>
-      <div class="dropdown-menu">
-        <a class="dropdown-item" href="#"><i class="fa fa-plus"></i> New Teacher</a>
-        <a class="dropdown-item" href="/teachers"><i class="fa fa-bars"></i> List Teachers</a>
-      </div>
-    </li>
-  </ul>
-</nav>
+<%@ include file="navigation.jsp" %>
 
 <div class="container">
-  <h2>Dashboard Page</h2>
+  <h2>ទំព័រដើម</h2>
+  <p><i>ក្នុងទំព័រនេះអ្នកអាចមើលព៌តមានសង្ខេបរបស់ប្រព័ន្ធគ្រប់គ្រងការបណ្តុះបណ្តាលវគ្គខ្លីបាន ដែលមានដូចខាងក្រោម</i></p>
+  
+  <div class="row">
+    <div class="col-lg-3 col-sm-6">
+      <div class="circle-tile ">
+        <a href="#"><div class="circle-tile-heading dark-blue"><i class="fa fa-users fa-fw fa-3x"></i></div></a>
+        <div class="circle-tile-content dark-blue">
+          <div class="circle-tile-description text-faded">ចំនួនគ្រូបង្រៀនសរុប</div>
+          <div class="circle-tile-number text-faded ">${countTeachers}</div>
+          <a class="circle-tile-footer" href="/teachers">More Info<i class="fa fa-chevron-circle-right"></i></a>
+        </div>
+      </div>
+    </div>
+     
+    <div class="col-lg-3 col-sm-6">
+      <div class="circle-tile ">
+        <a href="#"><div class="circle-tile-heading red"><i class="fa fa-address-card-o fa-fw fa-3x"></i></div></a>
+        <div class="circle-tile-content red">
+          <div class="circle-tile-description text-faded">ចំនួនសិស្សសរុប</div>
+          <div class="circle-tile-number text-faded ">10</div>
+          <a class="circle-tile-footer" href="#">More Info<i class="fa fa-chevron-circle-right"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+      <div class="circle-tile ">
+        <a href="#"><div class="circle-tile-heading green"><i class="fa fa-language fa-fw fa-3x"></i></div></a>
+        <div class="circle-tile-content green">
+          <div class="circle-tile-description text-faded">ចំនួនវគ្គបណ្តុះបណ្តាលសរុប</div>
+          <div class="circle-tile-number text-faded ">10</div>
+          <a class="circle-tile-footer" href="#">More Info<i class="fa fa-chevron-circle-right"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-sm-6">
+      <div class="circle-tile ">
+        <a href="#"><div class="circle-tile-heading blue"><i class="fa fa-book fa-fw fa-3x"></i></div></a>
+        <div class="circle-tile-content blue">
+          <div class="circle-tile-description text-faded">ចំនួនមុខវិជ្ជាសរុប</div>
+          <div class="circle-tile-number text-faded ">10</div>
+          <a class="circle-tile-footer" href="#">More Info<i class="fa fa-chevron-circle-right"></i></a>
+        </div>
+      </div>
+    </div> 
+  </div>
+   
 </div>
 
 </body>

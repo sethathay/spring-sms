@@ -17,25 +17,36 @@ public class MainController {
 	
 	@GetMapping("/")
 	public String init(HttpServletRequest req) {
-		//req.setAttribute("teachers", tService.findAllTeachers());
 		//Render view index.jsp
 		return "index";
 	}
 	
 	@GetMapping("/dashboard")
-	public String dashboard() {
+	public String dashboard(HttpServletRequest req) {
+		req.setAttribute("countTeachers", tService.count());
 		return "dashboard";
 	}
 	
 	@GetMapping("/teachers")
 	public String teachers(HttpServletRequest req) {
-		req.setAttribute("teachers", tService.findAllTeachers());
+		req.setAttribute("mode", "VIEW");
+		req.setAttribute("teachers", tService.findAll());
 		return "teachers";
 	}
+	
+	@GetMapping("/updateTeacher")
+	public String updateTeachers(@RequestParam long id, HttpServletRequest req) {
+		req.setAttribute("mode", "MODIFY");
+		req.setAttribute("teacher", tService.findById(id));
+		return "teachers";
+	}
+	
+	//@GetMapping("/newTeacher")
+	
 	@GetMapping("/delete")
 	public String deleteTeacher(@RequestParam long id,HttpServletRequest req) {
 		tService.delete(id);
-		req.setAttribute("teachers", tService.findAllTeachers());
+		req.setAttribute("teachers", tService.findAll());
 		return "teachers";
 	}
 

@@ -18,8 +18,9 @@ public class RestfulController {
 	
 	@GetMapping("/api/teachers")
 	public Collection<Teacher> getAllTeachers(){
-		return tService.findAllTeachers();
+		return tService.findAll();
 	}
+	
 	@GetMapping("/api/delete")
 	public void deleteTeacher(@RequestParam long id) {
 		tService.delete(id);
