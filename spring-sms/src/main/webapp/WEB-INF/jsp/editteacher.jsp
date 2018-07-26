@@ -25,24 +25,26 @@
         Teachers
       </a>
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="#"><i class="fa fa-plus"></i> New Teacher</a>
+        <a class="dropdown-item" href="/newTeacher"><i class="fa fa-plus"></i> New Teacher</a>
         <a class="dropdown-item" href="/teachers"><i class="fa fa-bars"></i> List Teachers</a>
       </div>
     </li>
   </ul>
 </nav>
 
+
+
 <div class="container">
-  <h2>New Teacher</h2>
+  <h2>Edit Teacher</h2>
 	  <form action="/action_page.php">
 	  	 <div class="form-group">
 		    <label for="name">ID:</label>
-		    <input type="text" class="form-control" id="id">
+		    <input type="text" readOnly=true class="form-control" id="id" value="${teacher.id}">
 		  </div>
-	  
+		  
 		  <div class="form-group">
 		    <label for="name">Name:</label>
-		    <input type="text" class="form-control" id="name">
+		    <input type="text" class="form-control" id="name" value="${teacher.name}">
 		  </div>
 		  
 		  <div class="form-group">
@@ -57,17 +59,17 @@
 		  
 		  <div class="form-group">
 		    <label for="dob">Date of Birth:</label>
-		    <input type="date" class="form-control" id="dob">
+		    <input type="date" class="form-control" id="dob" value="${teacher.dob}">
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="placeBirth">Place of Birth:</label>
-		    <input type="text" class="form-control" id="placeBirth">
+		    <input type="text" class="form-control" id="placeBirth" value="${teacher.pob}">
 		  </div>
 		  
 		  <div class="form-group">
 		    <label for="address">Address:</label>
-		    <input type="text" class="form-control" id="address">
+		    <input type="text" class="form-control" id="address" value="${teacher.address}">
 		  </div>
 		  
 		  <div class="form-group">
@@ -84,17 +86,17 @@
 		  
 		  <div class="form-group">
 		    <label for="currentAddr">Current Address:</label>
-		    <input type="text" class="form-control" id="currentAddr">
+		    <input type="text" class="form-control" id="currentAddr" value="${teacher.caddress}">
 		  </div>
 		  
 		   <div class="form-group">
 		    <label for="phoneNo">Phone No:</label>
-		    <input type="text" class="form-control" id="phonNo">
+		    <input type="text" class="form-control" id="phonNo" value="${teacher.phone}">
 		  </div>
 		  
 		   <div class="form-group">
 		    <label for="email">Email:</label>
-		    <input type="email" class="form-control" id="email">
+		    <input type="email" class="form-control" id="email" value="${teacher.email}">
 		  </div>
 		  <button style="background-color: #4CAF50;color:#fff" type="submit" class="btn btn-default">Submit</button>
 	</form>

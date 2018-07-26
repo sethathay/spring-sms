@@ -11,15 +11,15 @@
 <%@ include file="navigation.jsp" %>
 
 <div class="container">
-  <h2>ទំព័រដើម</h2>
-  <p><i>ក្នុងទំព័រនេះអ្នកអាចមើលព៌តមានសង្ខេបរបស់ប្រព័ន្ធគ្រប់គ្រងការបណ្តុះបណ្តាលវគ្គខ្លីបាន ដែលមានដូចខាងក្រោម</i></p>
+  <h2>????????</h2>
+  <p><i>?????????????????????????????????????????????????????????????????????????????????? ?????????????????</i></p>
   
   <div class="row">
     <div class="col-lg-3 col-sm-6">
       <div class="circle-tile ">
         <a href="#"><div class="circle-tile-heading dark-blue"><i class="fa fa-users fa-fw fa-3x"></i></div></a>
         <div class="circle-tile-content dark-blue">
-          <div class="circle-tile-description text-faded">ចំនួនគ្រូបង្រៀនសរុប</div>
+          <div class="circle-tile-description text-faded">???????????????????</div>
           <div class="circle-tile-number text-faded ">${countTeachers}</div>
           <a class="circle-tile-footer" href="/teachers">More Info<i class="fa fa-chevron-circle-right"></i></a>
         </div>
@@ -30,7 +30,7 @@
       <div class="circle-tile ">
         <a href="#"><div class="circle-tile-heading red"><i class="fa fa-address-card-o fa-fw fa-3x"></i></div></a>
         <div class="circle-tile-content red">
-          <div class="circle-tile-description text-faded">ចំនួនសិស្សសរុប</div>
+          <div class="circle-tile-description text-faded">??????????????</div>
           <div class="circle-tile-number text-faded ">10</div>
           <a class="circle-tile-footer" href="#">More Info<i class="fa fa-chevron-circle-right"></i></a>
         </div>
@@ -40,7 +40,7 @@
       <div class="circle-tile ">
         <a href="#"><div class="circle-tile-heading green"><i class="fa fa-language fa-fw fa-3x"></i></div></a>
         <div class="circle-tile-content green">
-          <div class="circle-tile-description text-faded">ចំនួនវគ្គបណ្តុះបណ្តាលសរុប</div>
+          <div class="circle-tile-description text-faded">?????????????????????????</div>
           <div class="circle-tile-number text-faded ">10</div>
           <a class="circle-tile-footer" href="#">More Info<i class="fa fa-chevron-circle-right"></i></a>
         </div>
@@ -50,7 +50,7 @@
       <div class="circle-tile ">
         <a href="#"><div class="circle-tile-heading blue"><i class="fa fa-book fa-fw fa-3x"></i></div></a>
         <div class="circle-tile-content blue">
-          <div class="circle-tile-description text-faded">ចំនួនមុខវិជ្ជាសរុប</div>
+          <div class="circle-tile-description text-faded">??????????????????</div>
           <div class="circle-tile-number text-faded ">10</div>
           <a class="circle-tile-footer" href="#">More Info<i class="fa fa-chevron-circle-right"></i></a>
         </div>

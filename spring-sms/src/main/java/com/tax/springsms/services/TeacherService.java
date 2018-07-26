@@ -25,6 +25,13 @@ public class TeacherService {
 		}
 		return teachers;
 	}
+	public Teacher findOne(long id) {
+		
+		Optional<Teacher> teachers = tRepo.findById(id);
+		return teachers.isPresent()? teachers.get() : null;
+	
+	}
+	
 	//Optional for Java 8
 	public Teacher findById(long id) {
 		Optional<Teacher> tempT = tRepo.findById(id);
@@ -35,6 +42,7 @@ public class TeacherService {
 		return tRepo.count();
 	}
 	
+
 	public void delete(long id) {
 		tRepo.deleteById(id);
 	}
