@@ -25,12 +25,6 @@ public class TeacherService {
 		}
 		return teachers;
 	}
-	public Teacher findOne(long id) {
-		
-		Optional<Teacher> teachers = tRepo.findById(id);
-		return teachers.isPresent()? teachers.get() : null;
-	
-	}
 	
 	//Optional for Java 8
 	public Teacher findById(long id) {
@@ -47,8 +41,8 @@ public class TeacherService {
 		tRepo.deleteById(id);
 	}
 	
-	public void save(Teacher teachers) {
-		tRepo.save(teachers);
+	public void save(Teacher teacher) {
+		tRepo.save(teacher);
 	}
 
 }

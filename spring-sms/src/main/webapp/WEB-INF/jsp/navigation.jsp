@@ -42,7 +42,7 @@
         	មុខវិជ្ជា
       </a>
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="#"><i class="fa fa-plus"></i> បង្កើតថ្មី</a>
+        <a class="dropdown-item" href="/newsubject"><i class="fa fa-plus"></i> បង្កើតថ្មី</a>
         <a class="dropdown-item" href="/subjects"><i class="fa fa-bars"></i> បញ្ជីមុខវិជ្ជា</a>
       </div>
     </li>

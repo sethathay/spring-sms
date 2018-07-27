@@ -1,15 +1,12 @@
 package com.tax.springsms.models;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name="tbl_teacher")
@@ -51,8 +48,13 @@ public class Teacher {
 	@Column(name="active")
 	private boolean active;
 	
+	@ManyToMany(mappedBy = "teachers")
+	//Using for infinite recursion reference between two entities
+	@JsonBackReference
+	private List<Subject> subjects = new ArrayList<Subject>();
+	
 	public Teacher() {
-		
+		this.active = true;
 	}
 
 	public Teacher(String name, boolean gender, Date dob, String pob, String address, boolean fstatus, String caddress,
@@ -67,6 +69,21 @@ public class Teacher {
 		this.phone = phone;
 		this.email = email;
 		this.active = active;
+	}
+	
+	public Teacher(String name, boolean gender, Date dob, String pob, String address, boolean fstatus, String caddress,
+			String phone, String email, boolean active, List<Subject> subjects) {
+		this.name = name;
+		this.gender = gender;
+		this.dob = dob;
+		this.pob = pob;
+		this.address = address;
+		this.fstatus = fstatus;
+		this.caddress = caddress;
+		this.phone = phone;
+		this.email = email;
+		this.active = active;
+		this.subjects = subjects;
 	}
 
 	public Long getId() {
@@ -157,5 +174,11 @@ public class Teacher {
 		this.active = active;
 	}
 	
+	public void setSubjects(List<Subject> subjects) {
+		this.subjects = subjects;
+	}
 	
+	public List<Subject> getSubjects(){
+		return this.subjects;
+	}
 }

@@ -1,11 +1,13 @@
 package com.tax.springsms.models;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+
 
 @Entity
 @Table(name="tbl_subject")
@@ -28,8 +30,16 @@ public class Subject {
 	@Column(name="active")
 	private boolean active;
 	
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name="tbl_teacher_subject", 
+	joinColumns = @JoinColumn(name="subject_id", referencedColumnName="id"), 
+	inverseJoinColumns = @JoinColumn(name="teacher_id", referencedColumnName="id"))
+	//Using for infinite recursion reference between two entities
+	@JsonManagedReference
+	private List<Teacher> teachers = new ArrayList<Teacher>();
+	
 	public Subject() {
-		
+		this.active = true;
 	}
 
 	public Subject(String abbr, String name, String description, boolean active) {
@@ -37,6 +47,14 @@ public class Subject {
 		this.name = name;
 		this.description = description;
 		this.active = active;
+	}
+	
+	public Subject(String abbr, String name, String description, boolean active, List<Teacher> teachers) {
+		this.abbr = abbr;
+		this.name = name;
+		this.description = description;
+		this.active = active;
+		this.teachers = teachers;
 	}
 
 	public Long getId() {
@@ -77,6 +95,14 @@ public class Subject {
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+	
+	public void setTeachers(List<Teacher> teachers) {
+		this.teachers = teachers;
+	}
+	
+	public List<Teacher> getTeachers(){
+		return this.teachers;
 	}
 	
 	

@@ -52,7 +52,7 @@ public class Student {
 	private boolean active;
 	
 	public Student() {
-		
+		this.active = true;
 	}
 
 	public Student(String name, boolean gender, Date dob, String pob, String address, boolean fstatus, String caddress,

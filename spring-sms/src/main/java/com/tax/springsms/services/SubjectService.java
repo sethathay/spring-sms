@@ -19,11 +19,11 @@ public class SubjectService {
 	
 	
 	public Collection<Subject> findAll(){
-		List<Subject> teachers = new ArrayList<Subject>();
+		List<Subject> subjects = new ArrayList<Subject>();
 		for(Subject stud: subjectRepo.findAll()) {
-			teachers.add(stud);
+			subjects.add(stud);
 		}
-		return teachers;
+		return subjects;
 	}
 	
 	//Optional for Java 8
@@ -39,6 +39,10 @@ public class SubjectService {
 
 	public void delete(long id) {
 		subjectRepo.deleteById(id);
+	}
+	
+	public void save(Subject teacher) {
+		subjectRepo.save(teacher);
 	}
 
 }

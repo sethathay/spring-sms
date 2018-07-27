@@ -15,7 +15,7 @@
 		  <p><i>ក្នុងផ្នែកនេះលោកអ្នកអាចធ្វើការបង្កើត កែប្រែ និងលុបនូវព៌តមានរបស់គ្រូបង្រៀន</i></p>   
 		  <div class="row">
 		  	<div class="col-sm-12">
-		  		<button type="button" class="btn btn-success"><i class="fa fa-plus"></i> បង្កើតថ្មី</button>
+		  		<a href="/newteacher" class="btn btn-success"><i class="fa fa-plus"></i> បង្កើតថ្មី</a>
 		  		<br/><br/>
 		  	</div>
 		  </div>         
@@ -49,8 +49,8 @@
 			        <td>${teacher.caddress}</td>
 			        <td>${teacher.phone}</td>
 			        <td>${teacher.email}</td>
-			       	<td><a href="updateTeacher1?id=${teacher.id}"><i class="fa fa-pencil" style="color:green"></i></a></td>
-			       	<td><a href="delete?id=${teacher.id}"><i class="fa fa-trash-o" style="color:red"></i></a></td>
+			       	<td><a href="updateteacher?id=${teacher.id}"><i class="fa fa-pencil" style="color:green"></i></a></td>
+			       	<td><a href="deleteteacher?id=${teacher.id}"><i class="fa fa-trash-o" style="color:red"></i></a></td>
 			      </tr>
 		      	</c:forEach>
 		    </tbody>
@@ -60,11 +60,12 @@
 		<h2>កែប្រែព៌តមានគ្រូបង្រៀន</h2>
 		 <div class="row">
 		  	<div class="col-sm-12">
+		  		<br/>
 		  		<a class="btn btn-success" href="teachers"><i class="fa fa-mail-reply"></i> ត្រលប់ក្រោយ</a>
 		  		<br/><br/>
 		  	</div>
 		  </div>
-			<form method="POST" action="save">
+			<form method="POST" action="saveteacher">
 			<input type="hidden" value="${teacher.id}" name="id" id="id">
 			  <div class="form-group row">
 			    <label class="col-form-label col-form-label-sm col-sm-2" for="name">ឈ្មោះ (*)</label>
@@ -125,15 +126,16 @@
 	    	</div>
 			</form>
 	</c:when>
-		<c:when test="${mode == 'NEW'}">
-		<h2>កែប្រែព៌តមានគ្រូបង្រៀន</h2>
+	<c:when test="${mode == 'NEW'}">
+		<h2>បង្កើតគ្រូបង្រៀនថ្មី</h2>
 		 <div class="row">
 		  	<div class="col-sm-12">
+		  		<br/>
 		  		<a class="btn btn-success" href="teachers"><i class="fa fa-mail-reply"></i> ត្រលប់ក្រោយ</a>
 		  		<br/><br/>
 		  	</div>
 		  </div>
-			<form method="POST" action="save">
+			<form method="POST" action="saveteacher">
 			<!-- No need it will generate ID auto -->
 			<!--<input type="hidden" value="${teacher.id}+3" name="id" id="id">-->
 			  <div class="form-group row">
