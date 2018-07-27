@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.tax.springsms.services.StudentService;
+import com.tax.springsms.services.SubjectService;
 import com.tax.springsms.services.TeacherService;
 
 @Controller
@@ -14,6 +16,11 @@ public class MainController {
 	
 	@Autowired
 	private TeacherService tService;
+	@Autowired
+	private StudentService stuService;
+	@Autowired
+	private SubjectService subjectService;
+	
 	
 	@GetMapping("/")
 	public String init(HttpServletRequest req) {
@@ -27,12 +34,27 @@ public class MainController {
 		return "dashboard";
 	}
 	
+	@GetMapping("/subjects")
+	public String subjects(HttpServletRequest req) {
+		req.setAttribute("mode", "VIEW");
+		req.setAttribute("subjects", subjectService.findAll());
+		return "subjects";
+	}
+	
+	@GetMapping("/students")
+	public String students(HttpServletRequest req) {
+		req.setAttribute("mode", "VIEW");
+		req.setAttribute("students", stuService.findAll());
+		return "students";
+	}
+	
 	@GetMapping("/teachers")
 	public String teachers(HttpServletRequest req) {
 		req.setAttribute("mode", "VIEW");
 		req.setAttribute("teachers", tService.findAll());
 		return "teachers";
 	}
+	
 	@GetMapping("/newTeacher")
 	public String addTeacher() {
 		return "newteacher";
