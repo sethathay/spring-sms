@@ -52,7 +52,14 @@
 		  </table>
 	</c:when>
 	<c:when test="${mode == 'MODIFY' || mode == 'NEW'}">
-		<h2>កែប្រែព៌តមានមុខវិជ្ជា</h2>
+		<c:choose>
+			<c:when test="${mode == 'MODIFY'}">
+				<h2>កែប្រែព៌តមានមុខវិជ្ជា</h2>
+			</c:when>
+			<c:when test="${mode == 'NEW'}">
+				<h2>បង្កើតមុខវិជ្ជាថ្មី</h2>
+			</c:when>
+		</c:choose>
 		 <div class="row">
 		  	<div class="col-sm-12">
 		  		<br/>
@@ -84,8 +91,10 @@
 				</div>
 				<div class="form-group row">
 					<div class="offset-sm-2 col-sm-10">
-						<div class="row col-sm-12">
-							<label class="col-form-label col-form-label-sm" for="description">ជ្រើសរើសគ្រូដែលអាចបង្រៀនមុខវិជ្ជានេះ</label>
+						<div class="row">
+							<label class="col-form-label col-form-label-sm col-sm-4" for="description">សូមជ្រើសរើសគ្រូដែលអាចបង្រៀនមុខវិជ្ជានេះ</label>
+							<select class="form-control form-control-sm col-sm-4" aria-describedby="passwordHelpBlock">
+							</select>
 							&nbsp;
 						    <a href="#" class="btn btn-success"><i class="fa fa-plus"></i></a>
 						</div>
@@ -116,7 +125,7 @@
 						      <input type="hidden" name="teachers[${element.index}].address" value="${t.address}">
 						      <input type="hidden" name="teachers[${element.index}].caddress" value="${t.caddress}">
 						      <input type="hidden" name="teachers[${element.index}].fstatus" value="${t.fstatus}">
-						      <td><a href="#" class="cmdDeleteRowTeacher"><i class="fa fa-trash-o" style="color:red"></i></a></td>
+						      <td><a href="#" class="cmdDeleteRowTeacher" onClick="$(this).closest('tr').remove();"><i class="fa fa-trash-o" style="color:red"></i></a></td>
 						    </tr>
 						    </c:forEach>
 						  </tbody>
