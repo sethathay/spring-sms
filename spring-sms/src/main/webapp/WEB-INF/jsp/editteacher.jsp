@@ -51,8 +51,8 @@
 		    <label for="gender">Gender:</label>
 		    <div class="col-sm-offset-2 col-sm-10">
 		        <span class="radio">
-		          <label class="col-sm-2"><input type="radio" name="gender"> Male</label>
-		          <label class="col-sm-2"><input type="radio" name="gender"> Female</label>
+		          <label class="col-sm-2"><input type="radio" name="gender" value="male" id="male"> Male</label>
+		          <label class="col-sm-2"><input type="radio" name="gender" value="female" id="female"> Female</label>
 		        </span>
 		     </div>
 		  </div>
@@ -76,10 +76,10 @@
 		    <label for="famStatus">Family Status:</label>
 		    <div class="col-sm-offset-2 col-sm-10">
 		        <span class="radio">
-		          <label class="col-sm-2"><input type="radio" name="famStatus"> Single</label>
-		          <label class="col-sm-2"><input type="radio" name="famStatus"> Married</label>
-		          <label class="col-sm-2"><input type="radio" name="famStatus"> Widow</label>
-		          <label class="col-sm-2"><input type="radio" name="famStatus"> Widower</label>
+		          <label class="col-sm-2"><input type="radio" name="famStatus" value="single" id="single"> Single</label>
+		          <label class="col-sm-2"><input type="radio" name="famStatus" value="married" id="married"> Married</label>
+		          <label class="col-sm-2"><input type="radio" name="famStatus" value="widow" id="widow"> Widow</label>
+		          <label class="col-sm-2"><input type="radio" name="famStatus" value="widower" id="widower"> Widower</label>
 		        </span>
 		     </div>
 		  </div>
@@ -98,7 +98,7 @@
 		    <label for="email">Email:</label>
 		    <input type="email" class="form-control" id="email" value="${teacher.email}">
 		  </div>
-		  <button style="background-color: #4CAF50;color:#fff" type="submit" class="btn btn-default">Submit</button>
+		  <button style="background-color: #4CAF50;color:#fff" type="submit" class="btn btn-default" >Submit</button>
 	</form>
 </div>
 

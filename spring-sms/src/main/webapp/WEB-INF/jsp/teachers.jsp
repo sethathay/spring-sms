@@ -64,8 +64,78 @@
 		  		<br/><br/>
 		  	</div>
 		  </div>
-			<form method="POST" action="">
+			<form method="POST" action="save">
 			<input type="hidden" value="${teacher.id}" name="id" id="id">
+			  <div class="form-group row">
+			    <label class="col-form-label col-form-label-sm col-sm-2" for="name">ឈ្មោះ (*)</label>
+			    <div class="col-sm-4">
+			    	<input type="text" required class="form-control form-control-sm" value="${teacher.name}" name="name" id="name">
+			    </div>
+			    <label class="col-form-label col-form-label-sm col-sm-2" for="gender">ភេទ </label>
+			      <div class="col-sm-4">
+			      	<select class="form-control form-control-sm" name="gender" id="gender">
+				        <option value="false" ${teacher.gender? "" : "selected" }>ស្រី</option>
+				        <option value="true" ${teacher.gender? "selected" : "" }>ប្រុស</option>
+				      </select>
+			      </div>
+			  </div>
+			  <div class="form-group row">
+			    <label class="col-form-label col-form-label-sm col-sm-2" for="dob">ថ្ងៃខែឆ្នាំកំណើត</label>
+			    <div class="col-sm-4">
+			    	<input type="date" class="form-control form-control-sm" value="${teacher.dob}" name="dob" id="dob">
+			    </div>
+			    <label class="col-form-label col-form-label-sm col-sm-2" for="pob">ទីកន្លែងកំណើត</label>
+			    <div class="col-sm-4">
+			    	<input type="text" class="form-control form-control-sm" value="${teacher.pob}" name="pob" id="pob">
+			    </div>
+			  </div>
+			  <div class="form-group row">
+				  <label class="col-form-label col-form-label-sm col-sm-2" for="address">អសយដ្ឋានបច្ចុប្បន្ន</label>
+				  <div class="col-sm-4">
+				  	<textarea class="form-control form-control-sm" rows="3" name="address" id="address">${teacher.address}</textarea>
+				  </div>
+				  <label class="col-form-label col-form-label-sm col-sm-2" for="caddress">អសយដ្ឋានទំនាក់ទំនងបច្ចុប្បន្ន</label>
+				  <div class="col-sm-4">
+				  	<textarea class="form-control form-control-sm" rows="3" name="caddress" id="caddress">${teacher.caddress}</textarea>
+				  </div>
+				</div>
+				<div class="form-group row">
+			      <label class="col-form-label col-form-label-sm col-sm-2" for="fstatus">ស្ថានភាពគ្រួសារ</label>
+			      <div class="col-sm-4">
+			      	<select class="form-control form-control-sm" name="fstatus" id="fstatus">
+				        <option value="false" ${teacher.fstatus? "" : "selected" }>នៅលីវ</option>
+				        <option value="true" ${teacher.fstatus? "selected" : "" }>មានគ្រួសារ</option>
+				      </select>
+			      </div>
+			      <label class="col-form-label col-form-label-sm col-sm-2" for="phone">លេខទូរសព្ទ</label>
+				    <div class="col-sm-4">
+				    	<input type="text" class="form-control form-control-sm" value="${teacher.phone}" name="phone" id="phone">
+				    </div>
+		      </div>
+			  <div class="form-group row">
+			    <label class="col-form-label col-form-label-sm col-sm-2" for="email">អ៊ីម៉ែល</label>
+			    <div class="col-sm-4">
+			    	<input type="email" class="form-control form-control-sm" value="${teacher.email}" name="email" id="email">
+			    </div>
+			  </div>
+			  <div class="form-group row">        
+	      		<div class="offset-sm-2 col-sm-10">
+	      			<button type="submit" class="btn btn-primary">រក្សាទុក</button>
+	      		</div>
+	    	</div>
+			</form>
+	</c:when>
+		<c:when test="${mode == 'NEW'}">
+		<h2>កែប្រែព៌តមានគ្រូបង្រៀន</h2>
+		 <div class="row">
+		  	<div class="col-sm-12">
+		  		<a class="btn btn-success" href="teachers"><i class="fa fa-mail-reply"></i> ត្រលប់ក្រោយ</a>
+		  		<br/><br/>
+		  	</div>
+		  </div>
+			<form method="POST" action="save">
+			<!-- No need it will generate ID auto -->
+			<!--<input type="hidden" value="${teacher.id}+3" name="id" id="id">-->
 			  <div class="form-group row">
 			    <label class="col-form-label col-form-label-sm col-sm-2" for="name">ឈ្មោះ (*)</label>
 			    <div class="col-sm-4">

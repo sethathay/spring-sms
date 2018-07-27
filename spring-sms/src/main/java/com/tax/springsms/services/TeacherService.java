@@ -46,5 +46,9 @@ public class TeacherService {
 	public void delete(long id) {
 		tRepo.deleteById(id);
 	}
+	
+	public void save(Teacher teachers) {
+		tRepo.save(teachers);
+	}
 
 }
