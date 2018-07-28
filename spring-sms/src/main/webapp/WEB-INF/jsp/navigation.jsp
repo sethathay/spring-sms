@@ -24,7 +24,7 @@
         	សិស្ស
       </a>
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="#"><i class="fa fa-plus"></i> បង្កើតថ្មី</a>
+        <a class="dropdown-item" href="/newstudent"><i class="fa fa-plus"></i> បង្កើតថ្មី</a>
         <a class="dropdown-item" href="/students"><i class="fa fa-bars"></i> បញ្ជីសិស្ស</a>
       </div>
     </li>

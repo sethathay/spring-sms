@@ -39,7 +39,7 @@
 		    <tbody>
 		    	<c:forEach var="teacher" items="${teachers}">
 			      <tr>
-			        <td>${teacher.id}</td>
+			        <td id="IDTeacher">${teacher.id}</td>
 			        <td>${teacher.name}</td>
 			        <td>${teacher.gender? "ប្រុស": "ស្រី"}</td>
 			        <td>${teacher.dob}</td>
@@ -48,9 +48,35 @@
 			        <td>${teacher.fstatus? "មានគ្រួសារ": "នៅលីវ"}</td>
 			        <td>${teacher.caddress}</td>
 			        <td>${teacher.phone}</td>
-			        <td>${teacher.email}</td>
+			        <td>${teacher.email}</td>  <!-- deleteteacher?id=${teacher.id} -->
 			       	<td><a href="updateteacher?id=${teacher.id}"><i class="fa fa-pencil" style="color:green"></i></a></td>
-			       	<td><a href="deleteteacher?id=${teacher.id}"><i class="fa fa-trash-o" style="color:red"></i></a></td>
+			       	<td><a data-toggle="modal" href="#myModal${teacher.id}"><i class="fa fa-trash-o" style="color:red"></i></a>
+			       		<!-- The Modal -->
+						  <div class="modal fade" id="myModal${teacher.id}">
+						    <div class="modal-dialog modal-sm">
+						      <div class="modal-content">
+						      
+						        <!-- Modal Header -->
+						        <div class="modal-header">
+						          <h4 class="modal-title">បញ្ជាក់</h4>
+						          <button type="button" class="close" data-dismiss="modal">&times;</button>
+						        </div>
+						        
+						        <!-- Modal body -->
+						        <div class="modal-body">
+						          តើអ្នកពិតជាចង់លុបទិន្នន័យ ${teacher.id} នេះមែនទេ?
+						        </div>
+						        
+						        <!-- Modal footer -->
+						        <div class="modal-footer">
+						          <a href="deleteteacher?id=${teacher.id}"><button type="button" class="btn btn-primary" data-dismiss="model">យល់ព្រម</button></a>
+						        </div>
+						        
+						      </div>
+						    </div>
+						  </div>
+						<!-- End Model -->
+			       	</td>
 			      </tr>
 		      	</c:forEach>
 		    </tbody>

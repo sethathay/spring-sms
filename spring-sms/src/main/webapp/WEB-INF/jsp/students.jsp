@@ -15,7 +15,7 @@
 		  <p><i>ក្នុងផ្នែកនេះលោកអ្នកអាចធ្វើការបង្កើត កែប្រែ និងលុបនូវព៌តមានរបស់សិស្ស</i></p>   
 		  <div class="row">
 		  	<div class="col-sm-12">
-		  		<button type="button" class="btn btn-success"><i class="fa fa-plus"></i> បង្កើតថ្មី</button>
+		  		<a href="/newstudent" class="btn btn-success"><i class="fa fa-plus"></i> បង្កើតថ្មី</a>
 		  		<br/><br/>
 		  	</div>
 		  </div>         
@@ -49,23 +49,62 @@
 			        <td>${student.caddress}</td>
 			        <td>${student.phone}</td>
 			        <td>${student.email}</td>
-			       	<td><a href="updateTeacher1?id=${student.id}"><i class="fa fa-pencil" style="color:green"></i></a></td>
-			       	<td><a href="delete?id=${student.id}"><i class="fa fa-trash-o" style="color:red"></i></a></td>
+			       	<td><a href="updatestudent?id=${student.id}"><i class="fa fa-pencil" style="color:green"></i></a></td>
+			       	<td><a data-toggle="modal" href="#myModal${student.id}"><i class="fa fa-trash-o" style="color:red"></i></a>
+			       	
+			       	<!-- The Modal -->
+						  <div class="modal fade" id="myModal${student.id}">
+						    <div class="modal-dialog modal-sm">
+						      <div class="modal-content">
+						      
+						        <!-- Modal Header -->
+						        <div class="modal-header">
+						          <h4 class="modal-title">បញ្ជាក់</h4>
+						          <button type="button" class="close" data-dismiss="modal">&times;</button>
+						        </div>
+						        
+						        <!-- Modal body -->
+						        <div class="modal-body">
+						          តើអ្នកពិតជាចង់លុបទិន្នន័យ ${student.id} នេះមែនទេ?
+						        </div>
+						        
+						        <!-- Modal footer -->
+						        <div class="modal-footer">
+						          <a href="deletestudent?id=${student.id}"><button type="button" class="btn btn-primary" data-dismiss="model">យល់ព្រម</button></a>
+						        </div>
+						        
+						      </div>
+						    </div>
+						  </div>
+						<!-- End Model -->	
+			       	
+			       	</td>
 			      </tr>
 		      	</c:forEach>
 		    </tbody>
 		  </table>
 	</c:when>
-	<c:when test="${mode == 'MODIFY'}">
-		<h2>កែប្រែព៌តមានគ្រូបង្រៀន</h2>
+	<c:when test="${mode == 'MODIFY' || mode == 'NEW'}">
+		<c:choose>
+			<c:when test="${mode== 'MODIFY' }">
+				<h2>កែប្រែព៌តមានសិស្ស</h2>
+			</c:when>
+			<c:when test="${mode== 'NEW' }">
+				<h2>ចុះឈ្មោះសិស្សថ្មី</h2>
+			</c:when>
+		</c:choose>
 		 <div class="row">
 		  	<div class="col-sm-12">
 		  		<a class="btn btn-success" href="students"><i class="fa fa-mail-reply"></i> ត្រលប់ក្រោយ</a>
 		  		<br/><br/>
 		  	</div>
 		  </div>
-			<form method="POST" action="">
-			<input type="hidden" value="${student.id}" name="id" id="id">
+			<form method="POST" action="savestudent">
+			<c:choose>
+				<c:when test="${mode=='MODIFY'}">
+					<input type="hidden" value="${student.id}" name="id" id="id">
+				</c:when>
+			</c:choose>
 			  <div class="form-group row">
 			    <label class="col-form-label col-form-label-sm col-sm-2" for="name">ឈ្មោះ (*)</label>
 			    <div class="col-sm-4">

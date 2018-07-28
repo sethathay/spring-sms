@@ -55,10 +55,10 @@ public class TeacherController {
 	}
 	
 	@GetMapping("/deleteteacher")
-	public String deleteTeacher(@RequestParam long id,HttpServletRequest req) {
+	public void deleteTeacher(@RequestParam long id,HttpServletRequest req,HttpServletResponse resp) throws IOException {
 		tService.delete(id);
 		req.setAttribute("teachers", tService.findAll());
-		return "teachers";
+		resp.sendRedirect("/teachers");
 	}
 	
 	@GetMapping("/newteacher")
