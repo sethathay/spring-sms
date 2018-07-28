@@ -122,12 +122,13 @@
 						  	<c:forEach var="t" items="${subject.teachers}" varStatus="element">
 						    <tr>
 						      <!-- Binding list of teachers for field you display -->
-						      <th scope="row"><input type="hidden" name="teachers[${element.index}].id" value="${t.id}">${element.count}</th>
+						      <input type="hidden" name="teachers[${element.index}].id" value="${t.id}">
+						      <th scope="row">${element.count}</th>
 						      <td>${t.name}</td>
 						      <td>${t.gender? "ប្រុស" : "ស្រី" }</td>
 						      <td>${t.phone}</td>
 						      <td>${t.email}</td>
-						      <td><a href="#" class="cmdDeleteRowTeacher" onClick="$(this).closest('tr').remove();"><i class="fa fa-trash-o" style="color:red"></i></a></td>
+						      <td><a href="#" class="cmdDeleteRowTeacher"><i class="fa fa-trash-o" style="color:red"></i></a></td>
 						    </tr>
 						    </c:forEach>
 						  </tbody>
