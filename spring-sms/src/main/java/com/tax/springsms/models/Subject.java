@@ -30,7 +30,7 @@ public class Subject {
 	@Column(name="active")
 	private boolean active;
 	
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(name="tbl_teacher_subject", 
 	joinColumns = @JoinColumn(name="subject_id", referencedColumnName="id"), 
 	inverseJoinColumns = @JoinColumn(name="teacher_id", referencedColumnName="id"))

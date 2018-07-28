@@ -16,12 +16,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tax.springsms.models.Subject;
 import com.tax.springsms.services.SubjectService;
+import com.tax.springsms.services.TeacherService;
 
 @Controller
 public class SubjectController {
 	
 	@Autowired
 	private SubjectService subjectService;
+	@Autowired
+	private TeacherService tService;
 	
 	@GetMapping("/subjects")
 	public String subjects(HttpServletRequest req) {
@@ -42,6 +45,7 @@ public class SubjectController {
 	@GetMapping("/updatesubject")
 	public String updateSubject(@RequestParam long id, HttpServletRequest req) {
 		req.setAttribute("mode", "MODIFY");
+		req.setAttribute("teacherList", tService.findAll());
 		req.setAttribute("subject", subjectService.findById(id));
 		return "subjects";
 	}
@@ -55,6 +59,7 @@ public class SubjectController {
 	
 	@GetMapping("/newsubject")
 	public String addSubject(HttpServletRequest req) {
+		req.setAttribute("teacherList", tService.findAll());
 		req.setAttribute("mode", "NEW");
 		return "subjects";
 	}

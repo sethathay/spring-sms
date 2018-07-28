@@ -92,14 +92,22 @@
 				<div class="form-group row">
 					<div class="offset-sm-2 col-sm-10">
 						<div class="row">
-							<label class="col-form-label col-form-label-sm col-sm-4" for="description">សូមជ្រើសរើសគ្រូដែលអាចបង្រៀនមុខវិជ្ជានេះ</label>
-							<select class="form-control form-control-sm col-sm-4" aria-describedby="passwordHelpBlock">
+							<label class="col-form-label col-form-label-sm col-sm-4" for="selectteacher">សូមជ្រើសរើសគ្រូដែលអាចបង្រៀនមុខវិជ្ជានេះ</label>
+							<select class="form-control form-control-sm col-sm-4" name="selectteacher">
+								<c:forEach var="indTeacher" items="${teacherList}">
+									<option value="${ indTeacher.id }" 
+									text="${ indTeacher.name }"
+									gender = "${indTeacher.gender? "ប្រុស" : "ស្រី" }" 
+									phone = "${ indTeacher.phone }" 
+									email = "${ indTeacher.email }" 
+									>${ indTeacher.name }</option>
+								</c:forEach>
 							</select>
 							&nbsp;
-						    <a href="#" class="btn btn-success"><i class="fa fa-plus"></i></a>
+						    <a class="btnAddTeacher btn btn-success"><i class="fa fa-plus"></i></a>
 						</div>
 						<br>
-						<table class="table table-bordered table-sm">
+						<table class="table table-bordered table-sm tbTechersList">
 						  <thead>
 						    <tr>
 						      <th scope="col">ល.រ</th>
@@ -115,16 +123,10 @@
 						    <tr>
 						      <!-- Binding list of teachers for field you display -->
 						      <th scope="row"><input type="hidden" name="teachers[${element.index}].id" value="${t.id}">${element.count}</th>
-						      <td><input type="hidden" name="teachers[${element.index}].name" value="${t.name}">${t.name}</td>
-						      <td><input type="hidden" name="teachers[${element.index}].gender" value="${t.gender}">${t.gender? "ប្រុស" : "ស្រី" }</td>
-						      <td><input type="hidden" name="teachers[${element.index}].phone" value="${t.phone}">${t.phone}</td>
-						      <td><input type="hidden" name="teachers[${element.index}].email" value="${t.email}">${t.email}</td>
-						      <!-- Binding list of teachers for field you didn't want to display -->
-						      <input type="hidden" name="teachers[${element.index}].dob" value="${t.dob}">
-						      <input type="hidden" name="teachers[${element.index}].pob" value="${t.pob}">
-						      <input type="hidden" name="teachers[${element.index}].address" value="${t.address}">
-						      <input type="hidden" name="teachers[${element.index}].caddress" value="${t.caddress}">
-						      <input type="hidden" name="teachers[${element.index}].fstatus" value="${t.fstatus}">
+						      <td>${t.name}</td>
+						      <td>${t.gender? "ប្រុស" : "ស្រី" }</td>
+						      <td>${t.phone}</td>
+						      <td>${t.email}</td>
 						      <td><a href="#" class="cmdDeleteRowTeacher" onClick="$(this).closest('tr').remove();"><i class="fa fa-trash-o" style="color:red"></i></a></td>
 						    </tr>
 						    </c:forEach>
