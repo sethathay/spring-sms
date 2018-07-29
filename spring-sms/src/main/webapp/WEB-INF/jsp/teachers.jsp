@@ -32,6 +32,7 @@
 		        <th>អសយដ្ឋានទំនាក់ទំនងបច្ចុប្បន្ន</th>
 		        <th>លេខទូរសព្ទ</th>
 		        <th>អ៊ីម៉ែល</th>
+		        <th>មុខវិជ្ជា</th>
 		        <th>កែប្រែ</th>
 		        <th>លុប</th>
 		      </tr>
@@ -49,6 +50,11 @@
 			        <td>${teacher.caddress}</td>
 			        <td>${teacher.phone}</td>
 			        <td>${teacher.email}</td>  <!-- deleteteacher?id=${teacher.id} -->
+			        <td>
+			        	<c:forEach var="subject" items="${teacher.subjects}">
+			        		<span class="badge badge-pill badge-secondary">${subject.name}</span> &nbsp;
+			        	</c:forEach>
+			        </td>
 			       	<td><a href="updateteacher?id=${teacher.id}"><i class="fa fa-pencil" style="color:green"></i></a></td>
 			       	<td><a data-toggle="modal" href="#myModal${teacher.id}"><i class="fa fa-trash-o" style="color:red"></i></a>
 			       		<!-- The Modal -->
@@ -145,6 +151,51 @@
 			    	<input type="email" class="form-control form-control-sm" value="${teacher.email}" name="email" id="email">
 			    </div>
 			  </div>
+			  
+			  	<div class="form-group row">
+					<div class="offset-sm-2 col-sm-10">
+						<div class="row">
+							<label class="col-form-label col-form-label-sm col-sm-4" for="selectsubject">សូមជ្រើសរើសមុខវិជ្ជាដែលគ្រូអាចបង្រៀន</label>
+							<select class="form-control form-control-sm col-sm-4" name="selectsubject">
+								<c:forEach var="indSubject" items="${subjectList}">
+									<option value="${ indSubject.id }"
+									abbr = "${ indSubject.abbr}"
+									name = "${ indSubject.name}"
+									description = "${ indSubject.description}"
+									>${ indSubject.name }</option>
+								</c:forEach>
+							</select>
+							&nbsp;
+						    <a class="btnAddSubject btn btn-success"><i class="fa fa-plus"></i></a>
+						</div>
+						<br>
+						<table class="table table-bordered table-sm tblSubjectList">
+						  <thead>
+						    <tr>
+						      <th scope="col">ល.រ</th>
+						      <th scope="col">អក្សរកាត់</th>
+						      <th scope="col">ឈ្មោះ</th>
+						      <th scope="col">បរិយាយផ្សេងៗ</th>
+						      <th scope="col">លុប</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						  	<c:forEach var="sub" items="${teacher.subjects}" varStatus="element">
+						    <tr>
+						      <!-- Binding list of teachers for field you display -->
+						      <input type="hidden" name="subjects[${element.index}].id" value="${sub.id}">
+						      <th scope="row">${element.count}</th>
+						      <td>${sub.abbr}</td>
+						      <td>${sub.name}</td>
+						      <td>${sub.description}</td>
+						      <td><a href="#" class="cmdDeleteRowSubject"><i class="fa fa-trash-o" style="color:red"></i></a></td>
+						    </tr>
+						    </c:forEach>
+						  </tbody>
+						</table>
+					</div>
+				</div>
+			  
 			  <div class="form-group row">        
 	      		<div class="offset-sm-2 col-sm-10">
 	      			<button type="submit" class="btn btn-primary">រក្សាទុក</button>
@@ -216,6 +267,51 @@
 			    	<input type="email" class="form-control form-control-sm" value="${teacher.email}" name="email" id="email">
 			    </div>
 			  </div>
+			  
+			  <div class="form-group row">
+					<div class="offset-sm-2 col-sm-10">
+						<div class="row">
+							<label class="col-form-label col-form-label-sm col-sm-4" for="selectsubject">សូមជ្រើសរើសមុខវិជ្ជាដែលគ្រូអាចបង្រៀន</label>
+							<select class="form-control form-control-sm col-sm-4" name="selectsubject">
+								<c:forEach var="indSubject" items="${subjectList}">
+									<option value="${ indSubject.id }"
+									abbr = "${ indSubject.abbr}"
+									name = "${ indSubject.name}"
+									description = "${ indSubject.description}"
+									>${ indSubject.name }</option>
+								</c:forEach>
+							</select>
+							&nbsp;
+						    <a class="btnAddSubject btn btn-success"><i class="fa fa-plus"></i></a>
+						</div>
+						<br>
+						<table class="table table-bordered table-sm tblSubjectList">
+						  <thead>
+						    <tr>
+						      <th scope="col">ល.រ</th>
+						      <th scope="col">អក្សរកាត់</th>
+						      <th scope="col">ឈ្មោះ</th>
+						      <th scope="col">បរិយាយផ្សេងៗ</th>
+						      <th scope="col">លុប</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						  	<c:forEach var="sub" items="${teacher.subjects}" varStatus="element">
+						    <tr>
+						      <!-- Binding list of teachers for field you display -->
+						      <input type="hidden" name="subjects[${element.index}].id" value="${sub.id}">
+						      <th scope="row">${element.count}</th>
+						      <td>${sub.abbr}</td>
+						      <td>${sub.name}</td>
+						      <td>${sub.description}</td>
+						      <td><a href="#" class="cmdDeleteRowSubject"><i class="fa fa-trash-o" style="color:red"></i></a></td>
+						    </tr>
+						    </c:forEach>
+						  </tbody>
+						</table>
+					</div>
+				</div>
+			  
 			  <div class="form-group row">        
 	      		<div class="offset-sm-2 col-sm-10">
 	      			<button type="submit" class="btn btn-primary">រក្សាទុក</button>

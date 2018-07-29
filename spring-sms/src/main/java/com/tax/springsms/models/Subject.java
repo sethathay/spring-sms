@@ -6,7 +6,7 @@ import java.util.List;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 @Entity
@@ -35,7 +35,10 @@ public class Subject {
 	joinColumns = @JoinColumn(name="subject_id", referencedColumnName="id"), 
 	inverseJoinColumns = @JoinColumn(name="teacher_id", referencedColumnName="id"))
 	//Using for infinite recursion reference between two entities
-	@JsonManagedReference
+	//@JsonManagedReference
+	
+	@JsonIgnoreProperties("subjects")
+	
 	private List<Teacher> teachers = new ArrayList<Teacher>();
 	
 	public Subject() {

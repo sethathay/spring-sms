@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tax.springsms.models.Teacher;
+import com.tax.springsms.services.SubjectService;
 import com.tax.springsms.services.TeacherService;
 
 @Controller
@@ -26,6 +27,9 @@ public class TeacherController {
 	
 	@Autowired
 	private TeacherService tService;
+	
+	@Autowired
+	private SubjectService subService; 
 	
 	@GetMapping("/teachers")
 	public String teachers(HttpServletRequest req) {
@@ -50,6 +54,7 @@ public class TeacherController {
 	@GetMapping("/updateteacher")
 	public String updateTeachers(@RequestParam long id, HttpServletRequest req) {
 		req.setAttribute("mode", "MODIFY");
+		req.setAttribute("subjectList", subService.findAll());
 		req.setAttribute("teacher", tService.findById(id));
 		return "teachers";
 	}
@@ -63,6 +68,7 @@ public class TeacherController {
 	
 	@GetMapping("/newteacher")
 	public String addTeacher(HttpServletRequest req) {
+		req.setAttribute("subjectList", subService.findAll());
 		req.setAttribute("mode", "NEW");
 		return "teachers";
 	}
