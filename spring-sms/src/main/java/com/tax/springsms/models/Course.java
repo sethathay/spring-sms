@@ -22,9 +22,11 @@ public class Course {
 	private int duration;
 	
 	@Column(name="start_date")
+	@Temporal(TemporalType.DATE)
 	private Date startDate;
 	
 	@Column(name="end_date")
+	@Temporal(TemporalType.DATE)
 	private Date endDate;
 	
 	@Column(name="status")
@@ -33,7 +35,11 @@ public class Course {
 	@Column(name="active")
 	private boolean active;
 	
-	@OneToMany(mappedBy = "course")
+	//@OneToMany(mappedBy = "course")
+	/*@OneToMany(fetch = FetchType.LAZY)
+	@JoinTable(name="tbl_course_subject", 
+	joinColumns = @JoinColumn(name="course_id", referencedColumnName="id"), 
+	inverseJoinColumns = @JoinColumn(name="subject_id", referencedColumnName="id"))*/
 	private List<CourseSubject> courseSubjects = new ArrayList<CourseSubject>();
 	
 	public Course() {

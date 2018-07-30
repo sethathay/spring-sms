@@ -15,8 +15,8 @@
         	វគ្គបណ្តុះបណ្តាល
       </a>
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="#"><i class="fa fa-plus"></i> បង្កើតថ្មី</a>
-        <a class="dropdown-item" href="#"><i class="fa fa-bars"></i> បញ្ជីវគ្គបណ្តុះបណ្តាល</a>
+        <a class="dropdown-item" href="/newcourse"><i class="fa fa-plus"></i> បង្កើតថ្មី</a>
+        <a class="dropdown-item" href="/courses"><i class="fa fa-bars"></i> បញ្ជីវគ្គបណ្តុះបណ្តាល</a>
       </div>
     </li>
     <li class="nav-item dropdown">

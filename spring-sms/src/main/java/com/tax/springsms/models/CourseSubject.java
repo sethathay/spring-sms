@@ -20,8 +20,9 @@ public class CourseSubject {
 	private Subject subject;
 	
 	//additional field
-	@Column(name="teacher_id")
-	private int teacherId;
+	@OneToOne
+	@JoinColumn(name="teacher_id")
+	private Teacher teacher;
 
 	public Long getId() {
 		return id;
@@ -47,12 +48,12 @@ public class CourseSubject {
 		this.subject = subject;
 	}
 
-	public int getTeacherId() {
-		return teacherId;
+	public Teacher getTeacher() {
+		return teacher;
 	}
 
-	public void setTeacherId(int teacherId) {
-		this.teacherId = teacherId;
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
 	}
 	
 	
