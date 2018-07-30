@@ -38,6 +38,9 @@ public class Subject {
 	@JsonManagedReference
 	private List<Teacher> teachers = new ArrayList<Teacher>();
 	
+	@OneToMany(mappedBy = "subject")
+	private List<CourseSubject> courseSubjects = new ArrayList<CourseSubject>();
+	
 	public Subject() {
 		this.active = true;
 	}
@@ -103,6 +106,14 @@ public class Subject {
 	
 	public List<Teacher> getTeachers(){
 		return this.teachers;
+	}
+	
+	public void setCourseSubjects(List<CourseSubject> courseSubjects) {
+		this.courseSubjects = courseSubjects;
+	}
+	
+	public List<CourseSubject> getCourseSubjects(){
+		return this.courseSubjects;
 	}
 	
 	
