@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="tbl_teacher")
@@ -50,7 +51,9 @@ public class Teacher {
 	
 	@ManyToMany(mappedBy = "teachers")
 	//Using for infinite recursion reference between two entities
-	@JsonBackReference
+	//@JsonBackReference
+	
+	@JsonIgnoreProperties("teachers")
 	private List<Subject> subjects = new ArrayList<Subject>();
 	
 	public Teacher() {
