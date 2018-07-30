@@ -49,11 +49,14 @@ public class Teacher {
 	@Column(name="active")
 	private boolean active;
 	
-	@ManyToMany(mappedBy = "teachers")
+	//@ManyToMany(cascade=CascadeType.PERSIST, fetch = FetchType.LAZY, mappedBy = "teachers")
 	//Using for infinite recursion reference between two entities
 	//@JsonBackReference
-	
-	@JsonIgnoreProperties("teachers")
+	//@JsonIgnoreProperties("teachers")
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinTable(name="tbl_teacher_subject", 
+	joinColumns = @JoinColumn(name="teacher_id", referencedColumnName="id"), 
+	inverseJoinColumns = @JoinColumn(name="subject_id", referencedColumnName="id"))
 	private List<Subject> subjects = new ArrayList<Subject>();
 	
 	public Teacher() {
@@ -184,4 +187,5 @@ public class Teacher {
 	public List<Subject> getSubjects(){
 		return this.subjects;
 	}
+	
 }

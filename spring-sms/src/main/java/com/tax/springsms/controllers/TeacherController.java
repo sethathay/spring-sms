@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.tax.springsms.models.Subject;
 import com.tax.springsms.models.Teacher;
 import com.tax.springsms.services.SubjectService;
 import com.tax.springsms.services.TeacherService;
