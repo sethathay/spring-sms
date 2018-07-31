@@ -19,13 +19,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tax.springsms.models.Course;
+import com.tax.springsms.models.CourseSubject;
 import com.tax.springsms.services.CourseService;
+import com.tax.springsms.services.SubjectService;
 
 @Controller
 public class CourseController {
 	
 	@Autowired
 	private CourseService courseService;
+	
+	@Autowired
+	private SubjectService subjectService;
 	
 	@GetMapping("/courses")
 	public String teachers(HttpServletRequest req) {
@@ -35,9 +40,9 @@ public class CourseController {
 	}
 	
 	@PostMapping("/savecourse")
-	public void saveSubject(@ModelAttribute Course course,BindingResult bindingResult, 
+	public void saveSubject(@ModelAttribute Course courses, BindingResult bindingResult, 
 			HttpServletRequest req,HttpServletResponse resp) throws IOException {
-		courseService.save(course);
+		courseService.save(courses);
 		req.setAttribute("courses", courseService.findAll());
 		req.setAttribute("mode", "VIEW");
 		resp.sendRedirect("/courses");
@@ -51,14 +56,14 @@ public class CourseController {
 	@GetMapping("/updatecourse")
 	public String updateCourse(@RequestParam long id, HttpServletRequest req) {
 		req.setAttribute("mode", "MODIFY");
-		//req.setAttribute("teacherList", tService.findAll());
+		req.setAttribute("subjectList", subjectService.findAll());
 		req.setAttribute("course", courseService.findById(id));
 		return "courses";
 	}
 	
 	@GetMapping("/newcourse")
 	public String addCourse(HttpServletRequest req) {
-		//req.setAttribute("teacherList", tService.findAll());
+		req.setAttribute("subjectList", subjectService.findAll());
 		req.setAttribute("mode", "NEW");
 		return "courses";
 	}

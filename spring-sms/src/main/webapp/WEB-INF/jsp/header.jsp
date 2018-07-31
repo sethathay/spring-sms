@@ -10,3 +10,4 @@
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
  <script src="/resources/js/subject.js"></script>
   <script src="/resources/js/teacher.js"></script>
+  <script src="/resources/js/course.js"></script>

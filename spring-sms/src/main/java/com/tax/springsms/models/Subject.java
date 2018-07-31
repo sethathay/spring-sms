@@ -34,9 +34,7 @@ public class Subject {
 	@JoinTable(name="tbl_teacher_subject", 
 	joinColumns = @JoinColumn(name="subject_id", referencedColumnName="id"), 
 	inverseJoinColumns = @JoinColumn(name="teacher_id", referencedColumnName="id"))
-	//Using for infinite recursion reference between two entities
-	//@JsonManagedReference
-	//@JsonIgnoreProperties("subjects")
+	@JsonManagedReference
 	private List<Teacher> teachers = new ArrayList<Teacher>();
 	
 	@OneToMany(mappedBy = "subject")

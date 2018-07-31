@@ -35,11 +35,7 @@ public class Course {
 	@Column(name="active")
 	private boolean active;
 	
-	//@OneToMany(mappedBy = "course")
-	/*@OneToMany(fetch = FetchType.LAZY)
-	@JoinTable(name="tbl_course_subject", 
-	joinColumns = @JoinColumn(name="course_id", referencedColumnName="id"), 
-	inverseJoinColumns = @JoinColumn(name="subject_id", referencedColumnName="id"))*/
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "course", orphanRemoval = true)
 	private List<CourseSubject> courseSubjects = new ArrayList<CourseSubject>();
 	
 	public Course() {

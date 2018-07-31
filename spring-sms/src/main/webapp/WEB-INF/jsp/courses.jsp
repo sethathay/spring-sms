@@ -101,7 +101,7 @@
 		  <form method="POST" action="savecourse">
 		  <c:choose>
 				<c:when test="${mode == 'MODIFY'}">
-					<input type="hidden" value="${course.id}" name="id" id="id">
+					<input class="clsCourseId" type="hidden" value="${course.id}" name="id" id="id">
 				</c:when>
 			</c:choose>
 			<div class="form-group row">
@@ -125,13 +125,32 @@
 			    </div>
 			  </div>
 			  <div class="form-group row">
+			  	<div class="col-sm-12"><hr/></div>
+			  </div>
+			  <div class="form-group row">
 			  	<div class="offset-sm-2 col-sm-10">
 			  		<div class="row">
-			  			<label class="col-form-label col-form-label-sm col-sm-4" for="selectsubject">សូមជ្រើសរើសគ្រូដែលអាចបង្រៀនមុខវិជ្ជានេះ</label>
-			  			<select class="form-control form-control-sm col-sm-4" name="selectsubject">
+			  			<label class="col-form-label col-form-label-sm col-sm-2" for="selectsubject">មុខវិជ្ជាសិក្សា</label>
+			  			<select class="form-control form-control-sm col-sm-3" name="selectsubject">
+			  				<option></option>
+			  				<c:forEach var="indSubject" items="${subjectList}">
+			  					<option
+			  					value="${ indSubject.id }" 
+			  					abbr="${ indSubject.abbr }" 
+			  					subjectName="${ indSubject.name }">
+			  						${ indSubject.name }
+			  					</option>
+			  				</c:forEach>
 			  			</select>
-			  			&nbsp;
-						<a class="btnAddSubject btn btn-success"><i class="fa fa-plus"></i></a>
+			  			<label class="col-form-label col-form-label-sm col-sm-2" for="selectteacher">គ្រូបង្រៀន</label>
+			  			<select class="form-control form-control-sm col-sm-3" name="selectteacher">
+			  			</select>
+			  		</div>
+			  		<div class="row">
+			  			<div class="col-sm-10">
+			  				<br>
+			  				<a class="btnAddCourseSubject btn btn-success"><i class="fa fa-plus"></i></a>
+			  			</div>			  			
 			  		</div>
 			  		<br>
 			  		<table class="table table-bordered table-sm tbCoursesList">
@@ -148,10 +167,12 @@
 						  </thead>
 						  <tbody>
 						  	<c:forEach var="t" items="${course.courseSubjects}" varStatus="element">
-						    <tr>
-						      <input type="hidden" name="courseSubjects[${element.index}].course" value="${t}">
-						      <input type="hidden" name="courseSubjects[${element.index}].subject" value="${t.subject}">
-						      <input type="hidden" name="courseSubjects[${element.index}].teacher" value="${t.teacher}">
+						    <tr>	
+						      <input type="hidden" name="courseSubjects[${element.index}].id" value="${t.id}">
+						      <input type="hidden" name="courseSubjects[${element.index}].course.id" value="${course.id}">
+						      <input type="hidden" name="courseSubjects[${element.index}].subject.id" value="${t.subject.id}">
+						      <input type="hidden" name="courseSubjects[${element.index}].teacher.id" value="${t.teacher.id}">
+						       
 						      <th scope="row">${element.count}</th>
 						      <td>${t.subject.abbr}</td>
 						      <td>${t.subject.name}</td>
@@ -159,6 +180,7 @@
 						      <td>${t.teacher.phone}</td>
 						      <td>${t.teacher.email}</td>
 						      <td><a href="#" class="cmdDeleteRowCourseSubject"><i class="fa fa-trash-o" style="color:red"></i></a></td>
+						      
 						    </tr>
 						    </c:forEach>
 						  </tbody>

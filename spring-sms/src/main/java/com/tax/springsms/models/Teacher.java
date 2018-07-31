@@ -57,6 +57,7 @@ public class Teacher {
 	@JoinTable(name="tbl_teacher_subject", 
 	joinColumns = @JoinColumn(name="teacher_id", referencedColumnName="id"), 
 	inverseJoinColumns = @JoinColumn(name="subject_id", referencedColumnName="id"))
+	@JsonBackReference
 	private List<Subject> subjects = new ArrayList<Subject>();
 	
 	public Teacher() {
