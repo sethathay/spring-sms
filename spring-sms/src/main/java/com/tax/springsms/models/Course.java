@@ -39,6 +39,7 @@ public class Course {
 	private List<CourseSubject> courseSubjects = new ArrayList<CourseSubject>();
 	
 	public Course() {
+		this.status = 0;
 		this.active = true;
 	}
 

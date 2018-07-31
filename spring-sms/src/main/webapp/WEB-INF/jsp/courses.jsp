@@ -42,7 +42,7 @@
 			        <td>${course.duration}</td>
 			        <td>${course.startDate}</td>
 			        <td>${course.endDate}</td>
-			        <td>${course.status == 1? "បើកទទួលពាក្យ" : course.status ==2 ? "កំពុងសិក្សា" : "បានបញ្ចប់"}</td>
+			        <td>${course.status == 0? "វគ្គថ្មី" : course.status == 1? "បើកទទួលពាក្យ" : course.status ==2 ? "កំពុងសិក្សា" : "បានបញ្ចប់"}</td>
 			        <td>
 			        	<c:forEach var="obj" items="${course.courseSubjects}">
 			        		<span class="badge badge-pill badge-secondary">${obj.subject.name} / ${obj.teacher.name}</span> <br>
@@ -82,13 +82,16 @@
 		    </tbody>
 		  </table>  
 	</c:when>
-	<c:when test="${mode == 'MODIFY' || mode == 'NEW'}">
+	<c:when test="${mode == 'MODIFY' || mode == 'NEW' || mode == 'SCHEDULE'}">
 		<c:choose>
 			<c:when test="${mode == 'MODIFY'}">
 				<h2>កែប្រែព៌តមានវគ្គបណ្តុះបណ្តាល</h2>
 			</c:when>
 			<c:when test="${mode == 'NEW'}">
 				<h2>បង្កើតវគ្គបណ្តុះបណ្តាលថ្មី</h2>
+			</c:when>
+			<c:when test="${mode == 'SCHEDULE'}">
+				<h2>កាលវិភាគរបស់វគ្គបណ្តុះបណ្តាល</h2>
 			</c:when>
 		</c:choose>
 		<div class="row">
@@ -100,7 +103,7 @@
 		  </div>
 		  <form method="POST" action="savecourse">
 		  <c:choose>
-				<c:when test="${mode == 'MODIFY'}">
+				<c:when test="${mode == 'MODIFY' || mode == 'SCHEDULE'}">
 					<input class="clsCourseId" type="hidden" value="${course.id}" name="id" id="id">
 				</c:when>
 			</c:choose>
@@ -124,6 +127,23 @@
 			    	<input type="date" class="form-control form-control-sm" value="${course.endDate}" name="endDate" id="endDate">
 			    </div>
 			  </div>
+			  <c:choose>
+				<c:when test="${mode == 'MODIFY' || mode == 'SCHEDULE'}">
+				  <div class="form-group row">
+				  	<label class="col-form-label col-form-label-sm col-sm-2" for="status">ស្ថានភាព </label>
+				  	<div class="col-sm-4">
+				      	<select class="form-control form-control-sm" name="status" id="status">
+				      		<option value="0" ${course.status == 0? "selected" : "" }>វគ្គថ្មី</option>
+					        <option value="1" ${course.status == 1? "selected" : "" }>បើកទទួលពាក្យ</option>
+					        <option value="2" ${course.status == 2? "selected" : "" }>កំពុងសិក្សា</option>
+					        <option value="3" ${course.status == 3? "selected" : "" }>បានបញ្ចប់</option>
+					    </select>
+				     </div>
+				  </div>
+				  </c:when>
+			  </c:choose>
+			  <c:choose>
+				<c:when test="${mode == 'SCHEDULE'}">
 			  <div class="form-group row">
 			  	<div class="col-sm-12"><hr/></div>
 			  </div>
@@ -145,6 +165,18 @@
 			  			<label class="col-form-label col-form-label-sm col-sm-2" for="selectteacher">គ្រូបង្រៀន</label>
 			  			<select class="form-control form-control-sm col-sm-3" name="selectteacher">
 			  			</select>
+			  		</div>
+			  		<div class="row">
+			  			<label class="col-form-label col-form-label-sm col-sm-2" for="dayofweek">ថ្ងៃប្រចាំសប្តាហ៍</label>
+				      	<select class="form-control form-control-sm col-sm-3" name="dayofweek" id="dayofweek">
+					      	<option value="1">ច័ន្ទ</option>
+						    <option value="2">អង្គារ</option>
+						    <option value="3">ពុធ</option>
+						    <option value="4">ព្រហស្បតិ៍</option>
+						    <option value="5">សុក្រ</option>
+						    <option value="6">សៅរ៍</option>
+						    <option value="7">អាទិត្យ</option>
+					    </select>
 			  		</div>
 			  		<div class="row">
 			  			<div class="col-sm-10">
@@ -187,6 +219,8 @@
 						</table>
 			  	</div>
 			  </div>
+			  </c:when>
+			  </c:choose>
 			  <div class="form-group row">        
 	      		<div class="offset-sm-2 col-sm-10">
 	      			<button type="submit" class="btn btn-primary">រក្សាទុក</button>

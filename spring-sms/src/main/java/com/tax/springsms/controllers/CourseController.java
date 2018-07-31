@@ -61,6 +61,14 @@ public class CourseController {
 		return "courses";
 	}
 	
+	@GetMapping("/schedulecourse")
+	public String scheduleCourse(@RequestParam long id, HttpServletRequest req) {
+		req.setAttribute("mode", "SCHEDULE");
+		req.setAttribute("subjectList", subjectService.findAll());
+		req.setAttribute("course", courseService.findById(id));
+		return "courses";
+	}
+	
 	@GetMapping("/newcourse")
 	public String addCourse(HttpServletRequest req) {
 		req.setAttribute("subjectList", subjectService.findAll());
