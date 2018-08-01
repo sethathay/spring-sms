@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.tax.springsms.services.TeacherService;
+import com.tax.springsms.services.CourseService;
 import com.tax.springsms.services.StudentService;
 import com.tax.springsms.services.SubjectService;
 
@@ -18,6 +19,8 @@ public class MainController {
 	private StudentService stuService;
 	@Autowired
 	private SubjectService subService;
+	@Autowired
+	private CourseService cService;
 	
 	
 	@GetMapping("/")
@@ -31,6 +34,7 @@ public class MainController {
 		req.setAttribute("countTeachers", tService.count());
 		req.setAttribute("countStudents", stuService.count());
 		req.setAttribute("countSubjects", subService.count());
+		req.setAttribute("countCourses", cService.count());
 		return "dashboard";
 	}
 	

@@ -34,5 +34,9 @@ public class CourseService {
 	public void save(Course c) {
 		courseRepo.save(c);
 	}
+	
+	public long count() {
+		return courseRepo.count();
+	}
 
 }

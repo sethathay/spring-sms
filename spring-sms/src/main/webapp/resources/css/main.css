@@ -18,3 +18,7 @@
 	background-color:transparent;
 	border:none;
 }
+
+.active-row{
+	background-color:#f9ebd7;
+}

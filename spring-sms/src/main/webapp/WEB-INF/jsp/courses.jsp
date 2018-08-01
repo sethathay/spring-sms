@@ -107,7 +107,7 @@
 					<input class="clsCourseId" type="hidden" value="${course.id}" name="id" id="id">
 				</c:when>
 			</c:choose>
-			<div class="form-group row">
+			<div class="form-group row ${mode == 'SCHEDULE'? 'd-none' : ''}">
 			    <label class="col-form-label col-form-label-sm col-sm-2" for="abbr">ឈ្មោះ (*)</label>
 			    <div class="col-sm-4">
 			    	<input type="text" required class="form-control form-control-sm" value="${course.name}" name="name" id="name">
@@ -117,7 +117,7 @@
 			    	<input type="number" required class="form-control form-control-sm" value="${course.duration}" name="duration" id="duration">
 			    </div>
 			  </div>
-			  <div class="form-group row">
+			  <div class="form-group row ${mode == 'SCHEDULE'? 'd-none' : ''}">
 			    <label class="col-form-label col-form-label-sm col-sm-2" for="dob">ថ្ងៃចាប់ផ្តើម </label>
 			    <div class="col-sm-4">
 			    	<input type="date" class="form-control form-control-sm" value="${course.startDate}" name="startDate" id="startDate">
@@ -129,7 +129,7 @@
 			  </div>
 			  <c:choose>
 				<c:when test="${mode == 'MODIFY' || mode == 'SCHEDULE'}">
-				  <div class="form-group row">
+				  <div class="form-group row ${mode == 'SCHEDULE'? 'd-none' : ''}">
 				  	<label class="col-form-label col-form-label-sm col-sm-2" for="status">ស្ថានភាព </label>
 				  	<div class="col-sm-4">
 				      	<select class="form-control form-control-sm" name="status" id="status">
@@ -143,15 +143,13 @@
 				  </c:when>
 			  </c:choose>
 			  <c:choose>
-				<c:when test="${mode == 'SCHEDULE'}">
-			  <div class="form-group row">
-			  	<div class="col-sm-12"><hr/></div>
-			  </div>
-			  <div class="form-group row">
-			  	<div class="offset-sm-2 col-sm-10">
+				<c:when test="${mode == 'MODIFY' || mode == 'SCHEDULE'}">
+			  <div class="form-group row ${mode == 'MODIFY'? 'd-none' : ''}">
+			  	<div class="col-sm-12">
 			  		<div class="row">
+			  			<input type="hidden" class="clsEditId" name="editId" value="">
 			  			<label class="col-form-label col-form-label-sm col-sm-2" for="selectsubject">មុខវិជ្ជាសិក្សា</label>
-			  			<select class="form-control form-control-sm col-sm-3" name="selectsubject">
+			  			<select class="form-control form-control-sm col-sm-4" name="selectsubject">
 			  				<option></option>
 			  				<c:forEach var="indSubject" items="${subjectList}">
 			  					<option
@@ -163,12 +161,13 @@
 			  				</c:forEach>
 			  			</select>
 			  			<label class="col-form-label col-form-label-sm col-sm-2" for="selectteacher">គ្រូបង្រៀន</label>
-			  			<select class="form-control form-control-sm col-sm-3" name="selectteacher">
+			  			<select class="form-control form-control-sm col-sm-4" name="selectteacher">
 			  			</select>
 			  		</div>
+			  		<br>
 			  		<div class="row">
 			  			<label class="col-form-label col-form-label-sm col-sm-2" for="dayofweek">ថ្ងៃប្រចាំសប្តាហ៍</label>
-				      	<select class="form-control form-control-sm col-sm-3" name="dayofweek" id="dayofweek">
+				      	<select class="form-control form-control-sm col-sm-4" name="dayofweek" id="dayofweek">
 					      	<option value="1">ច័ន្ទ</option>
 						    <option value="2">អង្គារ</option>
 						    <option value="3">ពុធ</option>
@@ -177,11 +176,20 @@
 						    <option value="6">សៅរ៍</option>
 						    <option value="7">អាទិត្យ</option>
 					    </select>
+					    <label class="col-form-label col-form-label-sm col-sm-2" for="studytime">ចំនួនម៉ោងសិក្សា (H)</label>
+					    <input type="number" class="col-sm-4 form-control form-control-sm" value="" name="studytime" id="studytime">
+			  		</div>
+			  		<br>
+			  		<div class="row">
+			  			<label class="col-form-label col-form-label-sm col-sm-2" for="starttime">ចាប់ពីម៉ោង</label>
+			  			<input type="text" class="form-control form-control-sm col-sm-4" value="" name="starttime" id="starttime">
+			  			<label class="col-form-label col-form-label-sm col-sm-2" for="endtime">ដល់ម៉ោង</label>
+			  			<input type="text" class="form-control form-control-sm col-sm-4" value="" name="endtime" id="endtime">
 			  		</div>
 			  		<div class="row">
-			  			<div class="col-sm-10">
+			  			<div class="col-sm-12">
 			  				<br>
-			  				<a class="btnAddCourseSubject btn btn-success"><i class="fa fa-plus"></i></a>
+			  				<a class="btnAddCourseSubject btn btn-success"><i class="fa fa-plus"></i> បញ្ចូលទៅក្នុងតារាង</a>
 			  			</div>			  			
 			  		</div>
 			  		<br>
@@ -192,8 +200,11 @@
 						      <th scope="col">អក្សរកាត់</th>
 						      <th scope="col">មុខវិជ្ជា</th>
 						      <th scope="col">គ្រូបង្រៀន</th>
-						      <th scope="col">លេខទូរសព្ទ</th>
-						      <th scope="col">អ៊ីម៉ែល</th>
+						      <th scope="col">ថ្ងៃប្រចាំសប្តាហ៍</th>
+						      <th scope="col">ចំនួនម៉ោងសិក្សា</th>
+						      <th scope="col">ចាប់ពីម៉ោង</th>
+						      <th scope="col">ដល់ម៉ោង</th>
+						      <th scope="col">កែប្រែ</th>
 						      <th scope="col">លុប</th>
 						    </tr>
 						  </thead>
@@ -204,13 +215,28 @@
 						      <input type="hidden" name="courseSubjects[${element.index}].course.id" value="${course.id}">
 						      <input type="hidden" name="courseSubjects[${element.index}].subject.id" value="${t.subject.id}">
 						      <input type="hidden" name="courseSubjects[${element.index}].teacher.id" value="${t.teacher.id}">
+						      <input type="hidden" name="courseSubjects[${element.index}].dayOfWeek" value="${t.dayOfWeek}">
+						      <input type="hidden" name="courseSubjects[${element.index}].studyTime" value="${t.studyTime}">
+						      <input type="hidden" name="courseSubjects[${element.index}].startTime" value="${t.startTime}">
+						      <input type="hidden" name="courseSubjects[${element.index}].endTime" value="${t.endTime}">
 						       
 						      <th scope="row">${element.count}</th>
 						      <td>${t.subject.abbr}</td>
 						      <td>${t.subject.name}</td>
 						      <td>${t.teacher.name}</td>
-						      <td>${t.teacher.phone}</td>
-						      <td>${t.teacher.email}</td>
+						      <td>
+						      ${ t.dayOfWeek == 1 ? 'ច័ន្ទ' :
+						      	 t.dayOfWeek == 2 ? 'អង្គារ':
+						      	 t.dayOfWeek == 3 ? 'ពុធ':
+						      	 t.dayOfWeek == 4 ? 'ព្រហស្បតិ៍':
+						      	 t.dayOfWeek == 5 ? 'សុក្រ':
+						      	 t.dayOfWeek == 6 ? 'សៅរ៍':'អាទិត្យ'
+						      }
+						      </td>
+						      <td>${t.studyTime}H</td>
+						      <td>${t.startTime}</td>
+						      <td>${t.endTime}</td>
+						      <td><a href="#" class="cmdEditRowCourseSubject"><i class="fa fa-pencil" style="color:green"></i></a></td>
 						      <td><a href="#" class="cmdDeleteRowCourseSubject"><i class="fa fa-trash-o" style="color:red"></i></a></td>
 						      
 						    </tr>

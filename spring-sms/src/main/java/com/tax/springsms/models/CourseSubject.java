@@ -23,6 +23,18 @@ public class CourseSubject {
 	@OneToOne
 	@JoinColumn(name="teacher_id")
 	private Teacher teacher;
+	
+	@Column(name="dayofweek")
+	private int dayOfWeek;
+	
+	@Column(name="studytime")
+	private int studyTime;
+	
+	@Column(name="starttime")
+	private String startTime;
+	
+	@Column(name="endtime")
+	private String endTime;
 
 	public Long getId() {
 		return id;
@@ -55,7 +67,39 @@ public class CourseSubject {
 	public void setTeacher(Teacher teacher) {
 		this.teacher = teacher;
 	}
-	
+
+	public int getDayOfWeek() {
+		return dayOfWeek;
+	}
+
+	public void setDayOfWeek(int dayOfWeek) {
+		this.dayOfWeek = dayOfWeek;
+	}
+
+	public int getStudyTime() {
+		return studyTime;
+	}
+
+	public void setStudyTime(int studyTime) {
+		this.studyTime = studyTime;
+	}
+
+	public String getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+
+	public String getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+
 	
 
 }
