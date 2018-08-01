@@ -1,15 +1,13 @@
 package com.tax.springsms.models;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 
 @Entity
 @Table(name="tbl_student")
@@ -50,6 +48,13 @@ public class Student {
 	
 	@Column(name="active")
 	private boolean active;
+	
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinTable(name="tbl_student_course", 
+	joinColumns = @JoinColumn(name="student_id", referencedColumnName="id"), 
+	inverseJoinColumns = @JoinColumn(name="course_id", referencedColumnName="id"))
+//	@JsonBackReference
+	private List<Course> courses = new ArrayList<Course>();
 	
 	public Student() {
 		this.active = true;
@@ -155,6 +160,12 @@ public class Student {
 
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+	public void setCourses(List<Course> courses) {
+		this.courses=courses;
+	}
+	public List<Course> getCourses(){
+		return this.courses;
 	}
 	
 	

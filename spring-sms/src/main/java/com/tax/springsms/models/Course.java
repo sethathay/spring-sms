@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name="tbl_course")
 public class Course {
@@ -37,6 +39,13 @@ public class Course {
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "course", orphanRemoval = true)
 	private List<CourseSubject> courseSubjects = new ArrayList<CourseSubject>();
+	
+	@OneToMany(fetch = FetchType.LAZY)
+	@JoinTable(name="tbl_student_course", 
+	joinColumns = @JoinColumn(name="student_id", referencedColumnName="id"), 
+	inverseJoinColumns = @JoinColumn(name="course_id", referencedColumnName="id"))
+//	@JsonManagedReference
+	private List<Student> students = new ArrayList<Student>();
 	
 	public Course() {
 		this.status = 0;

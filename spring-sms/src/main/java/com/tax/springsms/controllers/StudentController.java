@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tax.springsms.models.Student;
+import com.tax.springsms.services.CourseService;
 import com.tax.springsms.services.StudentService;
 
 @Controller
@@ -26,6 +27,9 @@ public class StudentController {
 	
 	@Autowired
 	private StudentService stuService;
+	
+	@Autowired
+	private CourseService cusService;
 	
 	@GetMapping("/students")
 	public String students(HttpServletRequest req) {
@@ -62,5 +66,20 @@ public class StudentController {
 		req.setAttribute("students", stuService.findAll());
 		resp.sendRedirect("/students");
 	}
+	
+	@GetMapping("/newregister")
+	public String newRegister(HttpServletRequest req) {
+		req.setAttribute("mode", "NEW");
+		req.setAttribute("studentList",stuService.findAll());
+		req.setAttribute("courseList", cusService.findAll());
+		return ("registerStudent");
+	}
+	
+	@PostMapping("/saveregister")
+	public void studentRegister(@ModelAttribute Student student,BindingResult bindingResult,HttpServletRequest req,HttpServletResponse resp) throws IOException{
+		stuService.save(student);
+		req.setAttribute("students", stuService.findAll());
+		req.setAttribute("mode", "VIEW");
+		resp.sendRedirect("/students");	}
 
 }

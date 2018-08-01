@@ -8,7 +8,7 @@
       <a class="nav-link" href="/dashboard">ទំព័រដើម</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="/newstudent">ចុះឈ្មោះសិស្សចូលរៀន</a>
+      <a class="nav-link" href="newregister">ចុះឈ្មោះសិស្សចូលរៀន</a>
     </li>
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">

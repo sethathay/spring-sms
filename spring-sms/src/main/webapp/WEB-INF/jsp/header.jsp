@@ -11,3 +11,5 @@
  <script src="/resources/js/subject.js"></script>
   <script src="/resources/js/teacher.js"></script>
   <script src="/resources/js/course.js"></script>
+  <script src="/resources/js/coursereg.js"></script>
+  
