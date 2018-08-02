@@ -12,6 +12,24 @@
     </li>
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        	ការប្រលងបញ្ចប់វគ្គ
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="#"><i class="fa fa-plus"></i> រៀបចំកម្មវិធីការប្រលង</a>
+        <a class="dropdown-item" href="#"><i class="fa fa-id-badge"></i> ការបញ្ចូលពិន្ទុ</a>
+        <a class="dropdown-item" href="#"><i class="	fa fa-trophy"></i> ចេញលទ្ធផលនៃការប្រលង</a>
+      </div>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+        	ការចេញវិញ្ញាបនបត្របញ្ចប់វគ្គ
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item" href="#"><i class="fa fa-mortar-board"></i> បោះពុម្ពវិញ្ញាបនបត្របញ្ចប់វគ្គ</a>
+      </div>
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
         	វគ្គបណ្តុះបណ្តាល
       </a>
       <div class="dropdown-menu">
@@ -26,6 +44,7 @@
       <div class="dropdown-menu">
         <a class="dropdown-item" href="/newstudent"><i class="fa fa-plus"></i> បង្កើតថ្មី</a>
         <a class="dropdown-item" href="/students"><i class="fa fa-bars"></i> បញ្ជីសិស្ស</a>
+        <a class="dropdown-item" href="/students-att"><i class="fa fa-pencil-square-o"></i> ចុះវត្តមាន</a>
       </div>
     </li>
     <li class="nav-item dropdown">
@@ -35,6 +54,7 @@
       <div class="dropdown-menu">
         <a class="dropdown-item" href="/newteacher"><i class="fa fa-plus"></i> បង្កើតថ្មី</a>
         <a class="dropdown-item" href="/teachers"><i class="fa fa-bars"></i> បញ្ជីគ្រូបង្រៀន</a>
+        <a class="dropdown-item" href="/teachers-att"><i class="fa fa-pencil-square-o"></i> ចុះវត្តមាន</a>
       </div>
     </li>
      <li class="nav-item dropdown">

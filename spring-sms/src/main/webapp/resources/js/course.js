@@ -148,8 +148,9 @@ $(function() {
 		$('.tbCoursesList tbody tr').each(function (i, val) {
 			var iterator = 1;
 			$(this).find('input[type=hidden]').each( function (n, nval) {
+				//console.log($(this).val());
 				if((iterator % 9 == 3 && $(this).val() === indSubject) ||
-				   (iterator % 9 == 1 && $(this).val() === $('.clsEditId').val())){
+				   ($('.clsEditId').val() != "" && iterator % 9 == 1 && $(this).val() === $('.clsEditId').val())){
 					isExist = true;
 					ind = i;
 				}
