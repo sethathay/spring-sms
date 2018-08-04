@@ -12,67 +12,90 @@
 <c:choose>
 	<c:when test="${mode == 'NEW'}">
 		<h2>ចុះឈ្មោះចូលរៀន</h2>
-		 <div class="row">
-		  	<div class="col-sm-12">
-		  		<a href="/newstudent" class="btn btn-success"><i class="fa fa-plus"></i> បង្កើតថ្មី</a>
-		  		<br/><br/>
-		  	</div>
-		  </div>
-			<form method="POST" action="saveregister">
+		  <br/><br/>
 				<div class="form-group row">
 					<div class="col-sm-10">
 						<div class="row">
 							<label class="col-form-label col-form-label-sm col-sm-4" for="name">ឈ្មោះសិស្ស (*)</label>
-							<select class="form-control form-control-sm col-sm-4" name="selectstudent">
+							<select class="selectStu form-control form-control-sm col-sm-4" name="selectstudent">
 								<c:forEach var="indStudent" items="${studentList}">
 									<option value="${ indStudent.id }" 
-									text="${ indStudent.name }"
-									gender = "${indStudent.gender? "ប្រុស" : "ស្រី" }" 
-									phone = "${ indStudent.phone }" 
+									name="${ indStudent.name }"
+									gender = "${indStudent.gender}" 
+									dob="${indStudent.dob}"
+									pob="${indStudent.pob}"
+									address="${indStudent.address}"
+									fstatus="${indStudent.fstatus}"
+									phone = "${ indStudent.phone }"
+									caddress = "${ indStudent.caddress}" 
 									email = "${ indStudent.email }" 
 									>${ indStudent.name }</option>								
 								</c:forEach>
 							</select>
+							&nbsp;
+							<span class="col-sm-2" style="padding:0px 0px !important"><a href="/newstudent" class="form-control-sm btn btn-success"><i class="fa fa-plus"></i> បង្កើតថ្មី</a></span>
 						</div>
 						</div>
+					</div>
 						<br/>
-						<div class="col-sm-12">
-							<div class="row">
-								<table class="table table-striped">
-								    <thead>
-								      <tr>
-								        <th>ល.រ</th>
-								        <th>ឈ្មោះ</th>
-								        <th>ភេទ</th>
-								        <th>ថ្ងៃខែឆ្នាំកំណើត</th>
-								        <th>ទីកន្លែងកំណើត</th>
-								        <th>អសយដ្ឋានបច្ចុប្បន្ន</th>
-								        <th>ស្ថានភាពគ្រួសារ</th>
-								        <th>អសយដ្ឋានទំនាក់ទំនងបច្ចុប្បន្ន</th>
-								        <th>លេខទូរសព្ទ</th>
-								        <th>អ៊ីម៉ែល</th>
-								      </tr>
-								    </thead>
-								    <tbody>
-								    	 <c:forEach var="student" items="${studentList}">
-									      <tr>
-									        <td>${student.id}</td>
-									        <td>${student.name}</td>
-									        <td>${student.gender? "ប្រុស": "ស្រី"}</td>
-									        <td>${student.dob}</td>
-									        <td>${student.pob}</td>
-									        <td>${student.address}</td>
-									        <td>${student.fstatus? "មានគ្រួសារ": "នៅលីវ"}</td>
-									        <td>${student.caddress}</td>
-									        <td>${student.phone}</td>
-									        <td>${student.email}</td>
-									      </tr>
-								      	</c:forEach>
-								    </tbody>
-								  </table>
+						<!-- <form>	 -->	
+						<form method="POST" action="/saveregister">  
+							<input type="hidden" value="${studentList[0].id}" name="id" id="id">
+							<div class="form-group row">
+								<label class="col-form-label col-form-label-sm col-sm-2" for="name">ឈ្មោះ (*)</label>
+								<div class="col-sm-4">
+									<input type="text" required class="form-control form-control-sm" value="${studentList[0].name}" name="name" id="name" readonly="true">
+								</div>
+								<label class="col-form-label col-form-label-sm col-sm-2" for="gender">ភេទ </label>
+								<div class="col-sm-4">
+								    <select class="form-control form-control-sm" name="gender" id="gender" disabled="false">
+										<option value="false" ${studentList[0].gender? "" : "selected" }>ស្រី</option>
+									    <option value="true" ${studentList[0].gender? "selected" : "" }>ប្រុស</option>
+									</select>
+								</div>
 							</div>
-						</div>
+							<div class="form-group row">
+								<label class="col-form-label col-form-label-sm col-sm-2" for="dob">ថ្ងៃខែឆ្នាំកំណើត</label>
+								<div class="col-sm-4">
+								   <input type="date" class="form-control form-control-sm" value="${studentList[0].dob}" name="dob" id="dob" readonly="true">
+								</div>
+								<label class="col-form-label col-form-label-sm col-sm-2" for="pob">ទីកន្លែងកំណើត</label>
+								<div class="col-sm-4">
+								   <input type="text" class="form-control form-control-sm" value="${studentList[0].pob}" name="pob" id="pob" readonly="true">
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-form-label col-form-label-sm col-sm-2" for="address">អសយដ្ឋានបច្ចុប្បន្ន</label>
+								<div class="col-sm-4">
+									<textarea class="form-control form-control-sm" rows="3" name="address" id="address" readonly="true">${studentList[0].address}</textarea>
+								</div>
+								<label class="col-form-label col-form-label-sm col-sm-2" for="caddress">អសយដ្ឋានទំនាក់ទំនងបច្ចុប្បន្ន</label>
+								<div class="col-sm-4">
+									<textarea class="form-control form-control-sm" rows="3" name="caddress" id="caddress" readonly="true">${studentList[0].caddress}</textarea>
+								</div>
+							</div>
+							<div class="form-group row">
+								<label class="col-form-label col-form-label-sm col-sm-2" for="fstatus">ស្ថានភាពគ្រួសារ</label>
+								<div class="col-sm-4">
+									<select class="form-control form-control-sm" name="fstatus" id="fstatus" disabled="false">
+									    <option value="false" ${studentList[0].fstatus? "" : "selected" }>នៅលីវ</option>
+									    <option value="true" ${studentList[0].fstatus? "selected" : "" }>មានគ្រួសារ</option>
+									 </select>
+								</div>
+								      <label class="col-form-label col-form-label-sm col-sm-2" for="phone">លេខទូរសព្ទ</label>
+									    <div class="col-sm-4">
+									    	<input type="text" class="form-control form-control-sm" value="${studentList[0].phone}" name="phone" id="phone" readonly="true">
+									    </div>
+							</div>
+							<div class="form-group row">
+								  <label class="col-form-label col-form-label-sm col-sm-2" for="email">អ៊ីម៉ែល</label>
+								<div class="col-sm-4">
+								  <input type="email" class="form-control form-control-sm" value="${studentList[0].email}" name="email" id="email" readonly="true">
+								</div>
+							</div>
+						<!-- </form> -->
 						<br/>
+					<div class="form-group row">
 						<div class="col-sm-10">
 						<div class="row">
 							<label class="col-form-label col-form-label-sm col-sm-4" for="selectcourse">សូមជ្រើសរើសវគ្គបណ្តុះបណ្តាល(*)</label>
@@ -103,10 +126,14 @@
 						    </tr>
 						  </thead>
 						  <tbody>
-						  	<c:forEach var="t" items="${indStudent.courses}" varStatus="element">
+						  	<c:forEach var="t" items="${indStudent.stuCourse}" varStatus="element">
 						    <tr>
 								      <!-- Binding list of teachers for field you display -->
-								      <input type="hidden" name="courses[${element.index}].id" value="${t.id}">
+								      <input type="hidden" name="stuCourse[${element.index}].id" value="${t.id}">
+								      <input type="hidden" name="stuCourse[${element.index}].course.id" value="${t.course.id}">
+								      <input type="hidden" name="stuCourse[${element.index}].student.id" value="${indStudent.id}">
+								      <input type="hidden" name="stuCourse[${element.index}].regDate" value="">
+								      
 								      <th scope="row">${element.count}</th>
 								      <td>${t.name}</td>
 								      <td>${t.duration}</td>

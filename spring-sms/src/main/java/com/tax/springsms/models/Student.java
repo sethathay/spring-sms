@@ -49,12 +49,9 @@ public class Student {
 	@Column(name="active")
 	private boolean active;
 	
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinTable(name="tbl_student_course", 
-	joinColumns = @JoinColumn(name="student_id", referencedColumnName="id"), 
-	inverseJoinColumns = @JoinColumn(name="course_id", referencedColumnName="id"))
-//	@JsonBackReference
-	private List<Course> courses = new ArrayList<Course>();
+	//Ling
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "student", orphanRemoval = true)
+	private List<StudentCourse> stuCourse = new ArrayList<StudentCourse>();
 	
 	public Student() {
 		this.active = true;
@@ -161,11 +158,11 @@ public class Student {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-	public void setCourses(List<Course> courses) {
-		this.courses=courses;
+	public void setStudentCourses(List<StudentCourse> studentCourses) {
+		this.stuCourse=studentCourses;
 	}
-	public List<Course> getCourses(){
-		return this.courses;
+	public List<StudentCourse> getStudentCourses(){
+		return this.stuCourse;
 	}
 	
 	

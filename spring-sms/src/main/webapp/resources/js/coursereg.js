@@ -56,4 +56,28 @@ $(function() {
 		}
 	});
 	
+	$(".selectStu").change(function(){
+		var id = $('.selectStu').val();
+		var name = $('option:selected', '.selectStu').attr('name');
+		var gender = $('option:selected', '.selectStu').attr('gender');
+		var dob = $('option:selected', '.selectStu').attr('dob');
+		var pob = $('option:selected', '.selectStu').attr('pob');
+		var address = $('option:selected', '.selectStu').attr('address');
+		var fstatus = $('option:selected', '.selectStu').attr('fstatus');
+		var phone = $('option:selected', '.selectStu').attr('phone');
+		var email = $('option:selected', '.selectStu').attr('email');
+		var caddress = $('option:selected', '.selectStu').attr('caddress');
+		
+		console.info("Name",name+","+gender+","+dob+",pob"+pob+",address"+address+","+fstatus+","+phone+","+email+",caddress"+caddress);
+		$("#id")[0].value=id;
+		$("#name")[0].value=name;
+		$("#gender")[0].value=gender;
+		$("#dob")[0].value=dob;
+		$("#pob")[0].value=pob;
+		$("#address")[0].value=address;
+		$("#caddress")[0].value=caddress;
+		$("#fstatus")[0].value=fstatus;
+		$("#phone")[0].value=phone;
+		$("#email")[0].value=email;
+	});
 });

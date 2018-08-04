@@ -40,12 +40,9 @@ public class Course {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "course", orphanRemoval = true)
 	private List<CourseSubject> courseSubjects = new ArrayList<CourseSubject>();
 	
-	@OneToMany(fetch = FetchType.LAZY)
-	@JoinTable(name="tbl_student_course", 
-	joinColumns = @JoinColumn(name="student_id", referencedColumnName="id"), 
-	inverseJoinColumns = @JoinColumn(name="course_id", referencedColumnName="id"))
-//	@JsonManagedReference
-	private List<Student> students = new ArrayList<Student>();
+	//Ling
+	@OneToMany(mappedBy = "course")
+	private List<StudentCourse> stuCourse = new ArrayList<StudentCourse>();
 	
 	public Course() {
 		this.status = 0;
