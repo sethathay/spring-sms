@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tax.springsms.models.Course;
+import com.tax.springsms.models.CourseSubject;
 import com.tax.springsms.models.Student;
 import com.tax.springsms.models.Subject;
 import com.tax.springsms.models.Teacher;
@@ -37,9 +38,9 @@ public class RestfulController {
 	}
 	
 	@GetMapping("/api/courses")
-	public Collection<Course> getAllCourses(){
+	public Collection<CourseSubject> getAllCourses(){
 //		return subService.findById(1).getTeachers();
-		return courseService.findAll();
+		return courseService.findById(2).getCourseSubjects();
 	}
 	
 	@GetMapping("/api/subject/teacher")

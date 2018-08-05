@@ -44,7 +44,7 @@ public class Course {
 	@JoinTable(name="tbl_student_course", 
 	joinColumns = @JoinColumn(name="student_id", referencedColumnName="id"), 
 	inverseJoinColumns = @JoinColumn(name="course_id", referencedColumnName="id"))
-//	@JsonManagedReference
+	@JsonManagedReference
 	private List<Student> students = new ArrayList<Student>();
 	
 	public Course() {

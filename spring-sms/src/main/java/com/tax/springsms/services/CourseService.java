@@ -25,6 +25,11 @@ public class CourseService {
 		return courses;
 	}
 	
+	public Collection<Course> findAllInProgressAndFinish(){
+		//Course InProgess and Finish
+		return courseRepo.findByStatusGreaterThanEqual(2);
+	}
+	
 	//Optional for Java 8
 	public Course findById(long id) {
 		Optional<Course> tempT = courseRepo.findById(id);

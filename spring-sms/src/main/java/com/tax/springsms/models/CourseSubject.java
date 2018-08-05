@@ -1,5 +1,8 @@
 package com.tax.springsms.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.*;
 
 @Entity
@@ -35,6 +38,25 @@ public class CourseSubject {
 	
 	@Column(name="endtime")
 	private String endTime;
+	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "schedule")
+	private List<TeacherAttendance> attendances = new ArrayList<TeacherAttendance>();
+	
+	public CourseSubject() {
+		
+	}
+
+	public CourseSubject(Course course, Subject subject, Teacher teacher, int dayOfWeek, int studyTime,
+			String startTime, String endTime, List<TeacherAttendance> attendances) {
+		this.course = course;
+		this.subject = subject;
+		this.teacher = teacher;
+		this.dayOfWeek = dayOfWeek;
+		this.studyTime = studyTime;
+		this.startTime = startTime;
+		this.endTime = endTime;
+		this.attendances = attendances;
+	}
 
 	public Long getId() {
 		return id;
@@ -101,5 +123,12 @@ public class CourseSubject {
 	}
 
 	
+	public void setAttendances(List<TeacherAttendance> attendances) {
+		this.attendances = attendances;
+	}
+	
+	public List<TeacherAttendance> getAttendances(){
+		return this.attendances;
+	}	
 
 }
