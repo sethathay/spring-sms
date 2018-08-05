@@ -46,6 +46,10 @@ public class Course {
 	inverseJoinColumns = @JoinColumn(name="course_id", referencedColumnName="id"))
 	@JsonManagedReference
 	private List<Student> students = new ArrayList<Student>();
+
+	//Ling
+	@OneToMany(mappedBy = "course")
+	private List<StudentCourse> stuCourse = new ArrayList<StudentCourse>();
 	
 	public Course() {
 		this.status = 0;
