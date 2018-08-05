@@ -1,5 +1,7 @@
 package com.tax.springsms.models;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +28,27 @@ public class StudentCourse {
 	private Student student;
 	
 	@Column(name="reg_date")
-	private String regDate;
+	private Date regDate;
+	
+	@Column(name="printed")
+	private int isPrint=0;
+	
+	public StudentCourse() {
+		
+	}
+	public StudentCourse(Course course,Student stu,Date regDate) {
+		this.course=course;
+		this.student=stu;
+		this.regDate=regDate;
+	}
+	
+	public long getID() {
+		return id;
+	}
+	
+	public void setID(long id) {
+		this.id=id;
+	}
 	
 	public Course getCourse() {
 		return course;
@@ -44,11 +66,20 @@ public class StudentCourse {
 		this.student = student;
 	}
 
-	public String getRegDate() {
+	public Date getRegDate() {
 		return regDate;
 	}
 	
-	public void setRegDate(String regDate) {
+	public void setRegDate(Date regDate) {
 		this.regDate=regDate;
+	}
+	
+	public int getIsPrinted() {
+		return isPrint;
+	}
+	
+	public void setIsPrinted(int isPrint) {
+		
+		this.isPrint=isPrint;
 	}
 }

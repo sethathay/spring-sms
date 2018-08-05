@@ -50,8 +50,8 @@ public class Student {
 	private boolean active;
 	
 	//Ling
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "student", orphanRemoval = true)
-	private List<StudentCourse> stuCourse = new ArrayList<StudentCourse>();
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
+	private List<StudentCourse> studentCourses = new ArrayList<StudentCourse>();
 	
 	public Student() {
 		this.active = true;
@@ -69,6 +69,21 @@ public class Student {
 		this.phone = phone;
 		this.email = email;
 		this.active = active;
+	}
+	
+	public Student(String name, boolean gender, Date dob, String pob, String address, boolean fstatus, String caddress,
+			String phone, String email, boolean active,List<StudentCourse> stuCourse) {
+		this.name = name;
+		this.gender = gender;
+		this.dob = dob;
+		this.pob = pob;
+		this.address = address;
+		this.fstatus = fstatus;
+		this.caddress = caddress;
+		this.phone = phone;
+		this.email = email;
+		this.active = active;
+		this.studentCourses=stuCourse;
 	}
 
 	public Long getId() {
@@ -159,10 +174,10 @@ public class Student {
 		this.active = active;
 	}
 	public void setStudentCourses(List<StudentCourse> studentCourses) {
-		this.stuCourse=studentCourses;
+		this.studentCourses=studentCourses;
 	}
 	public List<StudentCourse> getStudentCourses(){
-		return this.stuCourse;
+		return this.studentCourses;
 	}
 	
 	
