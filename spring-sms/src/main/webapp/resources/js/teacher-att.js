@@ -25,37 +25,4 @@ $(function() {
 			csDayOfWeek == 6? "សៅរ៍": "អាទិត្យ";
 		$("#lblDisplay").text("មុខវិជ្ជា: " + csSubjectName + " ថ្ងៃបង្រៀន: " + dayOfWeekText);
 	});
-	
-	/*var date = new Date();
-	var firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
-	var lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
-	var dayNotation = firstDay.getDay();
-	var lastDateNotation = lastDay.getDate();
-	var strDateNotation = "";
-	for(var i=1; i<=lastDateNotation; i++){
-		var strDayNotation = "";
-		if(dayNotation == 6){ 
-			strDayNotation = "ស";
-			dayNotation = 0;
-		}
-		else {
-			strDayNotation = dayNotation % 6 == 0 ? 'ទ' :
-							 dayNotation % 6 == 1 ? 'ច' :
-							 dayNotation % 6 == 2 ? 'អ':
-							 dayNotation % 6 == 3 ? 'ព':
-							 dayNotation % 6 == 4 ? 'ព្រ':
-							 dayNotation % 6 == 5 ? 'សុ': '';
-			dayNotation++;
-		}
-		strDateNotation += "<th>" + "(" + strDayNotation + ") <br>" + i + "</th>";
-	}
-	//Header of attendance table
-	var attHeader = "<tr>" +
-						"<th>" +
-							"ឈ្មោះគ្រូបង្រៀន" +
-						"</th>" +
-						strDateNotation +
-					"</tr>";
-	$(".tblAttendance thead").html(attHeader);
-	*/
 });

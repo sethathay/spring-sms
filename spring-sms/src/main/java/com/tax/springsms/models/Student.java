@@ -173,12 +173,12 @@ public class Student {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-	/*public void setStudentCourses(List<StudentCourse> studentCourses) {
+	public void setStudentCourses(List<StudentCourse> studentCourses) {
 		this.studentCourses=studentCourses;
 	}
 	public List<StudentCourse> getStudentCourses(){
 		return this.studentCourses;
-	}*/
+	}
 	
 	
 }

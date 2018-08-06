@@ -23,8 +23,9 @@
 	background-color:#f9ebd7;
 }
 
-.tblAttendance th{
-	padding:0.1em;
+.tblAttendance th, .tblAttendance td{
+	padding:0.3em !important;
+	text-align:center;
 }
 
 .tblAttendance{

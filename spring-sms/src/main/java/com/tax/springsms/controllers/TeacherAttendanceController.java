@@ -30,8 +30,15 @@ public class TeacherAttendanceController {
 	}
 	
 	@GetMapping("/listteacheratt")
-	public String listTeacherAttendance(@RequestParam long id, HttpServletRequest req) {
+	public String listTeacherAttendance(@RequestParam(required=true) long id, @RequestParam(required=false) int month,
+			@RequestParam(required=false) int year, HttpServletRequest req) {
 		req.setAttribute("mode", "LIST");
+		if(req.getParameterMap().containsKey("month")){
+			req.setAttribute("month", month);
+		}
+		if(req.getParameterMap().containsKey("year")){
+			req.setAttribute("year", year);
+		}
 		req.setAttribute("course", courseService.findById(id));
 		return "teachers-att";
 	}

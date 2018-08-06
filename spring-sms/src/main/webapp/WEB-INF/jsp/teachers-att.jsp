@@ -50,7 +50,7 @@
 				        		</span> <br>
 				        	</c:forEach>
 				        </td>
-				       	<td><a href="listteacheratt?id=${course.id}"><i class="fa fa-calendar" style="color:blue"></i></a></td>
+				       	<td><a href="listteacheratt?id=${course.id}&month=7&year=2018"><i class="fa fa-calendar" style="color:blue"></i></a></td>
 				       	<td><a href="newteacheratt?id=${course.id}"><i class="fa fa-pencil" style="color:green"></i></a></td>
 				       	</tr>
 			       	</c:forEach>
@@ -133,45 +133,91 @@
 			  		<br/><br/>
 			  	</div>
 			 </div>
+			 <%
+      			//Get a calendar instance
+      			Calendar calendar = Calendar.getInstance();
+      			// Get the last date of the current month. To get the last date for a
+           		// specific month you can set the calendar month using calendar object
+           		// calendar.set(Calendar.MONTH, theMonth) method.
+           		int month, year,lastDay, textFirstDay,currentYear,currentMonth;
+           		if(pageContext.findAttribute("month") != null && pageContext.findAttribute("year") != null){
+           			month = (int) pageContext.getAttribute("month");
+					year = (int) pageContext.getAttribute("year");
+					calendar.set(Calendar.MONTH, month);
+					calendar.set(Calendar.YEAR, year);
+					
+					lastDay = calendar.get(Calendar.DAY_OF_MONTH);
+					textFirstDay = calendar.get(Calendar.DAY_OF_WEEK);
+					currentYear = calendar.get(Calendar.YEAR);
+          		  	currentMonth = calendar.get(Calendar.MONTH);
+           		}else{
+      		    	int lastDate = calendar.getActualMaximum(Calendar.DATE);
+      		  		// Set the calendar date to the last date of the month so then we can
+              		// get the last day of the month
+      		    	calendar.set(Calendar.DATE, lastDate);
+      		    	lastDay = calendar.get(Calendar.DAY_OF_MONTH);
+      		    	//Calendar cl = Calendar.getInstance();
+          		  	int firstDate = calendar.getActualMinimum(Calendar.DATE);
+          		  	calendar.set(Calendar.DATE, firstDate);
+          		  	textFirstDay = calendar.get(Calendar.DAY_OF_WEEK);
+          		  	currentYear = calendar.get(Calendar.YEAR);
+          		  	currentMonth = calendar.get(Calendar.MONTH);
+           		}
+    		 %>
+			 <div class="row">
+			 	<div class="col-sm-12">
+			 		<div class="form-group row">
+				    <label class="col-form-label col-form-label-sm col-sm-1" for="month">ជ្រើសរើសខែ</label>
+				    <div class="col-sm-2">
+				    	<select class="form-control form-control-sm" name="month">
+					        <option value="0" <%=currentMonth == 0? "selected" : "" %>>មករា</option>
+					        <option value="1" <%=currentMonth == 1? "selected" : "" %>>កុម្ភៈ</option>
+					        <option value="2" <%=currentMonth == 2? "selected" : "" %>>មិនា</option>
+					        <option value="3" <%=currentMonth == 3? "selected" : "" %>>មេសា</option>
+					        <option value="4" <%=currentMonth == 4? "selected" : "" %>>ឧសភា</option>
+					        <option value="5" <%=currentMonth == 5? "selected" : "" %>>មិថុនា</option>
+					        <option value="6" <%=currentMonth == 6? "selected" : "" %>>កក្កដា</option>
+					        <option value="7" <%=currentMonth == 7? "selected" : "" %>>សីហា</option>
+					        <option value="8" <%=currentMonth == 8? "selected" : "" %>>កញ្ញា</option>
+					        <option value="9" <%=currentMonth == 9? "selected" : "" %>>តុលា</option>
+					        <option value="10" <%=currentMonth == 10? "selected" : "" %>>វិច្ឆិកា</option>
+					        <option value="11" <%=currentMonth == 11? "selected" : "" %>>ធ្នូ</option>
+					    </select>
+				    </div>
+				    <label class="col-form-label col-form-label-sm" for="year">ជ្រើសរើសឆ្នាំ</label>
+				    <div class="col-sm-2">
+				    	<select class="form-control form-control-sm" name="year">
+				    		<%for(int y=currentYear; y>=currentYear-20; y--){ %>
+					        <option value="<%=y%>"><%=y %></option>
+					        <%} %>
+					    </select>
+				    </div>
+				    <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-search"></i> ស្វែងរក</button>
+				  </div>
+			 	</div>
+			 </div>
 			 <div class="row">
 			  	<div class="col-sm-12">
-			  		<%
-		      			//Get a calendar instance
-		      			Calendar calendar = Calendar.getInstance();
-		      			// Get the last date of the current month. To get the last date for a
-		           		// specific month you can set the calendar month using calendar object
-		           		// calendar.set(Calendar.MONTH, theMonth) method.
-		      		    int lastDate = calendar.getActualMaximum(Calendar.DATE);
-		      		  	// Set the calendar date to the last date of the month so then we can
-		              	// get the last day of the month
-		      		    calendar.set(Calendar.DATE, lastDate);
-		      		    int lastDay = calendar.get(Calendar.DAY_OF_MONTH);
-		      		    
-		      		    Calendar cl = Calendar.getInstance();
-		      		  	int firstDate = cl.getActualMinimum(Calendar.DATE);
-		      		    cl.set(Calendar.DATE, firstDate);
-		      		    int textFirstDay = cl.get(Calendar.DAY_OF_WEEK_IN_MONTH);
-	      			%>
 			  		<table class="table table-bordered tblAttendance">
 				    <thead>
 			    		<th>ឈ្មោះគ្រូបង្រៀន</th>
 				    	<%
 				    		for(int i=1; i<=lastDay; i++){
 				    			String dateText = "";
-				    			if(textFirstDay == 6){
+				    			if(textFirstDay == 7){
 				    				dateText = "ស";
-				    				textFirstDay = 0;
+				    				textFirstDay = 1;
 				    			}else{
-				    				dateText = textFirstDay % 6 == 0 ? "អទ" :
-				    					textFirstDay % 6 == 1 ? "ច" :
-				    					textFirstDay % 6 == 2 ? "អ":
-				    					textFirstDay % 6 == 3 ? "ព":
-				    					textFirstDay % 6 == 4 ? "ព្រ":
-		    							textFirstDay % 6 == 5 ? "សុ": "";
+				    				dateText = textFirstDay % 7 == 1 ? "អទ" :
+				    					textFirstDay % 7 == 2 ? "ច" :
+				    					textFirstDay % 7 == 3 ? "អ":
+				    					textFirstDay % 7 == 4 ? "ព":
+				    					textFirstDay % 7 == 5 ? "ព្រ":
+		    							textFirstDay % 7 == 6 ? "សុ": "";
 				    				textFirstDay++;
 				    			}
-				    			%>
-				    			<th><%=textFirstDay %><br><%=i %></th>
+		    			%>
+				    		<th><%=dateText %><br><%=i %></th>
 				    	<%
 				    		}
 				    	%>
@@ -185,11 +231,11 @@
 				      				<c:forEach var="att" items="${ schedule.attendances }">
 			      						<% 
 			      						TeacherAttendance att = (TeacherAttendance) pageContext.getAttribute("att");
-			      						SimpleDateFormat ft = new SimpleDateFormat ("d");
+			      						SimpleDateFormat fts = new SimpleDateFormat ("d");
 			      						
 			      						int ind = (Integer) pageContext.getAttribute("i");
 			      						
-			      						if(ind == Integer.parseInt(ft.format(att.getScheduleDate()))){
+			      						if(ind == Integer.parseInt(fts.format(att.getScheduleDate()))){
 			      							hasDate = true;
 			      						%>
 			      							<td><%=att.getAbsent() == 0? "A" : att.getAbsent() == 1? "O" : "P" %></td>
