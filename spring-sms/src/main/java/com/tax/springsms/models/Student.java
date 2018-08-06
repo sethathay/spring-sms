@@ -50,8 +50,8 @@ public class Student {
 	private boolean active;
 	
 	//Ling
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "student", orphanRemoval = true)
-	private List<StudentCourse> stuCourse = new ArrayList<StudentCourse>();
+	//@OneToMany(cascade = CascadeType.ALL, mappedBy = "student", orphanRemoval = true)
+	//private List<StudentCourse> stuCourse = new ArrayList<StudentCourse>();
 	
 	public Student() {
 		this.active = true;
@@ -158,12 +158,12 @@ public class Student {
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-	public void setStudentCourses(List<StudentCourse> studentCourses) {
+	/*public void setStudentCourses(List<StudentCourse> studentCourses) {
 		this.stuCourse=studentCourses;
 	}
 	public List<StudentCourse> getStudentCourses(){
 		return this.stuCourse;
-	}
+	}*/
 	
 	
 }

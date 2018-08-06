@@ -22,3 +22,11 @@
 .active-row{
 	background-color:#f9ebd7;
 }
+
+.tblAttendance th{
+	padding:0.1em;
+}
+
+.tblAttendance{
+	font-size:12px;
+}

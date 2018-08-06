@@ -48,8 +48,8 @@ public class Course {
 	private List<Student> students = new ArrayList<Student>();
 
 	//Ling
-	@OneToMany(mappedBy = "course")
-	private List<StudentCourse> stuCourse = new ArrayList<StudentCourse>();
+	//@OneToMany(mappedBy = "course")
+	//private List<StudentCourse> stuCourse = new ArrayList<StudentCourse>();
 	
 	public Course() {
 		this.status = 0;

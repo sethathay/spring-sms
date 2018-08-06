@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import = "java.io.*,java.util.*" %>
+<%@ page import = "javax.servlet.*,java.text.*" %>
+<%@ page import = "com.tax.springsms.models.TeacherAttendance" %>
 <html>
 <head>
   <%@ include file="header.jsp" %>
@@ -130,14 +133,78 @@
 			  		<br/><br/>
 			  	</div>
 			 </div>
-			 <table class="table table-bordered tblAttendance">
-			    <thead>
-			      
-			    </thead>
-			    <tbody>
-			      
-			    </tbody>
-			  </table>
+			 <div class="row">
+			  	<div class="col-sm-12">
+			  		<%
+		      			//Get a calendar instance
+		      			Calendar calendar = Calendar.getInstance();
+		      			// Get the last date of the current month. To get the last date for a
+		           		// specific month you can set the calendar month using calendar object
+		           		// calendar.set(Calendar.MONTH, theMonth) method.
+		      		    int lastDate = calendar.getActualMaximum(Calendar.DATE);
+		      		  	// Set the calendar date to the last date of the month so then we can
+		              	// get the last day of the month
+		      		    calendar.set(Calendar.DATE, lastDate);
+		      		    int lastDay = calendar.get(Calendar.DAY_OF_MONTH);
+		      		    
+		      		    Calendar cl = Calendar.getInstance();
+		      		  	int firstDate = cl.getActualMinimum(Calendar.DATE);
+		      		    cl.set(Calendar.DATE, firstDate);
+		      		    int textFirstDay = cl.get(Calendar.DAY_OF_WEEK_IN_MONTH);
+	      			%>
+			  		<table class="table table-bordered tblAttendance">
+				    <thead>
+			    		<th>ឈ្មោះគ្រូបង្រៀន</th>
+				    	<%
+				    		for(int i=1; i<=lastDay; i++){
+				    			String dateText = "";
+				    			if(textFirstDay == 6){
+				    				dateText = "ស";
+				    				textFirstDay = 0;
+				    			}else{
+				    				dateText = textFirstDay % 6 == 0 ? "អទ" :
+				    					textFirstDay % 6 == 1 ? "ច" :
+				    					textFirstDay % 6 == 2 ? "អ":
+				    					textFirstDay % 6 == 3 ? "ព":
+				    					textFirstDay % 6 == 4 ? "ព្រ":
+		    							textFirstDay % 6 == 5 ? "សុ": "";
+				    				textFirstDay++;
+				    			}
+				    			%>
+				    			<th><%=textFirstDay %><br><%=i %></th>
+				    	<%
+				    		}
+				    	%>
+				    </thead>
+				    <tbody>
+				      <c:forEach var="schedule" items="${course.courseSubjects}">
+				      	<tr>
+				      		<td>${schedule.teacher.name}</td>
+				      			<c:forEach var="i" begin="1" end="<%=lastDay %>">
+				      				<%boolean hasDate = false; %>	
+				      				<c:forEach var="att" items="${ schedule.attendances }">
+			      						<% 
+			      						TeacherAttendance att = (TeacherAttendance) pageContext.getAttribute("att");
+			      						SimpleDateFormat ft = new SimpleDateFormat ("d");
+			      						
+			      						int ind = (Integer) pageContext.getAttribute("i");
+			      						
+			      						if(ind == Integer.parseInt(ft.format(att.getScheduleDate()))){
+			      							hasDate = true;
+			      						%>
+			      							<td><%=att.getAbsent() == 0? "A" : att.getAbsent() == 1? "O" : "P" %></td>
+			      						<%
+			      						}
+			      						%>
+			      					</c:forEach>
+			      					<%if(!hasDate) %> <td></td>
+				      			</c:forEach>
+				      	</tr>
+				      </c:forEach>
+				    </tbody>
+				  </table>
+			  	</div>
+		  	</div>
 	 	</c:when>
 	</c:choose>
 
