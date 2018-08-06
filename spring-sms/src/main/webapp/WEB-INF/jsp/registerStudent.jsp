@@ -11,11 +11,12 @@
 <div class="container">
 <c:choose>
 	<c:when test="${mode == 'NEW'}">
+	<form method="POST" action="/savesRegister">	
 		<h2>ចុះឈ្មោះចូលរៀន</h2>
-		  <br/><br/>
+		  <br/><br/>		  
 				<div class="form-group row">
 					<div class="col-sm-10">
-						<div class="row">
+						<div class="row">					
 							<label class="col-form-label col-form-label-sm col-sm-4" for="name">ឈ្មោះសិស្ស (*)</label>
 							<select class="selectStu form-control form-control-sm col-sm-4" name="selectstudent">
 								<c:forEach var="indStudent" items="${studentList}">
@@ -38,8 +39,7 @@
 						</div>
 					</div>
 						<br/>
-						<!-- <form>	 -->	
-						<form method="POST" action="/saveregister">  
+						<!-- <form>	 -->	  
 							<input type="hidden" value="${studentList[0].id}" name="id" id="id">
 							<div class="form-group row">
 								<label class="col-form-label col-form-label-sm col-sm-2" for="name">ឈ្មោះ (*)</label>
@@ -126,13 +126,13 @@
 						    </tr>
 						  </thead>
 						  <tbody>
-						  	<c:forEach var="t" items="${indStudent.stuCourse}" varStatus="element">
+						  	<%-- <c:forEach var="t" items="${indStudent.index].stuCourse}" varStatus="element">
 						    <tr>
 								      <!-- Binding list of teachers for field you display -->
 								      <input type="hidden" name="stuCourse[${element.index}].id" value="${t.id}">
-								      <input type="hidden" name="stuCourse[${element.index}].course.id" value="${t.course.id}">
-								      <input type="hidden" name="stuCourse[${element.index}].student.id" value="${indStudent.id}">
-								      <input type="hidden" name="stuCourse[${element.index}].regDate" value="">
+								      <input type="hidden" name="stuCourse[${element.index}].course.id" value=7>
+								      <input type="hidden" name="stuCourse[${element.index}].student.id" value="17">
+								      <input type="hidden" name="stuCourse[${element.index}].regDate" value=new Date()>
 								      
 								      <th scope="row">${element.count}</th>
 								      <td>${t.name}</td>
@@ -141,7 +141,7 @@
 								      <td>${t.endDate}</td>
 								      <td><a href="#" class="cmdDeleteRowCourse"><i class="fa fa-trash-o" style="color:red"></i></a></td>
 						    </tr>
-						    </c:forEach>
+						    </c:forEach> --%>
 						  </tbody>
 						</table>
 					</div>

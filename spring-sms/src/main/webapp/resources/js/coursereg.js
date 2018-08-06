@@ -22,6 +22,7 @@ $(function() {
 		var duration = $('option:selected', 'select[name="selectcourse"]').attr('duration');
 		var startDate = $('option:selected', 'select[name="selectcourse"]').attr('startDate');
 		var endDate = $('option:selected', 'select[name="selectcourse"]').attr('endDate');
+		var stuID=$("#id").val();
 		//Check course id that already exist in the table
 		var isExist = false;
 		$('.tblCoursesList tbody tr').each(function (i, val) {
@@ -32,7 +33,10 @@ $(function() {
 		if(!isExist){
 			var countRow = $('.tblCoursesList tbody tr').length;
 			var row = "<tr>" +
-						"<input type='hidden' name='courses["+ countRow + "].id' value='"+ ind + "'>" +
+						"<input type='hidden' name='studentCourses["+ countRow + "].id'>" +
+						"<input type='hidden' name='studentCourses["+ countRow + "].course.id' value='"+ ind + "'>" +
+						"<input type='hidden' name='studentCourses["+ countRow + "].student.id' value='"+ stuID + "'>" +
+						"<input type='hidden' name='studentCourses["+ countRow + "].regDate' value='"+ new Date().toISOString().slice(0,10) + "'>" +
 						"<th scope='row'>" +
 							( countRow + 1) +
 						"</th>" +

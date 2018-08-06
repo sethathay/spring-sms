@@ -2,7 +2,9 @@ package com.tax.springsms.controllers;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,7 +21,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tax.springsms.models.Student;
+import com.tax.springsms.models.StudentCourse;
 import com.tax.springsms.services.CourseService;
+import com.tax.springsms.services.StudentCourseService;
 import com.tax.springsms.services.StudentService;
 
 @Controller
@@ -30,6 +34,9 @@ public class StudentController {
 	
 	@Autowired
 	private CourseService cusService;
+	
+	@Autowired
+	private StudentCourseService scService;
 	
 	@GetMapping("/students")
 	public String students(HttpServletRequest req) {
@@ -74,12 +81,14 @@ public class StudentController {
 		req.setAttribute("courseList", cusService.findAll());
 		return ("registerStudent");
 	}
-	
-	@PostMapping("/saveregister")
-	public void studentRegister(@ModelAttribute Student student,BindingResult bindingResult,HttpServletRequest req,HttpServletResponse resp) throws IOException{
+	@PostMapping("/savesRegister")
+	public void saveRegister(@ModelAttribute Student student,BindingResult bindingResult,HttpServletRequest req,HttpServletResponse resp) throws IOException {
 		stuService.save(student);
-		req.setAttribute("students", stuService.findAll());
-		req.setAttribute("mode", "VIEW");
-		resp.sendRedirect("/students");	}
-
+		resp.sendRedirect("/registerdetails?printed=0");
+	}
+	@GetMapping("/registerdetails")
+	public String regStudentDetails(@RequestParam Long printed,HttpServletRequest req) {
+		req.setAttribute("stuRegisters",scService.findById(printed));
+		return "registerDetails";
+	}
 }
