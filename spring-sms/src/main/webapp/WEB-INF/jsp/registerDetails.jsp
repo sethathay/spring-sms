@@ -13,13 +13,12 @@
 		<h2>លិខិតចុះឈ្មោះចូលរៀន</h2>
 		  <br/><br/>		  
 				<div class="form-group row">
-					<div class="col-sm-10">
 						<div class="row">					
-					
-						</div>
+								<div class="col-sm-4">
+									<img style="width:100%;" alt="my Image" src="Create_Bar_Code_With_Parameter?value=${stuRegisters[0].student.id}${stuRegisters[0].course.id}+${stuRegisters[0].student.phone}">
+								</div>
 						</div>
 					</div>
-						<br/>
 						<!-- <form>	 -->
 							<div class="form-group row">
 								<label class="col-form-label col-form-label-sm col-sm-2" for="name">ឈ្មោះ (*)</label>
@@ -85,7 +84,7 @@
 			      			</label>
 	    			</div>	  
 	    			<div class="form-group row">
-			      			<label class="col-form-label col-form-label-sm col-sm-12" for="courseDes">កាលបរិច្ឆេទ ៖ ${(stuRegisters[0].regDate).toString()}
+			      			<label class="col-form-label col-form-label-sm col-sm-12" for="courseDes">កាលបរិច្ឆេទ ៖ ${stuRegisters[0].regDate}
 			      			</label>
 	    			</div>	  
 			  <div class="form-group row">        

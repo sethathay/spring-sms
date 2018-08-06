@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table(name="tbl_student_course")
@@ -28,6 +30,7 @@ public class StudentCourse {
 	private Student student;
 	
 	@Column(name="reg_date")
+	@Temporal(TemporalType.DATE)
 	private Date regDate;
 	
 	@Column(name="printed")
