@@ -25,4 +25,20 @@ $(function() {
 			csDayOfWeek == 6? "សៅរ៍": "អាទិត្យ";
 		$("#lblDisplay").text("មុខវិជ្ជា: " + csSubjectName + " ថ្ងៃបង្រៀន: " + dayOfWeekText);
 	});
+	
+	$("select[name='month']").change(function(){
+		var month = $(this).val();
+		var year = $("select[name='year']").val();
+		var currentHref = $("#cmdSearch").attr("href");
+		var varHref = currentHref.split("&",1);
+		$("#cmdSearch").attr("href", varHref + "&month=" + month + "&year="+year);
+	});
+	
+	$("select[name='year']").change(function(){
+		var year = $(this).val();
+		var month = $("select[name='month']").val();
+		var currentHref = $("#cmdSearch").attr("href");
+		var varHref = currentHref.split("&",1);
+		$("#cmdSearch").attr("href", varHref + "&month=" + month + "&year="+year);
+	});
 });

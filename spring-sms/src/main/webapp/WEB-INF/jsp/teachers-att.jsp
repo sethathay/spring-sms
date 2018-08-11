@@ -50,7 +50,7 @@
 				        		</span> <br>
 				        	</c:forEach>
 				        </td>
-				       	<td><a href="listteacheratt?id=${course.id}&month=7&year=2018"><i class="fa fa-calendar" style="color:blue"></i></a></td>
+				       	<td><a href="listteacheratt?id=${course.id}"><i class="fa fa-calendar" style="color:blue"></i></a></td>
 				       	<td><a href="newteacheratt?id=${course.id}"><i class="fa fa-pencil" style="color:green"></i></a></td>
 				       	</tr>
 			       	</c:forEach>
@@ -140,16 +140,20 @@
            		// specific month you can set the calendar month using calendar object
            		// calendar.set(Calendar.MONTH, theMonth) method.
            		int month, year,lastDay, textFirstDay,currentYear,currentMonth;
-           		if(pageContext.findAttribute("month") != null && pageContext.findAttribute("year") != null){
-           			month = (int) pageContext.getAttribute("month");
-					year = (int) pageContext.getAttribute("year");
+				if(request.getParameter("month") != null && request.getParameter("year") != null){					
+					month = Integer.parseInt(request.getParameter("month"));
+					year = Integer.parseInt(request.getParameter("year"));
 					calendar.set(Calendar.MONTH, month);
 					calendar.set(Calendar.YEAR, year);
 					
+					int lastDate = calendar.getActualMaximum(Calendar.DATE);
+					calendar.set(Calendar.DATE, lastDate);
 					lastDay = calendar.get(Calendar.DAY_OF_MONTH);
+					int firstDate = calendar.getActualMinimum(Calendar.DATE);
+					calendar.set(Calendar.DATE, firstDate);
 					textFirstDay = calendar.get(Calendar.DAY_OF_WEEK);
-					currentYear = calendar.get(Calendar.YEAR);
-          		  	currentMonth = calendar.get(Calendar.MONTH);
+					currentYear = year;
+          		  	currentMonth = month;
            		}else{
       		    	int lastDate = calendar.getActualMaximum(Calendar.DATE);
       		  		// Set the calendar date to the last date of the month so then we can
@@ -192,7 +196,7 @@
 					        <%} %>
 					    </select>
 				    </div>
-				    <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-search"></i> ស្វែងរក</button>
+				    <a id="cmdSearch" href="listteacheratt?id=${course.id}&month=<%=currentMonth %>&year=<%=currentYear %>" type="button" class="btn btn-primary btn-sm"><i class="fa fa-search"></i> ស្វែងរក</a>
 				  </div>
 			 	</div>
 			 </div>
@@ -231,11 +235,15 @@
 				      				<c:forEach var="att" items="${ schedule.attendances }">
 			      						<% 
 			      						TeacherAttendance att = (TeacherAttendance) pageContext.getAttribute("att");
-			      						SimpleDateFormat fts = new SimpleDateFormat ("d");
+			      						SimpleDateFormat ftD = new SimpleDateFormat ("d");
+			      						SimpleDateFormat ftM = new SimpleDateFormat ("M");
+			      						SimpleDateFormat ftY = new SimpleDateFormat ("y");
 			      						
 			      						int ind = (Integer) pageContext.getAttribute("i");
-			      						
-			      						if(ind == Integer.parseInt(fts.format(att.getScheduleDate()))){
+			      						//Compare day month year of selected date with attendance date
+			      						if(ind == Integer.parseInt(ftD.format(att.getScheduleDate()))
+			      						&& (currentMonth+1) == Integer.parseInt(ftM.format(att.getScheduleDate()))
+			      						&& currentYear == Integer.parseInt(ftY.format(att.getScheduleDate()))){
 			      							hasDate = true;
 			      						%>
 			      							<td><%=att.getAbsent() == 0? "A" : att.getAbsent() == 1? "O" : "P" %></td>
