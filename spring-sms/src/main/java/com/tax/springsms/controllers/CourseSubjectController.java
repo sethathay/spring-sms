@@ -15,6 +15,7 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.tax.springsms.models.CourseSubject;
 import com.tax.springsms.services.CourseSubjectService;
@@ -37,5 +38,11 @@ public class CourseSubjectController {
 		req.setAttribute("mode", "VIEW");
 		resp.sendRedirect("/teachers-att");
 	}
-
+	@PostMapping("/savestudentattendance")
+	public void saveStudentAttendance(@ModelAttribute CourseSubject cs, BindingResult bindingResult, 
+			HttpServletRequest req,HttpServletResponse resp,RedirectAttributes redirectAttributes) throws IOException {
+		csService.save(cs);
+		req.setAttribute("mode", "NEW");
+		resp.sendRedirect("/newstudentsatt?cosID="+cs.getCourse().getId());
+	}
 }

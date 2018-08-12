@@ -39,6 +39,10 @@ public class StudentCourseService {
 		
 		return stuCus;
 	}
-
+	public List<StudentCourse> findStudentByCourse(long courseID){
+		
+		return stuCourseRepo.findByCourse_id(courseID);
+		
+	}
 
 }

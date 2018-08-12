@@ -13,4 +13,5 @@
   <script src="/resources/js/course.js"></script>
   <script src="/resources/js/coursereg.js"></script>
   <script src="/resources/js/teacher-att.js"></script>
+  <script src="/resources/js/student-att.js"></script>
   

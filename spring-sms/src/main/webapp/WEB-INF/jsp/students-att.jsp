@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import = "java.io.*,java.util.*" %>
 <%@ page import = "javax.servlet.*,java.text.*" %>
-<%@ page import = "com.tax.springsms.models.TeacherAttendance" %>
+<%@ page import = "com.tax.springsms.models.StudentAttendance" %>
 <html>
 <head>
   <%@ include file="header.jsp" %>
@@ -15,8 +15,8 @@
 
 	<c:choose>
 		<c:when test="${mode == 'VIEW'}">
-			<h2>ចុះវត្តមានគ្រូបង្រៀន</h2>
-		 	<p><i>ក្នុងផ្នែកនេះលោកអ្នកអាចធ្វើការកត់ត្រា និងមើលវត្តមានរបស់គ្រូបង្រៀនតាមវគ្គនីមួយៗ</i></p>
+			<h2>ចុះវត្តមានសិស្ស</h2>
+		 	<p><i>ក្នុងផ្នែកនេះលោកអ្នកអាចធ្វើការកត់ត្រា និងមើលវត្តមានរបស់សិស្សតាមវគ្គនីមួយៗ</i></p>
 		 	<table class="table table-striped">
 			    <thead>
 			      <tr>
@@ -50,24 +50,25 @@
 				        		</span> <br>
 				        	</c:forEach>
 				        </td>
-				       	<td><a href="listteacheratt?id=${course.id}"><i class="fa fa-calendar" style="color:blue"></i></a></td>
-				       	<td><a href="newteacheratt?id=${course.id}"><i class="fa fa-pencil" style="color:green"></i></a></td>
+				        <!-- &month=7&year=2018 -->
+				       	<td><a href="liststudentatt?id=${course.id}&subID=${course.courseSubjects[0].subject.id}"><i class="fa fa-calendar" style="color:blue"></i></a></td>
+				       	<td><a href="newstudentsatt?cosID=${course.id}"><i class="fa fa-pencil" style="color:green"></i></a></td>
 				       	</tr>
 			       	</c:forEach>
 			    </tbody>
 		    </table>
 		</c:when>
 		<c:when test="${mode == 'NEW'}">
-			<h2>ចុះវត្តមានគ្រូបង្រៀន - វគ្គ​ ${ course.name }</h2>
-		 	<p><i>ក្នុងផ្នែកនេះលោកអ្នកអាចធ្វើការកត់ត្រា និងមើលវត្តមានរបស់គ្រូបង្រៀនតាមវគ្គនីមួយៗ</i></p>
+			<h2>ចុះវត្តមានសិស្ស- វគ្គ​ ${stuCourses[0].course.name}</h2>
+		 	<p><i>ក្នុងផ្នែកនេះលោកអ្នកអាចធ្វើការកត់ត្រា និងមើលវត្តមានរបស់សិស្សតាមវគ្គនីមួយៗ</i></p>
 		 	<div class="row">
 			  	<div class="col-sm-12">
 			  		<br/>
-			  		<a class="btn btn-success" href="teachers-att"><i class="fa fa-mail-reply"></i> ត្រលប់ក្រោយ</a>
+			  		<a class="btn btn-success" href="students-att"><i class="fa fa-mail-reply"></i> ត្រលប់ក្រោយ</a>
 			  		<br/><br/>
 			  	</div>
 			 </div>
-			 <form method="POST" action="saveattendance">
+			 <form method="POST" action="savestudentattendance">
 			 	<input type="hidden" name="id" id="csId">
 			 	<input type="hidden" name="course.id" id="csCourseId">
 			 	<input type="hidden" name="subject.id" id="csSubjectId">
@@ -77,13 +78,13 @@
 			 	<input type="hidden" name="startTime" id="csStartTime">
 			 	<input type="hidden" name="endTime" id="csEndTime">
 			 	<div class="form-group row">
-				    <label class="col-form-label col-form-label-sm col-sm-2" for="abbr">ឈ្មោះគ្រូ (*)</label>
-				    <div class="col-sm-4">
-				    	<select required class="clsSelTeacher form-control form-control-sm" name="attendances[0].schedule.id">
+			 		<label class="col-form-label col-form-label-sm col-sm-2" for="abbr">មុខវិជ្ជាឈ្មោះ (*)</label>
+			 		<div class="col-sm-4">
+				    	<select required class="clsSelSubject form-control form-control-sm" name="stuAttendance[0].schedule.id">
 				    		<option></option>
-							<c:forEach var="schedule" items="${course.courseSubjects}">
+							<c:forEach var="schedule" items="${stuCourses[0].course.courseSubjects}">
 								<option value="${ schedule.id }"
-								course_id="${ course.id }"
+								course_id="${ schedule.course.id }"
 								subject_id="${ schedule.subject.id }"
 								subject_name="${ schedule.subject.name }"
 								teacher_id="${ schedule.teacher.id }"
@@ -91,20 +92,32 @@
 								studyTime="${ schedule.studyTime }"
 								startTime="${ schedule.startTime }"
 								endTime="${ schedule.endTime }"
-								>${ schedule.teacher.name }</option>
+								>${ schedule.subject.name }</option>
+							</c:forEach>
+						</select>
+				    </div>
+			 	</div>
+			 	<div class="form-group row">
+				    <label class="col-form-label col-form-label-sm col-sm-2" for="abbr">ឈ្មោះសិស្ស (*)</label>
+				    <div class="col-sm-4">
+				    	<select required class="form-control form-control-sm" name="stuAttendance[0].studentCourses.ID">
+				    		<option></option>
+							<c:forEach var="stuCourse" items="${stuCourses}">
+								<option value="${ stuCourse.ID }"
+								>${ stuCourse.student.name }</option>
 							</c:forEach>
 						</select>
 						<label style="color:tomato" id="lblDisplay" class="col-form-label col-form-label-sm"></label>
 				    </div>
 				    <label class="col-form-label col-form-label-sm col-sm-2" for="name">ថ្ងៃកត់វត្តមាន (*)</label>
 				    <div class="col-sm-4">
-				    	<input required type="date" class="form-control form-control-sm" name="attendances[0].scheduleDate">
+				    	<input required type="date" class="form-control form-control-sm" name="stuAttendance[0].scheduleDate">
 				    </div>
 				  </div>
 				  <div class="form-group row">
 				    <label class="col-form-label col-form-label-sm col-sm-2" for="abbr">ប្រភេទវត្តមាន (*)</label>
 				    <div class="col-sm-4">
-				    	<select required class="form-control form-control-sm" name="attendances[0].absent">
+				    	<select required class="form-control form-control-sm" name="stuAttendance[0].absent">
 					        <option></option>
 					        <option value="0">អវត្តមាន</option>
 					        <option value="1">មានវត្តមាន</option>
@@ -113,7 +126,7 @@
 				    </div>
 				    <label class="col-form-label col-form-label-sm col-sm-2" for="name">ផ្សេងៗ</label>
 				    <div class="col-sm-4">
-				    	<textarea class="form-control form-control-sm" rows="3" name="attendances[0].remark"></textarea>
+				    	<textarea class="form-control form-control-sm" rows="3" name="stuAttendance[0].remark"></textarea>
 				    </div>
 				  </div>
 				  <div class="form-group row">        
@@ -124,12 +137,12 @@
 			 </form>
 		</c:when>
 		<c:when test="${mode == 'LIST'}">
-			<h2>បញ្ជីវត្តមានគ្រូបង្រៀន - វគ្គ​ ${ course.name }</h2>
-		 	<p><i>ក្នុងផ្នែកនេះលោកអ្នកអាចធ្វើការកត់ត្រា និងមើលវត្តមានរបស់គ្រូបង្រៀនតាមវគ្គនីមួយៗ</i></p>
+			<h2>បញ្ជីវត្តមានសិស្ស - វគ្គ​ ${ course.name }</h2>
+		 	<p><i>ក្នុងផ្នែកនេះលោកអ្នកអាចធ្វើការកត់ត្រា និងមើលវត្តមានរបស់សិស្សតាមវគ្គនីមួយៗ</i></p>
 		 	<div class="row">
 			  	<div class="col-sm-12">
 			  		<br/>
-			  		<a class="btn btn-success" href="teachers-att"><i class="fa fa-mail-reply"></i> ត្រលប់ក្រោយ</a>
+			  		<a class="btn btn-success" href="students-att"><i class="fa fa-mail-reply"></i> ត្រលប់ក្រោយ</a>
 			  		<br/><br/>
 			  	</div>
 			 </div>
@@ -140,7 +153,7 @@
            		// specific month you can set the calendar month using calendar object
            		// calendar.set(Calendar.MONTH, theMonth) method.
            		int month, year,lastDay, textFirstDay,currentYear,currentMonth;
-				if(request.getParameter("month") != null && request.getParameter("year") != null){					
+           		if(request.getParameter("month") != null && request.getParameter("year") != null){					
 					month = Integer.parseInt(request.getParameter("month"));
 					year = Integer.parseInt(request.getParameter("year"));
 					calendar.set(Calendar.MONTH, month);
@@ -168,12 +181,35 @@
           		  	currentMonth = calendar.get(Calendar.MONTH);
            		}
     		 %>
+    		 <div class="form-group row">
+			 		<label class="col-form-label col-form-label-sm col-sm-2" for="abbr">មុខវិជ្ជាឈ្មោះ (*)</label>
+			 		<div class="col-sm-4">
+				    	<select required class="selectSubject form-control form-control-sm">
+				    		<!-- <option></option> -->
+							<c:forEach var="sub" items="${course.courseSubjects}">
+							<c:choose>
+							<c:when test="${subjectID==sub.subject.id}">
+								<option value="${sub.subject.id}"
+								course_id="${course.id}"
+								subject_name="${sub.subject.name}" selected="true">${ sub.subject.name }</option>
+							</c:when>
+							<c:otherwise>
+							<option value="${sub.subject.id}"
+								course_id="${course.id}"
+								subject_name="${sub.subject.name}">${ sub.subject.name }</option>
+							</c:otherwise>
+							</c:choose>
+								
+							</c:forEach>
+						</select>
+				    </div>
+			 	</div>
 			 <div class="row">
 			 	<div class="col-sm-12">
 			 		<div class="form-group row">
 				    <label class="col-form-label col-form-label-sm col-sm-1" for="month">ជ្រើសរើសខែ</label>
 				    <div class="col-sm-2">
-				    	<select class="form-control form-control-sm" name="month">
+				    	<select class="form-control form-control-sm" name="subjectmonth">
 					        <option value="0" <%=currentMonth == 0? "selected" : "" %>>មករា</option>
 					        <option value="1" <%=currentMonth == 1? "selected" : "" %>>កុម្ភៈ</option>
 					        <option value="2" <%=currentMonth == 2? "selected" : "" %>>មិនា</option>
@@ -190,13 +226,13 @@
 				    </div>
 				    <label class="col-form-label col-form-label-sm" for="year">ជ្រើសរើសឆ្នាំ</label>
 				    <div class="col-sm-2">
-				    	<select class="form-control form-control-sm" name="year">
+				    	<select class="form-control form-control-sm" name="subjectyear">
 				    		<%for(int y=currentYear; y>=currentYear-20; y--){ %>
 					        <option value="<%=y%>"><%=y %></option>
 					        <%} %>
 					    </select>
 				    </div>
-				    <a id="cmdSearch" href="listteacheratt?id=${course.id}&month=<%=currentMonth %>&year=<%=currentYear %>" class="btn btn-primary btn-sm"><i class="fa fa-search"></i> ស្វែងរក</a>
+				    <a id="cmdSubSearch" href="liststudentatt?id=${course.id}&subID=${subjectID}&month=<%=currentMonth %>&year=<%=currentYear %>" class="btn btn-primary btn-sm"><i class="fa fa-search"></i> ស្វែងរក</a>
 				  </div>
 			 	</div>
 			 </div>
@@ -204,8 +240,9 @@
 			  	<div class="col-sm-12">
 			  		<table class="table table-bordered tblAttendance">
 				    <thead>
-			    		<th>ឈ្មោះគ្រូបង្រៀន</th>
+			    		<th>ឈ្មោះសិស្ស</th>
 				    	<%
+				    		//To show days in each month Jan-Dec
 				    		for(int i=1; i<=lastDay; i++){
 				    			String dateText = "";
 				    			if(textFirstDay == 7){
@@ -226,24 +263,53 @@
 				    		}
 				    	%>
 				    </thead>
+				    
+			 		
 				    <tbody>
 				      <c:forEach var="schedule" items="${course.courseSubjects}">
-				      	<tr>
-				      		<td>${schedule.teacher.name}</td>
+				      	
+				      		<c:choose>
+				      		<c:when test="${subjectID==schedule.subject.id}"> <!-- subject_id ==  -->
+				      		<c:forEach var="studentAtt" items="${schedule.stuAttendance}">
+				      		<tr>
+				      		<td>${studentAtt.studentCourses.student.name}</td>
 				      			<c:forEach var="i" begin="1" end="<%=lastDay %>">
-				      				<%boolean hasDate = false; %>	
-				      				<c:forEach var="att" items="${ schedule.attendances }">
+				      				<%boolean hasDate = false; %>
 			      						<% 
-			      						TeacherAttendance att = (TeacherAttendance) pageContext.getAttribute("att");
-			      						SimpleDateFormat ftD = new SimpleDateFormat ("d");
+			      						//To show attendance of each student from scheduleDate
+			      						StudentAttendance att = (StudentAttendance) pageContext.getAttribute("studentAtt");
+			      						SimpleDateFormat fts = new SimpleDateFormat ("d");
 			      						SimpleDateFormat ftM = new SimpleDateFormat ("M");
 			      						SimpleDateFormat ftY = new SimpleDateFormat ("y");
+			      						int ind = (Integer) pageContext.getAttribute("i");
+			      						
+			      						if(ind == Integer.parseInt(fts.format(att.getScheduleDate()))
+			      						   && (currentMonth+1) == Integer.parseInt(ftM.format(att.getScheduleDate()))
+					      				   && currentYear == Integer.parseInt(ftY.format(att.getScheduleDate()))){
+			      							hasDate = true;
+			      						%>
+			      							<td><%=att.getAbsent() == 0? "A" : att.getAbsent() == 1? "O" : "P" %></td>
+			      						<%
+			      						}
+			      						%>
+			      					<%if(!hasDate) %> <td></td>
+				      			</c:forEach>
+				      			</tr>
+				      		</c:forEach>
+				      		</c:when>
+				      		</c:choose>
+				      	
+				      		<%-- <td>${schedule.stuAttendance[0].studentCourses.student.name}</td>
+				      			<c:forEach var="i" begin="1" end="<%=lastDay %>">
+				      				<%boolean hasDate = false; %>	
+				      				<c:forEach var="att" items="${ schedule.stuAttendance}">
+			      						<% 
+			      						StudentAttendance att = (StudentAttendance) pageContext.getAttribute("att");
+			      						SimpleDateFormat fts = new SimpleDateFormat ("d");
 			      						
 			      						int ind = (Integer) pageContext.getAttribute("i");
-			      						//Compare day month year of selected date with attendance date
-			      						if(ind == Integer.parseInt(ftD.format(att.getScheduleDate()))
-			      						&& (currentMonth+1) == Integer.parseInt(ftM.format(att.getScheduleDate()))
-			      						&& currentYear == Integer.parseInt(ftY.format(att.getScheduleDate()))){
+			      						
+			      						if(ind == Integer.parseInt(fts.format(att.getScheduleDate()))){
 			      							hasDate = true;
 			      						%>
 			      							<td><%=att.getAbsent() == 0? "A" : att.getAbsent() == 1? "O" : "P" %></td>
@@ -252,14 +318,16 @@
 			      						%>
 			      					</c:forEach>
 			      					<%if(!hasDate) %> <td></td>
-				      			</c:forEach>
-				      	</tr>
+				      			</c:forEach> --%>
+				      	
 				      </c:forEach>
 				    </tbody>
+				    
+				    
 				  </table>
 			  	</div>
 		  	</div>
-	 	</c:when>
+		  	</c:when>
 	</c:choose>
 
 </div>
