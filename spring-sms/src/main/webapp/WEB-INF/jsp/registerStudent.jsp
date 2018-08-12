@@ -101,13 +101,17 @@
 							<label class="col-form-label col-form-label-sm col-sm-4" for="selectcourse">សូមជ្រើសរើសវគ្គបណ្តុះបណ្តាល(*)</label>
 							<select class="form-control form-control-sm col-sm-4" name="selectcourse">
 								<c:forEach var="indCourse" items="${courseList}">
-									<option value="${ indCourse.id}" 
-									name="${indCourse.name }"
-									duration="${ indCourse.duration}"
-									startDate="${ indCourse.startDate}"
-									endDate="${ indCourse.endDate}"
-									status="${ indCourse.status}"
-									>${indCourse.name }</option>
+								<c:choose>
+									<c:when test="${ indCourse.status==1}"> <!-- if indCourse.status == 1 => "បើកទទួលពាក្យ" -->
+										<option value="${ indCourse.id}" 
+										name="${indCourse.name }"
+										duration="${ indCourse.duration}"
+										startDate="${ indCourse.startDate}"
+										endDate="${ indCourse.endDate}"
+										status="${ indCourse.status}"
+										>${indCourse.name }</option>
+									</c:when>
+								</c:choose>
 								</c:forEach>
 							</select>
 							&nbsp;

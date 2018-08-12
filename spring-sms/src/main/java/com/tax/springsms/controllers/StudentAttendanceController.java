@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.tax.springsms.services.CourseService;
-import com.tax.springsms.services.CourseSubjectService;
 import com.tax.springsms.services.StudentCourseService;
 
 @Controller
@@ -21,8 +20,6 @@ public class StudentAttendanceController {
 	@Autowired
 	private StudentCourseService stuCourseService;
 	
-	@Autowired
-	private CourseSubjectService cosSubjectService;
 	
 	@GetMapping("/students-att")
 	public String studentAttendances(HttpServletRequest req) {

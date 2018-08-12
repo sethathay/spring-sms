@@ -45,12 +45,15 @@ public class CourseSubject {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "schedule")
 	private List<StudentAttendance> studentAttendances = new ArrayList<StudentAttendance>();
 	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "schedule")
+	private List<Exam> exam = new ArrayList<Exam>();
+	
 	public CourseSubject() {
 		
 	}
 
 	public CourseSubject(Course course, Subject subject, Teacher teacher, int dayOfWeek, int studyTime,
-			String startTime, String endTime, List<TeacherAttendance> attendances, List<StudentAttendance> stuAttendances) {
+			String startTime, String endTime, List<TeacherAttendance> attendances, List<StudentAttendance> stuAttendances,List<Exam> exam) {
 		this.course = course;
 		this.subject = subject;
 		this.teacher = teacher;
@@ -60,6 +63,7 @@ public class CourseSubject {
 		this.endTime = endTime;
 		this.attendances = attendances;
 		this.studentAttendances=stuAttendances;
+		this.exam=exam;
 	}
 
 	public Long getId() {
@@ -142,6 +146,14 @@ public class CourseSubject {
 	
 	public List<StudentAttendance> getStuAttendance(){
 		return this.studentAttendances;
+	}
+	public void setExam(List<Exam> exams) {
+		this.exam=exams;
+		
+	}
+	
+	public List<Exam> getExam(){
+		return this.exam;
 	}
 
 }

@@ -15,7 +15,7 @@
         	ការប្រលងបញ្ចប់វគ្គ
       </a>
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="#"><i class="fa fa-plus"></i> រៀបចំកម្មវិធីការប្រលង</a>
+        <a class="dropdown-item" href="/exampreparations"><i class="fa fa-plus"></i> រៀបចំកម្មវិធីការប្រលង</a>
         <a class="dropdown-item" href="#"><i class="fa fa-id-badge"></i> ការបញ្ចូលពិន្ទុ</a>
         <a class="dropdown-item" href="#"><i class="	fa fa-trophy"></i> ចេញលទ្ធផលនៃការប្រលង</a>
       </div>

@@ -45,4 +45,13 @@ public class CourseSubjectController {
 		req.setAttribute("mode", "NEW");
 		resp.sendRedirect("/newstudentsatt?cosID="+cs.getCourse().getId());
 	}
+	
+	@PostMapping("/saveexampreparation")
+	public void saveExamPreparation(@ModelAttribute CourseSubject cs, BindingResult bindingResult, 
+			HttpServletRequest req,HttpServletResponse resp,RedirectAttributes redirectAttributes) throws IOException {
+		csService.save(cs);
+		req.setAttribute("mode", "NEW");
+		resp.sendRedirect("/newexamprograms?id="+cs.getCourse().getId());
+		
+	}
 }
