@@ -91,5 +91,11 @@ public class Exam {
 	public int getFinalexam_piont() {
 		return this.finalexam_piont;
 	}
-
+	public void setId(Long id) {
+		this.id=id;
+	}
+	
+	public Long getId() {
+		return this.id;
+	}
 }

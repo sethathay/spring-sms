@@ -15,7 +15,7 @@
 
 	<c:choose>
 		<c:when test="${mode == 'VIEW'}">
-			<h2>ការរៀបចំកម្មវីធីប្រលង</h2>
+			<h2>ការរៀបចំកម្មវីធីប្រលងបញ្ចប់វគ្គ</h2>
 		 	<p><i>ក្នុងផ្នែកនេះលោកអ្នកអាចធ្វើការបញ្ចូល និងមើលកម្មវិធីការប្រលង</i></p>
 		 	<table class="table table-striped">
 			    <thead>
@@ -50,7 +50,7 @@
 				        		</span> <br>
 				        	</c:forEach>
 				        </td>
-				       	<td><a href="listteacheratt?id=${course.id}"><i class="fa fa-calendar" style="color:blue"></i></a></td>
+				       	<td><a href="listexamprograms?id=${course.id}"><i class="fa fa-calendar" style="color:blue"></i></a></td>
 				       	<td><a href="newexamprograms?id=${course.id}"><i class="fa fa-pencil" style="color:green"></i></a></td>
 				       	</tr>
 			       	</c:forEach>
@@ -58,7 +58,7 @@
 		    </table>
 		</c:when>
 		<c:when test="${mode == 'NEW'}">
-			<h2>បញ្ចូលកម្មវិធីការប្រលង - វគ្គ​ ${ exam_course.name }</h2>
+			<h2>បញ្ចូលកម្មវិធីការប្រលងបញ្ចប់ - វគ្គ​ ${ exam_course.name }</h2>
 		 	<p><i>ក្នុងផ្នែកនេះលោកអ្នកអាចធ្វើការបញ្ចូល និងមើលកម្មវិធីការប្រលង</i></p>
 		 	<div class="row">
 			  	<div class="col-sm-12">
@@ -126,12 +126,12 @@
 			 </form>
 		</c:when>
 		<c:when test="${mode == 'LIST'}">
-			<h2>បញ្ជីវត្តមានគ្រូបង្រៀន - វគ្គ​ ${ course.name }</h2>
-		 	<p><i>ក្នុងផ្នែកនេះលោកអ្នកអាចធ្វើការកត់ត្រា និងមើលវត្តមានរបស់គ្រូបង្រៀនតាមវគ្គនីមួយៗ</i></p>
+			<h2>កម្មវិធីការប្រលងបញ្ចប់ - វគ្គ​ ${ examprograms.name }</h2>
+		 	<p><i>ក្នុងផ្នែកនេះលោកអ្នកអាចធ្វើការបញ្ចូល និងមើលកម្មវិធីការប្រលងតាមវគ្គនីមួយៗ</i></p>
 		 	<div class="row">
 			  	<div class="col-sm-12">
 			  		<br/>
-			  		<a class="btn btn-success" href="teachers-att"><i class="fa fa-mail-reply"></i> ត្រលប់ក្រោយ</a>
+			  		<a class="btn btn-success" href="exampreparations"><i class="fa fa-mail-reply"></i> ត្រលប់ក្រោយ</a>
 			  		<br/><br/>
 			  	</div>
 			 </div>
@@ -170,7 +170,7 @@
           		  	currentMonth = calendar.get(Calendar.MONTH);
            		}
     		 %>
-			 <div class="row">
+<%-- 			 <div class="row">
 			 	<div class="col-sm-12">
 			 		<div class="form-group row">
 				    <label class="col-form-label col-form-label-sm col-sm-1" for="month">ជ្រើសរើសខែ</label>
@@ -201,13 +201,19 @@
 				    <a id="cmdSearch" href="listteacheratt?id=${course.id}&month=<%=currentMonth %>&year=<%=currentYear %>" class="btn btn-primary btn-sm"><i class="fa fa-search"></i> ស្វែងរក</a>
 				  </div>
 			 	</div>
-			 </div>
+			 </div> --%>
 			 <div class="row">
 			  	<div class="col-sm-12">
 			  		<table class="table table-bordered tblAttendance">
 				    <thead>
-			    		<th>ឈ្មោះគ្រូបង្រៀន</th>
-				    	<%
+			    		<th>ឈ្មោះមុខវិជ្ជា</th>
+			    		<th>កាលបរិច្ឆេទ</th>
+			    		<th>រយះពេល</th>
+			    		<th>ពិន្ទុវត្តមាន</th>
+			    		<th>ពិន្ទុប្រលង</th>
+			    		<th>កែប្រែ</th>
+			    		<th>លុប</th>
+<%-- 				    	<%
 				    		for(int i=1; i<=lastDay; i++){
 				    			String dateText = "";
 				    			if(textFirstDay == 7){
@@ -226,10 +232,50 @@
 				    		<th><%=dateText %><br><%=i %></th>
 				    	<%
 				    		}
-				    	%>
+				    	%> --%>
 				    </thead>
 				    <tbody>
-				      <c:forEach var="schedule" items="${course.courseSubjects}">
+				    	<c:forEach var="schedule" items="${examprograms.courseSubjects}">	
+				    		<c:forEach var="finalexam" items="${schedule.exam}">
+				    		<tr>
+				    			<td>${ finalexam.schedule.subject.name }</td>
+					    		<td>${finalexam.examDate}</td>
+					    		<td>${finalexam.duration}</td>
+					    		<td>${finalexam.attendance_piont}</td>
+					    		<td>${finalexam.finalexam_piont}</td>
+					    		<td><a href="#"><i class="fa fa-pencil" style="color:green"></i></a></td>
+					    		<td><a data-toggle="modal" href="#myModal${finalexam.id}"><i class="fa fa-trash-o" style="color:red"></i></a>
+					    			<!-- The Modal -->
+									  <div class="modal fade" id="myModal${finalexam.id}">
+									    <div class="modal-dialog modal-sm">
+									      <div class="modal-content">
+									      
+									        <!-- Modal Header -->
+									        <div class="modal-header">
+									          <h4 class="modal-title">បញ្ជាក់</h4>
+									          <button type="button" class="close" data-dismiss="modal">&times;</button>
+									        </div>
+									        
+									        <!-- Modal body -->
+									        <div class="modal-body">
+									          តើអ្នកពិតជាចង់លុបទិន្នន័យ ${finalexam.id} នេះមែនទេ?
+									        </div>
+									        
+									        <!-- Modal footer -->
+									        <div class="modal-footer">
+									          <a href="/deleteexam?id=${finalexam.id}&cosID=${schedule.course.id}"><button type="button" class="btn btn-primary" data-dismiss="model">យល់ព្រម</button></a>
+									        </div>
+									        
+									      </div>
+									    </div>
+									  </div>
+									<!-- End Model -->	
+					    		
+					    		</td>
+					    	</tr>
+				    		</c:forEach>
+				    	</c:forEach>
+				      <%-- <c:forEach var="schedule" items="${course.courseSubjects}">
 				      	<tr>
 				      		<td>${schedule.teacher.name}</td>
 				      			<c:forEach var="i" begin="1" end="<%=lastDay %>">
@@ -256,7 +302,7 @@
 			      					<%if(!hasDate) %> <td></td>
 				      			</c:forEach>
 				      	</tr>
-				      </c:forEach>
+				      </c:forEach> --%>
 				    </tbody>
 				  </table>
 			  	</div>
