@@ -46,5 +46,12 @@ public class ExamController {
 		examService.delete(id);
 		resp.sendRedirect("/listexamprograms?id="+cosID);
 	}
+	@GetMapping("/updateexam")
+	public String UpdateExampPrograms(@RequestParam long id,@RequestParam long examID,HttpServletRequest req) {
+		req.setAttribute("mode", "MODIFY");
+		req.setAttribute("exam_course", courseService.findById(id));
+		req.setAttribute("exam",examService.findById(examID));
+		return "examprogram";
+	}
 
 }

@@ -57,8 +57,11 @@
 			    </tbody>
 		    </table>
 		</c:when>
-		<c:when test="${mode == 'NEW'}">
-			<h2>បញ្ចូលកម្មវិធីការប្រលងបញ្ចប់ - វគ្គ​ ${ exam_course.name }</h2>
+		<c:when test="${mode == 'NEW' || mode=='MODIFY'}">
+			<c:choose>
+				<c:when test="${mode=='NEW'}"><h2>បញ្ចូលកម្មវិធីការប្រលងបញ្ចប់ - វគ្គ​ ${ exam_course.name }</h2></c:when>
+				<c:when test="${mode=='MODIFY'}"><h2>កែប្រែកម្មវិធីការប្រលង - វគ្គ​ ${ exam_course.name }</h2></c:when>
+			</c:choose>
 		 	<p><i>ក្នុងផ្នែកនេះលោកអ្នកអាចធ្វើការបញ្ចូល និងមើលកម្មវិធីការប្រលង</i></p>
 		 	<div class="row">
 			  	<div class="col-sm-12">
@@ -79,42 +82,63 @@
 			 	<div class="form-group row">
 			 		<label class="col-form-label col-form-label-sm col-sm-2" for="subject">មុខវិជ្ជាឈ្មោះ (*)</label>
 			 		<div class="col-sm-4">
-				    	<select required class="examSelSubject form-control form-control-sm" name="exam[0].schedule.id">
-				    		<option></option>
-							<c:forEach var="schedule" items="${exam_course.courseSubjects}">
-								<option value="${ schedule.id }"
-								course_id="${ schedule.course.id }"
-								subject_id="${ schedule.subject.id }"
-								subject_name="${ schedule.subject.name }"
-								teacher_id="${ schedule.teacher.id }"
-								dayOfWeek="${ schedule.dayOfWeek }"
-								studyTime="${ schedule.studyTime }"
-								startTime="${ schedule.startTime }"
-								endTime="${ schedule.endTime }"
-								>${ schedule.subject.name }</option>
-							</c:forEach>
+			 		<c:choose>
+			 			<c:when test="${mode=='NEW'}">
+				 			<select required class="examSelSubject form-control form-control-sm" name="exam[0].schedule.id">
+					    		<option></option>
+								<c:forEach var="schedule" items="${exam_course.courseSubjects}">
+									<option value="${ schedule.id }"
+									course_id="${ schedule.course.id }"
+									subject_id="${ schedule.subject.id }"
+									subject_name="${ schedule.subject.name }"
+									teacher_id="${ schedule.teacher.id }"
+									dayOfWeek="${ schedule.dayOfWeek }"
+									studyTime="${ schedule.studyTime }"
+									startTime="${ schedule.startTime }"
+									endTime="${ schedule.endTime }"
+									>${ schedule.subject.name }</option>
+								</c:forEach>
+							</select>
+			 			</c:when>
+			 			<c:when test="${mode=='MODIFY'}">
+			 				<select required class="examSelSubject form-control form-control-sm" name="exam[0].schedule.id" disabled="false">
+								<option value="${ exam.schedule.id }"
+								course_id="${ exam.schedule.course.id }"
+								subject_id="${ exam.schedule.subject.id }"
+								subject_name="${ exam.schedule.subject.name }"
+								teacher_id="${ exam.schedule.teacher.id }"
+								dayOfWeek="${ exam.schedule.dayOfWeek }"
+								studyTime="${ exam.schedule.studyTime }"
+								startTime="${ exam.schedule.startTime }"
+								endTime="${ exam.schedule.endTime }"
+								selected="true"
+								>${ exam.schedule.subject.name }</option>
 						</select>
+						<input type="hidden" name="exam[0].id" value="${exam.id}" id="examId">
+			 			</c:when>
+			 		</c:choose>
+				    	
 				    </div>
 				    <label class="col-form-label col-form-label-sm col-sm-2" for="date">កាលបរិច្ឆេទ (*)</label>
 				    <div class="col-sm-4">
-				    	<input required type="date" class="form-control form-control-sm" name="exam[0].examDate">
+				    	<input required type="date" class="form-control form-control-sm" value="${exam.examDate}" name="exam[0].examDate">
 				    </div>
 				  </div>
 				  <div class="form-group row">
 				    <label class="col-form-label col-form-label-sm col-sm-2" for="durations">រយះពេល (*)</label>
 				    <div class="col-sm-4">
-						<input type="text" class="form-control form-control-sm" value="${studentList[0].pob}" name="exam[0].duration" id="durations">
+						<input type="text" class="form-control form-control-sm" value="${exam.duration}" name="exam[0].duration" id="durations">
 					</div>
 				    <label class="col-form-label col-form-label-sm col-sm-2" for="attendances">ពិន្ទុវត្តមាន</label>
 				    <div class="col-sm-3">
-				    	<input type="text" class="form-control form-control-sm" value="${studentList[0].pob}" name="exam[0].attendance_piont" id="scoreAtt">
+				    	<input type="text" class="form-control form-control-sm" value="${exam.attendance_piont}" name="exam[0].attendance_piont" id="scoreAtt">
 				    </div>
 				    <label class="col-form-label col-form-label-sm col-sm-1" style="text-align:right;">/100</label>
 				  </div>
 				  <div class="form-group row">
 				  	<label class="col-form-label col-form-label-sm col-sm-2" for="finalexam">ពិន្ទុប្រលង</label>
 				    <div class="col-sm-3">
-				    	<input type="text" class="form-control form-control-sm" value="${studentList[0].pob}" name="exam[0].finalexam_piont" id="scoreExam">
+				    	<input type="text" class="form-control form-control-sm" value="${exam.finalexam_piont}" name="exam[0].finalexam_piont" id="scoreExam">
 				    </div>
 				    <label class="col-form-label col-form-label-sm col-sm-1" style="text-align:right;">/100</label>
 				  </div>
@@ -243,7 +267,7 @@
 					    		<td>${finalexam.duration}</td>
 					    		<td>${finalexam.attendance_piont}</td>
 					    		<td>${finalexam.finalexam_piont}</td>
-					    		<td><a href="#"><i class="fa fa-pencil" style="color:green"></i></a></td>
+					    		<td><a href="/updateexam?id=${examprograms.id}&examID=${finalexam.id}"><i class="fa fa-pencil" style="color:green"></i></a></td>
 					    		<td><a data-toggle="modal" href="#myModal${finalexam.id}"><i class="fa fa-trash-o" style="color:red"></i></a>
 					    			<!-- The Modal -->
 									  <div class="modal fade" id="myModal${finalexam.id}">

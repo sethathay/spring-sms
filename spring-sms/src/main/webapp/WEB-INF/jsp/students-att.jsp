@@ -266,61 +266,44 @@
 				    
 			 		
 				    <tbody>
-				      <c:forEach var="schedule" items="${course.courseSubjects}">
-				      	
-				      		<c:choose>
-				      		<c:when test="${subjectID==schedule.subject.id}"> <!-- subject_id ==  -->
-				      		<c:forEach var="studentAtt" items="${schedule.stuAttendance}">
-				      		<tr>
-				      		<td>${studentAtt.studentCourses.student.name}</td>
-				      			<c:forEach var="i" begin="1" end="<%=lastDay %>">
-				      				<%boolean hasDate = false; %>
-			      						<% 
-			      						//To show attendance of each student from scheduleDate
-			      						StudentAttendance att = (StudentAttendance) pageContext.getAttribute("studentAtt");
-			      						SimpleDateFormat fts = new SimpleDateFormat ("d");
-			      						SimpleDateFormat ftM = new SimpleDateFormat ("M");
-			      						SimpleDateFormat ftY = new SimpleDateFormat ("y");
-			      						int ind = (Integer) pageContext.getAttribute("i");
-			      						
-			      						if(ind == Integer.parseInt(fts.format(att.getScheduleDate()))
-			      						   && (currentMonth+1) == Integer.parseInt(ftM.format(att.getScheduleDate()))
-					      				   && currentYear == Integer.parseInt(ftY.format(att.getScheduleDate()))){
-			      							hasDate = true;
-			      						%>
-			      							<td><%=att.getAbsent() == 0? "A" : att.getAbsent() == 1? "O" : "P" %></td>
-			      						<%
-			      						}
-			      						%>
-			      					<%if(!hasDate) %> <td></td>
-				      			</c:forEach>
-				      			</tr>
-				      		</c:forEach>
-				      		</c:when>
-				      		</c:choose>
-				      	
-				      		<%-- <td>${schedule.stuAttendance[0].studentCourses.student.name}</td>
-				      			<c:forEach var="i" begin="1" end="<%=lastDay %>">
-				      				<%boolean hasDate = false; %>	
-				      				<c:forEach var="att" items="${ schedule.stuAttendance}">
-			      						<% 
-			      						StudentAttendance att = (StudentAttendance) pageContext.getAttribute("att");
-			      						SimpleDateFormat fts = new SimpleDateFormat ("d");
-			      						
-			      						int ind = (Integer) pageContext.getAttribute("i");
-			      						
-			      						if(ind == Integer.parseInt(fts.format(att.getScheduleDate()))){
-			      							hasDate = true;
-			      						%>
-			      							<td><%=att.getAbsent() == 0? "A" : att.getAbsent() == 1? "O" : "P" %></td>
-			      						<%
-			      						}
-			      						%>
-			      					</c:forEach>
-			      					<%if(!hasDate) %> <td></td>
-				      			</c:forEach> --%>
-				      	
-				      </c:forEach>
+					    <c:forEach var="schedule" items="${course.courseSubjects}">
+					    	<c:choose>
+					    	<c:when test="${subjectID==schedule.subject.id}">
+					    		<c:forEach var="stuInCos" items="${course.studentCourse}">
+					    			<tr>
+					    				<td>${stuInCos.student.name}</td>
+					    				<c:forEach var="i" begin="1" end="<%=lastDay %>">
+						      				<%boolean hasDate = false; %>	
+						      				<c:forEach var="att" items="${ schedule.stuAttendance }">
+						      					<c:choose>
+						      						<c:when test="${stuInCos.ID==att.studentCourses.ID}">
+							      						<% 
+							      						StudentAttendance att = (StudentAttendance) pageContext.getAttribute("att");
+							      						SimpleDateFormat ftD = new SimpleDateFormat ("d");
+							      						SimpleDateFormat ftM = new SimpleDateFormat ("M");
+							      						SimpleDateFormat ftY = new SimpleDateFormat ("y");
+							      						
+							      						int ind = (Integer) pageContext.getAttribute("i");
+							      						//Compare day month year of selected date with attendance date
+							      						if(ind == Integer.parseInt(ftD.format(att.getScheduleDate()))
+							      						&& (currentMonth+1) == Integer.parseInt(ftM.format(att.getScheduleDate()))
+							      						&& currentYear == Integer.parseInt(ftY.format(att.getScheduleDate()))){
+							      							hasDate = true;
+							      						%>
+							      							<td><%=att.getAbsent() == 0? "A" : att.getAbsent() == 1? "O" : "P" %></td>
+							      						<%
+							      						}
+							      						%>
+					      							</c:when>
+						      					</c:choose>
+					      					</c:forEach>
+					      					<%if(!hasDate) %> <td></td>
+						      			</c:forEach>
+					    			</tr>
+					    		</c:forEach>
+					    	</c:when>
+					    	</c:choose>
+					     </c:forEach>
 				    </tbody>
 				    
 				    
