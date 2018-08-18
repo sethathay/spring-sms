@@ -59,8 +59,10 @@
 		</c:when>
 		<c:when test="${mode == 'NEW' || mode=='MODIFY'}">
 			<c:choose>
-				<c:when test="${mode=='NEW'}"><h2>បញ្ចូលកម្មវិធីការប្រលងបញ្ចប់ - វគ្គ​ ${ exam_course.name }</h2></c:when>
-				<c:when test="${mode=='MODIFY'}"><h2>កែប្រែកម្មវិធីការប្រលង - វគ្គ​ ${ exam_course.name }</h2></c:when>
+				<c:when test="${mode=='NEW'}"><h2>បញ្ចូលកម្មវិធីការប្រលងបញ្ចប់ - វគ្គ​ ${ exam_course.name }
+				<input type="hidden" name="saveexam" class="saveexam" value="saveexampreparation"/></h2></c:when>
+				<c:when test="${mode=='MODIFY'}"><h2>កែប្រែកម្មវិធីការប្រលង - វគ្គ​ ${ exam_course.name }
+				<input type="hidden" name="saveexam" class="saveexam" value="saveupdateexam"/></h2></c:when>
 			</c:choose>
 		 	<p><i>ក្នុងផ្នែកនេះលោកអ្នកអាចធ្វើការបញ្ចូល និងមើលកម្មវិធីការប្រលង</i></p>
 		 	<div class="row">
@@ -70,7 +72,7 @@
 			  		<br/><br/>
 			  	</div>
 			 </div>
-			 <form method="POST" action="saveexampreparation">
+			 <form method="POST" id="frmSubmit">
 			 	<input type="hidden" name="id" id="csId">
 			 	<input type="hidden" name="course.id" id="csCourseId">
 			 	<input type="hidden" name="subject.id" id="csSubjectId">
@@ -78,7 +80,7 @@
 			 	<input type="hidden" name="dayOfWeek" id="csDayOfWeek">
 			 	<input type="hidden" name="studyTime" id="csStudyTime">
 			 	<input type="hidden" name="startTime" id="csStartTime">
-			 	<input type="hidden" name="endTime" id="csEndTime">
+			 	<input type="hidden" name="endTime" ifd="csEndTime">
 			 	<div class="form-group row">
 			 		<label class="col-form-label col-form-label-sm col-sm-2" for="subject">មុខវិជ្ជាឈ្មោះ (*)</label>
 			 		<div class="col-sm-4">
@@ -102,7 +104,7 @@
 			 			</c:when>
 			 			<c:when test="${mode=='MODIFY'}">
 			 				<select required class="examSelSubject form-control form-control-sm" name="exam[0].schedule.id" disabled="false">
-								<option value="${ exam.schedule.id }"
+								<option value="${ exam.schedule.id}"
 								course_id="${ exam.schedule.course.id }"
 								subject_id="${ exam.schedule.subject.id }"
 								subject_name="${ exam.schedule.subject.name }"
@@ -113,8 +115,9 @@
 								endTime="${ exam.schedule.endTime }"
 								selected="true"
 								>${ exam.schedule.subject.name }</option>
-						</select>
-						<input type="hidden" name="exam[0].id" value="${exam.id}" id="examId">
+							</select>
+							<input type="hidden" name="exam[0].schedule.id" value="${exam.schedule.id}" id="examSchId">
+							<input type="hidden" name="exam[0].id" value="${exam.id}" id="examId">
 			 			</c:when>
 			 		</c:choose>
 				    	
@@ -144,7 +147,7 @@
 				  </div>
 				  <div class="form-group row">        
 		      		<div class="offset-sm-2 col-sm-10">
-		      			<button type="submit" class="btn btn-primary">រក្សាទុក</button>
+		      			<button id="btnSubmit" type="submit" class="btn btn-primary">រក្សាទុក</button>
 		      		</div>
 	      		  </div>
 			 </form>
@@ -159,73 +162,6 @@
 			  		<br/><br/>
 			  	</div>
 			 </div>
-			 <%
-      			//Get a calendar instance
-      			Calendar calendar = Calendar.getInstance();
-      			// Get the last date of the current month. To get the last date for a
-           		// specific month you can set the calendar month using calendar object
-           		// calendar.set(Calendar.MONTH, theMonth) method.
-           		int month, year,lastDay, textFirstDay,currentYear,currentMonth;
-				if(request.getParameter("month") != null && request.getParameter("year") != null){					
-					month = Integer.parseInt(request.getParameter("month"));
-					year = Integer.parseInt(request.getParameter("year"));
-					calendar.set(Calendar.MONTH, month);
-					calendar.set(Calendar.YEAR, year);
-					
-					int lastDate = calendar.getActualMaximum(Calendar.DATE);
-					calendar.set(Calendar.DATE, lastDate);
-					lastDay = calendar.get(Calendar.DAY_OF_MONTH);
-					int firstDate = calendar.getActualMinimum(Calendar.DATE);
-					calendar.set(Calendar.DATE, firstDate);
-					textFirstDay = calendar.get(Calendar.DAY_OF_WEEK);
-					currentYear = year;
-          		  	currentMonth = month;
-           		}else{
-      		    	int lastDate = calendar.getActualMaximum(Calendar.DATE);
-      		  		// Set the calendar date to the last date of the month so then we can
-              		// get the last day of the month
-      		    	calendar.set(Calendar.DATE, lastDate);
-      		    	lastDay = calendar.get(Calendar.DAY_OF_MONTH);
-      		    	//Calendar cl = Calendar.getInstance();
-          		  	int firstDate = calendar.getActualMinimum(Calendar.DATE);
-          		  	calendar.set(Calendar.DATE, firstDate);
-          		  	textFirstDay = calendar.get(Calendar.DAY_OF_WEEK);
-          		  	currentYear = calendar.get(Calendar.YEAR);
-          		  	currentMonth = calendar.get(Calendar.MONTH);
-           		}
-    		 %>
-<%-- 			 <div class="row">
-			 	<div class="col-sm-12">
-			 		<div class="form-group row">
-				    <label class="col-form-label col-form-label-sm col-sm-1" for="month">ជ្រើសរើសខែ</label>
-				    <div class="col-sm-2">
-				    	<select class="form-control form-control-sm" name="month">
-					        <option value="0" <%=currentMonth == 0? "selected" : "" %>>មករា</option>
-					        <option value="1" <%=currentMonth == 1? "selected" : "" %>>កុម្ភៈ</option>
-					        <option value="2" <%=currentMonth == 2? "selected" : "" %>>មិនា</option>
-					        <option value="3" <%=currentMonth == 3? "selected" : "" %>>មេសា</option>
-					        <option value="4" <%=currentMonth == 4? "selected" : "" %>>ឧសភា</option>
-					        <option value="5" <%=currentMonth == 5? "selected" : "" %>>មិថុនា</option>
-					        <option value="6" <%=currentMonth == 6? "selected" : "" %>>កក្កដា</option>
-					        <option value="7" <%=currentMonth == 7? "selected" : "" %>>សីហា</option>
-					        <option value="8" <%=currentMonth == 8? "selected" : "" %>>កញ្ញា</option>
-					        <option value="9" <%=currentMonth == 9? "selected" : "" %>>តុលា</option>
-					        <option value="10" <%=currentMonth == 10? "selected" : "" %>>វិច្ឆិកា</option>
-					        <option value="11" <%=currentMonth == 11? "selected" : "" %>>ធ្នូ</option>
-					    </select>
-				    </div>
-				    <label class="col-form-label col-form-label-sm" for="year">ជ្រើសរើសឆ្នាំ</label>
-				    <div class="col-sm-2">
-				    	<select class="form-control form-control-sm" name="year">
-				    		<%for(int y=currentYear; y>=currentYear-20; y--){ %>
-					        <option value="<%=y%>"><%=y %></option>
-					        <%} %>
-					    </select>
-				    </div>
-				    <a id="cmdSearch" href="listteacheratt?id=${course.id}&month=<%=currentMonth %>&year=<%=currentYear %>" class="btn btn-primary btn-sm"><i class="fa fa-search"></i> ស្វែងរក</a>
-				  </div>
-			 	</div>
-			 </div> --%>
 			 <div class="row">
 			  	<div class="col-sm-12">
 			  		<table class="table table-bordered tblAttendance">
@@ -237,26 +173,6 @@
 			    		<th>ពិន្ទុប្រលង</th>
 			    		<th>កែប្រែ</th>
 			    		<th>លុប</th>
-<%-- 				    	<%
-				    		for(int i=1; i<=lastDay; i++){
-				    			String dateText = "";
-				    			if(textFirstDay == 7){
-				    				dateText = "ស";
-				    				textFirstDay = 1;
-				    			}else{
-				    				dateText = textFirstDay % 7 == 1 ? "អទ" :
-				    					textFirstDay % 7 == 2 ? "ច" :
-				    					textFirstDay % 7 == 3 ? "អ":
-				    					textFirstDay % 7 == 4 ? "ព":
-				    					textFirstDay % 7 == 5 ? "ព្រ":
-		    							textFirstDay % 7 == 6 ? "សុ": "";
-				    				textFirstDay++;
-				    			}
-		    			%>
-				    		<th><%=dateText %><br><%=i %></th>
-				    	<%
-				    		}
-				    	%> --%>
 				    </thead>
 				    <tbody>
 				    	<c:forEach var="schedule" items="${examprograms.courseSubjects}">	
@@ -299,34 +215,6 @@
 					    	</tr>
 				    		</c:forEach>
 				    	</c:forEach>
-				      <%-- <c:forEach var="schedule" items="${course.courseSubjects}">
-				      	<tr>
-				      		<td>${schedule.teacher.name}</td>
-				      			<c:forEach var="i" begin="1" end="<%=lastDay %>">
-				      				<%boolean hasDate = false; %>	
-				      				<c:forEach var="att" items="${ schedule.attendances }">
-			      						<% 
-			      						TeacherAttendance att = (TeacherAttendance) pageContext.getAttribute("att");
-			      						SimpleDateFormat ftD = new SimpleDateFormat ("d");
-			      						SimpleDateFormat ftM = new SimpleDateFormat ("M");
-			      						SimpleDateFormat ftY = new SimpleDateFormat ("y");
-			      						
-			      						int ind = (Integer) pageContext.getAttribute("i");
-			      						//Compare day month year of selected date with attendance date
-			      						if(ind == Integer.parseInt(ftD.format(att.getScheduleDate()))
-			      						&& (currentMonth+1) == Integer.parseInt(ftM.format(att.getScheduleDate()))
-			      						&& currentYear == Integer.parseInt(ftY.format(att.getScheduleDate()))){
-			      							hasDate = true;
-			      						%>
-			      							<td><%=att.getAbsent() == 0? "A" : att.getAbsent() == 1? "O" : "P" %></td>
-			      						<%
-			      						}
-			      						%>
-			      					</c:forEach>
-			      					<%if(!hasDate) %> <td></td>
-				      			</c:forEach>
-				      	</tr>
-				      </c:forEach> --%>
 				    </tbody>
 				  </table>
 			  	</div>

@@ -20,4 +20,7 @@ public class ExamService {
 		Optional<Exam> tempT = examRepo.findById(examID);
 		return tempT.isPresent() ? tempT.get(): null;
 	}
+	public void save(Exam examObj) {
+		examRepo.save(examObj);
+	}
 }

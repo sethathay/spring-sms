@@ -15,4 +15,6 @@
   <script src="/resources/js/teacher-att.js"></script>
   <script src="/resources/js/student-att.js"></script>
   <script src="/resources/js/exam.js"></script>
+  <script src="/resources/js/studentscoure.js"></script>
+  
   

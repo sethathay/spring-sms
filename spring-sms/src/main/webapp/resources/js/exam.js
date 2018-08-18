@@ -18,32 +18,8 @@ $(function() {
 		$("#csStartTime").val(csStartTime);
 		$("#csEndTime").val(csEndTime);
 	});
-//	$(".selectSubject").change(function(){
-//		console.log("Hello");
-//		var subject_id=$('option:selected', '.selectSubject').val();
-//		var course_id=$('option:selected','.selectSubject').attr('course_id');
-//		url="http://localhost:8080/liststudentatt?id="+course_id+"&subID="+subject_id;
-//		window.location = url;
-//	});
-//	$("select[name='subjectmonth']").change(function(){
-//		var month = $(this).val();
-//		var year = $("select[name='subjectyear']").val();
-//		var currentHref = $("#cmdSubSearch").attr("href");
-//		var varHref = currentHref.split("&",2);
-//		console.info("currentHref",currentHref);
-//		console.info("varHref",varHref);
-//		varHref = varHref.join("&");
-//		console.info("varHref",varHref);
-//		
-//		$("#cmdSubSearch").attr("href", varHref + "&month=" + month + "&year="+year);
-//		console.info("Haha",$("#cmdSubSearch").attr("href"));
-//	});
-//	$("select[name='subjectyear']").change(function(){
-//		var year = $(this).val();
-//		var month = $("select[name='subjectmonth']").val();
-//		var currentHref = $("#cmdSubSearch").attr("href");
-//		var varHref = currentHref.split("&",2);
-//		varHref = varHref.join("&");
-//		$("#cmdSubSearch").attr("href", varHref + "&month=" + month + "&year="+year);
-//	});
+	$("#btnSubmit").click(function(){
+		var url = $(".saveexam").val();
+		$("#frmSubmit").attr('action',url);
+	});
 });
