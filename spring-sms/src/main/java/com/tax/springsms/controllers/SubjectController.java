@@ -52,6 +52,7 @@ public class SubjectController {
 	@GetMapping("/deletesubject")
 	public String deleteSubject(@RequestParam long id,HttpServletRequest req) {
 		subjectService.delete(id);
+		req.setAttribute("mode", "VIEW");
 		req.setAttribute("subjects", subjectService.findAll());
 		return "subjects";
 	}

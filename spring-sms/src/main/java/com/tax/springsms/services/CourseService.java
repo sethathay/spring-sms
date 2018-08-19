@@ -43,5 +43,8 @@ public class CourseService {
 	public long count() {
 		return courseRepo.count();
 	}
+	public void deleteById(long id) {
+		courseRepo.deleteById(id);
+	}
 
 }

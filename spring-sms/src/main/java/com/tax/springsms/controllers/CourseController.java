@@ -75,5 +75,11 @@ public class CourseController {
 		req.setAttribute("mode", "NEW");
 		return "courses";
 	}
+	
+	@GetMapping("/deletecourse")
+	public void deleteCourse(@RequestParam long id, HttpServletRequest req,HttpServletResponse resp) throws IOException {
+		courseService.deleteById(id);
+		resp.sendRedirect("/courses");
+	}
 
 }

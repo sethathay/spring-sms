@@ -45,7 +45,34 @@
 			        </c:forEach>
 			        </td>
 			       	<td><a href="updatesubject?id=${subject.id}"><i class="fa fa-pencil" style="color:green"></i></a></td>
-			       	<td><a href="deletesubject?id=${subject.id}"><i class="fa fa-trash-o" style="color:red"></i></a></td>
+			       	<td><a data-toggle="modal" href="#myModal${subject.id}"><i class="fa fa-trash-o" style="color:red"></i></a>
+			       	<!-- The Modal -->
+						  <div class="modal fade" id="myModal${subject.id}">
+						    <div class="modal-dialog modal-sm">
+						      <div class="modal-content">
+						      
+						        <!-- Modal Header -->
+						        <div class="modal-header">
+						          <h4 class="modal-title">បញ្ជាក់</h4>
+						          <button type="button" class="close" data-dismiss="modal">&times;</button>
+						        </div>
+						        
+						        <!-- Modal body -->
+						        <div class="modal-body">
+						          តើអ្នកពិតជាចង់លុបទិន្នន័យ ${subject.id} នេះមែនទេ?
+						        </div>
+						        
+						        <!-- Modal footer -->
+						        <div class="modal-footer">
+						          <a href="deletesubject?id=${subject.id}"><button type="button" class="btn btn-primary" data-dismiss="model">យល់ព្រម</button></a>
+						        </div>
+						        
+						      </div>
+						    </div>
+						  </div>
+						<!-- End Model -->	
+			       	
+			       	</td>
 			      </tr>
 		      	</c:forEach>
 		    </tbody>

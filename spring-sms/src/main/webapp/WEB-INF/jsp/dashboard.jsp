@@ -42,7 +42,7 @@
         <div class="circle-tile-content green">
           <div class="circle-tile-description text-faded">ចំនួនវគ្គបណ្តុះបណ្តាលសរុប</div>
           <div class="circle-tile-number text-faded ">${countCourses}</div>
-          <a class="circle-tile-footer" href="#">More Info<i class="fa fa-chevron-circle-right"></i></a>
+          <a class="circle-tile-footer" href="/courses">More Info<i class="fa fa-chevron-circle-right"></i></a>
         </div>
       </div>
     </div>
